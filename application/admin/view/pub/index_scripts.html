@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    /*资讯-删除*/
+    function del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                type: 'POST',
+                url: "{:url('delete')}",
+                data: {id: id},
+                dataType: 'json',
+                success: function (data) {
+                    var result = data;
+                    if (result.err == 0){ //删除成功
+                        layer.msg(result.msg, {icon: 1, time:1000}, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(result.msg, {icon: 2}, function () {
+                            location.reload();
+                        });
+                    }
+                },
+                error: function (data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+</script>

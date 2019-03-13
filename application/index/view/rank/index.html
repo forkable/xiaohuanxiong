@@ -1,0 +1,55 @@
+{extend name="pub/base" /}
+{block name="seo"}
+<title>排行榜-{$site_name}</title>
+{/block}
+{block name="content"}
+{include file="pub/top2" /}
+<div class="rank-selector">
+    <a class="rank-selector-item active" href="javascript:void(0);" onclick="btnClick(this,'#rankList_1'); ">新番榜</a>
+    <a class="rank-selector-item" href="javascript:void(0);" onclick="btnClick(this,'#rankList_2'); ">人气榜</a>
+    <a class="rank-selector-item" href="javascript:void(0);" onclick="btnClick(this,'#rankList_3'); ">完结榜</a>
+    <a class="rank-selector-item" href="javascript:void(0);" onclick="btnClick(this,'#rankList_4');">收藏榜</a>
+</div>
+<div class="rank-list-con">
+    {volist name="list" id="item" key="k"}
+    {if $k == 1}
+    <ul class="rank-list" id="rankList_{$k}" style="display: block;">
+    {else /}
+        <ul class="rank-list" id="rankList_{$k}" style="display: none;">
+    {/if}
+        {volist name="item['keyword']" id="keyword" key="j"}
+        <a href="/book/{$keyword.id}" title="{$keyword.book_name}">
+            <li>
+                <div class="rank-list-cover">
+                    {if empty($keyword.cover_url)}
+                    <img class="rank-list-cover-img" src="{$img_site}/static/upload/book/{$keyword.id}/cover.jpg" alt="{$keyword.book_name}">
+                    {else /}
+                    <img class="rank-list-cover-img" src="{$keyword.cover_url}" alt="{$keyword.book_name}">
+                    {/if}
+                </div>
+                <div class="rank-list-info">
+                    <div class="rank-list-info-left">
+                        <span class="rank-list-info-left-index top-{$j-1}">{$j-1}</span>
+                    </div>
+                    <div class="rank-list-info-right">
+                        <p class="rank-list-info-right-title">{$keyword.book_name}</p>
+                        <p class="rank-list-info-right-subtitle">{$keyword.summary|subtext=15}...</p>
+                    </div>
+                </div>
+            </li>
+        </a>
+        {/volist}
+    </ul>
+    {/volist}
+</div>
+<div class="noDataFont" style="padding:10px;font-size:12px;color:#767676;text-align: center;">主人，下面木有了~</div>
+<script>
+    function btnClick(item,c) {
+        $('.rank-selector-item').removeClass('active');
+        $(item).addClass('active');
+        $('.rank-list').hide();
+        $(c).show();
+        $('body').scrollTop(0);
+    }
+</script>
+{/block}

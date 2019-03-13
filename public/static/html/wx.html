@@ -1,0 +1,66 @@
+<!-- saved from url=(0035)https://wx.1024.ink/t/5c6507e29fcab -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body style="background: rgb(239, 239, 239); margin: 0px; zoom: 1;">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>...</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/favicon22c41b.ico">
+    <div style="display:none"></div>
+    <div style="text-align: center;font-size: 18px;margin: 50px 0 30px 0;">
+        <h3 align="center" style="padding 20px;">已成功复制公众号<br>
+    		<font color="#FF0000" size="8px">
+	    		<strong>
+	    			<span id="target">
+	    				<samp oncopy="javascript:window.location.href=&#39;weixin://&#39;" id="fo1">paofuxiaoshuo</samp>
+	    			</span>
+	    		</strong>
+    		</font>
+    	</h3>
+    </div> 
+    <a href="weixin://" style="width: 90%;background: #1AAD19;text-align: center;color: #fff;margin: 0 auto;box-sizing: border-box;font-size: 18px;line-height: 2.55555556;border-radius: 5px;display: block;text-decoration: none;" class="copy-btns" data-clipboard-target="#fo1">去微信搜索添加</a>
+    <p></p>
+    <div align="center">
+    	<img src="https://wx1.sinaimg.cn/mw690/ab72f980gy1g05xk665e3g20kt0gogur.gif" width="80%" height="250px" data-clipboard-action="copy" data-clipboard-target="#target" id="copy_btn"></div>
+        <script>
+        var auto_jump = 0;
+        if (/baiduboxapp/i.test(navigator.userAgent)) {
+            if (auto_jump == 1) {
+                window.location.href = "bdbox://utils?action=sendIntent&minver=7.4&params=%7B%22intent%22%3A%22weixin%3A%2F%2F%23Intent%3Bend%22%7D";
+            }
+        } else {
+            if (auto_jump == 1) {
+                window.location.href = "weixin://";
+            }
+        }
+        </script>
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://paofutv.test.upcdn.net/clipboard.min.js"></script>
+        <script type="text/javascript">
+        var clipboard = new Clipboard('.copy-btns');
+        clipboard.on('success',
+            function(e) {
+                // alert("微信网页版提示:\r\n账号已复制成功,\r\n点击确定前往微信添加");
+                // location.href = "weixin://";
+                if (/baiduboxapp/i.test(navigator.userAgent)) {
+                    location.href = "bdbox://utils?action=sendIntent&minver=7.4&params=%7B%22intent%22%3A%22weixin%3A%2F%2F%23Intent%3Bend%22%7D";
+                } else {
+                    location.href = "weixin://";
+                }
+            });
+        clipboard.on('error',
+            function(e) {
+                // alert("微信网页版提示:\r\n账号已复制成功,\r\n点击确定前往微信添加");
+                // location.href = "weixin://";
+                location.href = "weixin://";
+            });
+        </script>
+</body>
+
+</html>

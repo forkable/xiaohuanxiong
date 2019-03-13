@@ -1,0 +1,117 @@
+{extend name="pub/pc_base" /}
+{block name="content"}
+<div class="">
+    <section class="container-fluid banner_toplist">
+        <div class="warp"> <img src="/static/images/banner_toplist_text.png" alt="">        </div>
+    </section>
+</div>
+<section class="box container pb40 overflow-Show js_top_container" style="min-height:800px;">
+    <div class="box-body">
+        <ul class="mh-list col3 top-cat">
+            {volist name="list" id="item"}
+            <li>
+                <div class="title"> {$item.title} </div>
+                {volist name="item['keyword']" id="keyword"}
+                {if $i == 1}
+                <div class="clearfix">
+                    <div class="mh-item horizontal">
+                        {if empty($keyword.cover_url)}
+                        <p class="mh-cover" style="background-image: url({$img_site}/static/upload/book/{$keyword.id}/cover.jpg)">
+                            <span class="num num-1">{$i}</span>
+                        </p>
+                        {else /}
+                        <p class="mh-cover" style="background-image: url({$keyword.cover_url})">
+                            <span class="num num-1">{$i}</span>
+                        </p>
+                        {/if}
+                        <div class="mh-item-detali">
+                            <h2 class="title">
+                                <a href="/book/{$keyword.id}" title="{$keyword.book_name}">{$keyword.book_name}</a>
+                            </h2>
+                            <p class="zl">
+                                <span>作者：</span>
+                                <span>
+                                    <a href="#" target="_blank" style="color:#666;">{$keyword.author.author_name}</a>
+                                </span>
+                            </p>
+                            <div class="bottom">
+                                <p class="chapter" style="width:181px;">
+                                    <span>总计</span>
+                                    <a href="book/{$keyword.id}" target="_blank">{$keyword.chapter_count}话</a>
+                                </p>
+                                <div class="desc"> {$keyword.summary|subtext=35}... </div>
+                                {volist name="keyword.taglist" id="tag"}
+                                <p class="mh-label">
+                                    <a href="/booklist?tag={$tag}"><span>{$tag}</span></a>
+                                </p>
+                                {/volist}
+                                <p>
+                                    <a class="btn" href="book/{$keyword.id}" title="{$keyword.book_name}" >查看详情</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {else /}
+                <div class="mh-itme-top">
+                    <a href="/book/{$keyword.id}" onmouseover="pop(this)" onmouseout="hide(this)" title="{$keyword.book_name}" style="width:100%; display: block;">
+                        <span class="num num-1">{$i}</span>{$keyword.book_name}
+                    </a>
+                    <div class="mh-tip-wrap" style="z-index: 10; display: none; opacity: 1; margin-left: 0px;">
+                        <div class="mh-item-tip">
+                            <a href="/book/{$keyword.id}" title="{$keyword.book_name}" style="height:auto;padding-left: 0;">
+                                {if empty($keyword.cover_url)}
+                                <p class="mh-cover tip" style="background-image: url({$img_site}/static/upload/book/{$keyword.id}/cover.jpg)"></p>
+                                {else /}
+                                <p class="mh-cover tip" style="background-image: url({$keyword.cover_url})"></p>
+                                {/if}
+                            </a>
+                            <div class="mh-item-tip-detali">
+                                <h2 class="title">
+                                    <a href="/book/{$keyword.id}" title="{$keyword.book_name}">{$keyword.book_name}</a>
+                                    <span class="mh-star star-4">
+
+                                    </span>
+                                </h2>
+                                <p class="author">
+                                    <span>作者：</span>
+                                    <span>
+                                        <a href="#" target="_blank">{$keyword.author.author_name}</a>
+                                    </span>
+                                </p>
+                                <p class="chapter" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                    <span>总计</span>
+                                    <a href="book/{$keyword.id}" target="_blank">{$keyword.chapter_count}话 </a>
+                                </p>
+                                <div class="desc"> {$keyword.summary|subtext=20}... </div>
+                                <p>
+                                    <a class="btn" href="/book/{$keyword.id}" target="_blank">查看详情</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/if}
+                {/volist}
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</section>
+<ul class="index-right-float bottom" style="display: block;">
+    <li>
+        <a href="javascript:void(0);" class="index-side-code">
+            <img class="index-float-code" src="/static/images/wxqrcode.jpg">
+        </a>
+    </li>
+    <li><a href="javascript:slide();" class="index-right-float-top"></a></li>
+</ul>
+<script>
+    function pop(obj) {
+        $(obj).siblings('.mh-tip-wrap').show(100);
+    }
+    function hide(obj) {
+        $(obj).siblings('.mh-tip-wrap').hide(100);
+    }
+</script>
+{/block}

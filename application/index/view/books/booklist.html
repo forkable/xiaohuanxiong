@@ -1,0 +1,66 @@
+{extend name="pub/base" /}
+{block name="seo"}
+<title>{$cate_selector}漫画-{$site_name}</title>
+{/block}
+{block name="content"}
+{include file="pub/top2" /}
+<div class="manga-list-bar" id="end">
+    <a class="manga-list-bar-item {$end_selector=='全部'?'active':''}" onclick="active(this)" data-val="-1">全部</a>
+    <a class="manga-list-bar-item {$end_selector=='0'?'active':''}" onclick="active(this)" data-val="0">连载中</a>
+    <a class="manga-list-bar-item {$end_selector=='1'?'active':''}" onclick="active(this)" data-val="1">已完结</a>
+    <a class="manga-list-bar-right " id="manga-list-bar-right">地区</a>
+    <div class="manga-list-bar-right-down" id="manga-list-bar-right-down" style="display:none;">
+        <a class="manga-list-bar-right-down-item {$area_selector=='全部'?'active':''}" onclick="active(this)" data-val="-1">全部</a>
+        {volist name="areas" id="vo"}
+        <a class="manga-list-bar-right-down-item {$area_selector==$vo.id?'active':''}" onclick="active(this)" data-val="{$vo.id}">{$vo.area_name}</a>
+        {/volist}
+    </div>
+</div>
+<script>
+    function active(item) {
+        $(item).siblings().removeClass('active');
+        $(item).addClass('active');
+        var end = $('#end a.active').attr('data-val');
+        var area = $('#manga-list-bar-right-down a.active').attr('data-val');
+        location.href = '/booklist?tag={$cate_selector}'+'&area='+area+'&end='+end;
+    }
+</script>
+<div class="manga-list" style="border:none;background-color:#f8f8f8;padding-top: 87px;">
+    <ul class="manga-list-2">
+        {volist name="books" id="vo"}
+        <li>
+            <div class="manga-list-2-cover">
+                <a href="/book/{$vo.id}">
+                    {if empty($book.cover_url)}
+                    <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
+                    {else /}
+                    <img class="manga-list-2-cover-img" src="{$vo.cover_url}">
+                    {/if}
+                </a>
+            </div>
+            <p class="manga-list-2-title">
+                <a href="/book/{$vo.id}">{$vo.book_name}</a>
+            </p>
+            <p class="manga-list-2-tip">
+                <a href="/book/{$vo.id}">已更新 {$vo.chapter_count}话</a>
+            </p>
+        </li>
+        {/volist}
+    </ul>
+    {$books|raw}
+</div>
+
+<script>
+    $(function () {
+        $("#manga-list-bar-right").click(function () {
+            if ($("#manga-list-bar-right-down").is(":hidden")) {
+                $("#manga-list-bar-right-down").show();
+            }
+            else {
+                $("#manga-list-bar-right-down").hide();
+            }
+        });
+    });
+</script>
+{include file="pub/return_top"}
+{/block}

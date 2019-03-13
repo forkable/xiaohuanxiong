@@ -1,0 +1,62 @@
+{extend name="pub/base" /}
+{block name="title"}
+<title>章节管理</title>
+{/block}
+
+{block name="body"}
+<section class="Hui-admin-article">
+    <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        {$book_name}
+        <span class="c-gray en">&gt;</span>
+        {$chapter_name}
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+           href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+
+    <article class="Hui-admin-content clearfix">
+        <div class="panel mt-20">
+            <div class="panel-body">
+                <div class="clearfix">
+                    <a href="{:url('chapters/index',['id'=>$chapter_id,'book_id'=>$book_id])}"
+                       class="btn btn-primary ">返回</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel mt-20">
+            <div class="panel-body">
+                <div class="clearfix">
+                    <form action="{:url('upload')}" enctype="multipart/form-data" method="post">
+                        <input type="hidden" value="{$chapter_id}" name="chapter_id">
+                        <input type="hidden" value="{$book_id}" name="book_id">
+                        <div class="formControls col-xs-3 col-sm-3">
+                            <input type="file" multiple="multiple" name="image[]" class="input-text">
+                        </div>
+                        <div class="formControls col-xs-6 col-sm-6">
+                            <input class="btn btn-primary radius" type="submit" value="上传"/>&nbsp;<span
+                                style="color: red">图片大小不要超过500kb，格式只能是jpg</span>
+                        </div>
+                    </form>
+                    <a class="btn btn-primary radius" href="{:url('clear',['chapter_id' => $chapter_id])}"
+                       onClick="return confirm('确定清空?');">清空图片</a>
+                </div>
+                <div class="mt-20 clearfix">
+                    {volist name="photos" id="vo"}
+                    {if empty($vo.img_url)}
+                    <img onclick="del(this,{$vo.id})" style="max-width: 130px;height: auto"
+                         src="{$img_site}/static/upload/book/{$book_id}/{$chapter_id}/{$vo.id}.jpg" />                    
+                    {else /}
+                    <img onclick="del(this,{$vo.id})" style="max-width: 130px;height: auto"
+                         src="{$vo.img_url}" />
+                    {/if}
+                    {/volist}
+                </div>
+            </div>
+        </div>
+
+
+    </article>
+</section>
+{include file="pub/index_scripts" /}
+{/block}

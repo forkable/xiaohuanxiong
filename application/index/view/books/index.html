@@ -1,0 +1,115 @@
+{extend name="pub/base" /}
+{block name="seo"}
+<title>{$book.book_name}全集免费高清无修在线阅读-{$site_name}</title>
+{/block}
+{block name="content"}
+{include file="pub/top2" /}
+<div class="detail-main">
+    {if empty($book.cover_url)}
+    <img class="detail-main-bg" src="{$img_site}/static/upload/book/{$book.id}/cover.jpg">
+    <div class="detail-main-cover"><img src="{$img_site}/static/upload/book/{$book.id}/cover.jpg"></div>
+    {else /}
+    <img class="detail-main-bg" src="{$book.cover_url}">
+    <div class="detail-main-cover"><img src="{$book.cover_url}"></div>
+    {/if}
+    <div class="detail-main-info">
+        <p class="detail-main-info-title">{$book.book_name}</p>
+        <p class="detail-main-info-star star-4"></p>
+        <p class="detail-main-info-author">作者：
+            <a href="#">{$book.author.author_name}</a>
+        </p>
+        <p class="detail-main-info-class">
+            {volist name="tags" id="vo"}
+            <span>
+                <a href="/booklist/?tag={$vo}">{$vo}</a>
+            </span>
+            {/volist}
+        </p>
+    </div>
+</div>
+<p class="detail-desc">{$book.summary}</p>
+<div id="tempc">
+    <div class="detail-selector item-3">
+        <a class="detail-selector-item active" href="javascript:void(0);"
+           onclick="titleSelect(this, '#chapter_indexes');">目录</a>
+        <a class="detail-selector-item" href="javascript:void(0);"
+           onclick="titleSelect(this, '#author_words');">作者语</a>
+        <a class="detail-selector-item" href="javascript:void(0);"
+           onclick="titleSelect(this, '#comment');">评论
+            <span class="detail-selector-item-count commentcount">999+</span>
+        </a>
+    </div>
+    <div id="chapter_indexes" class="selector-zero">
+        <div class="detail-list-title" id="detail-list-title">
+            <span class="detail-list-title-1">{$book.end==0?'连载中':'已完结'}</span>
+            <span class="detail-list-title-3">{$book.last_time|date='Y-m-d'}更新</span>
+            <a href="javascript:void(0);" mode="0" onclick="sortBtnClick(this);" class="detail-list-title-right inverted">倒序</a>
+        </div>
+        <ul class="detail-list-1 detail-list-select" id="detail-list-select">
+            {volist name="book.chapters" id="vo"}
+            <li><a href="/chapter/{$vo.id}" title="{$vo.chapter_name}" class="chapteritem">{$vo.chapter_name}</a></li>
+            {/volist}
+        </ul>
+        <div class="detail-fix-bottom">
+            <a href="javascript:void(0);" class="collection">
+                <img class="detail-bottom-1" src="/static/images/detail-bottom-1.png">
+            </a>
+            <a href="javascript:void(0)" class="btndownload">
+                <img class="detail-bottom-2" src="/static/images/detail-bottom-2.png">
+            </a>
+            {if $start == -1}
+            <a href="#" class="detail-bottom-btn">暂无章节</a>
+            {else /}
+            <a href="/chapter/{$start}" class="detail-bottom-btn">开始阅读</a>
+            {/if}
+        </div>
+        <a class="detail-list-more" id="detail-list-more" href="javascript:void(0);" onclick="charpterMore(this);">展开全部章节</a>
+    </div>
+
+    <script>
+        ;(function(){
+            $("#detail-list-select li").each(function(){
+                var tsi=$(this).index();
+                $(this).attr("idx",tsi);
+            })
+        })();
+    </script>
+
+    <div id="comment" style="display:none;" class="selector-zero">
+        <ul class="detail-list-comment" style="display: block;">
+            <li>
+                <div class="detail-list-comment-cover">
+                    <img src="http://css99tel.cdndm5.com/v201903121809/blue/images/user/toux3.jpg">
+                </div>
+                <div class="detail-list-comment-info">
+                    <p class="detail-list-comment-title">骑猴上树
+                        <a class="detail-list-comment-right zanbtn" href="javascript:void(0);" pid="7612697">1</a>
+                    </p>
+                    <p class="detail-list-comment-subtitle">2019-02-25 02:03</p>
+                    <p class="detail-list-comment-content recommentbtn" pid="7612697" poster="骑猴上树">借花献佛！！！</p>
+                </div>
+            </li>
+        </ul>
+        <div class="detail-comment-fix-bottom">
+            <a class="detail-comment-fix-bottom-a btncomment" href="javascript:void(0);">
+                <img class="detail-comment-fix-bottom-logo" src="/static/images/detail-comment-logo.png">我已经忍不住要吐槽啦～</a>
+        </div>
+    </div>
+</div>
+
+<div style="height:70px;"></div>
+<script>
+    $(window).scroll(function () {
+       $('.detail-main').css('margin-top','50px');
+    });
+
+    function titleSelect(item,id) {
+        $('.detail-selector-item').removeClass('active');
+        $(item).addClass('active');
+        $('.selector-zero').hide();
+        $(id).show();
+    }
+</script>
+{include file="pub/return_top"}
+
+{/block}
