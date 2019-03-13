@@ -38,6 +38,7 @@ class Write extends Controller
                 }
                 $book = new Book();
                 $book->author_id = $author->id;
+                $book->area_id = trim($data['area_id']);
                 $book->book_name = trim($data['book_name']);
                 if (!empty($data['nick_name']) || !is_null($data['nick_name'])){
                     $book->nick_name = trim($data['nick_name']);
