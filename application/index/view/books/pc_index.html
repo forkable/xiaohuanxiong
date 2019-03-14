@@ -30,7 +30,7 @@
                 <p class="tip">
                     <span class="block">状态：<span>{$book.end?'已完结':'连载中'}</span></span>
                     <span class="block ticai">地区：<a href="#" target="_blank">{$book.area.area_name}</a></span>
-                    <span class="block">更新时间：{$book.last_time}</span>
+                    <span class="block">更新时间：{$book.last_time|date='Y-m-d'}</span>
                 </p>
                 <p class="tip" style="margin-top:10px;">
                     <span class="block">标签：
