@@ -33,7 +33,7 @@
             <label class="form-label col-xs-4 col-sm-3">地区：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:150px;">
-                    <select class="select" name="area_id" size="4">
+                    <select class="select" name="area_id" size="1">
                         {volist name="areas" id="vo"}
                         <option value="{$vo.id}" {$book.area_id==$vo.id?"selected":""}>{$vo.area_name}</option>
                         {/volist}
