@@ -145,7 +145,7 @@ CREATE TABLE `xwx_friendship_link` (
 DROP TABLE IF EXISTS `xwx_area`;
 CREATE TABLE `xwx_area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_name` varchar(12) NOT NULL,
+  `area_name` varchar(32) NOT NULL,
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
