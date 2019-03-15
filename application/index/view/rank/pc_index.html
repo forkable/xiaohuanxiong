@@ -16,13 +16,12 @@
                 <div class="clearfix">
                     <div class="mh-item horizontal">
                         {if empty($keyword.cover_url)}
-                        <p class="mh-cover"
-                           style="background-image: url({$img_site}/static/upload/book/{$keyword.id}/cover.jpg)">
-                            <span class="num num-1">{$i}</span>
+                        <p class="mh-cover" style="background-image: url({$img_site}/static/upload/book/{$keyword.id}/cover.jpg)">
+                            <span class="num num-{$i}">{$i}</span>
                         </p>
                         {else /}
                         <p class="mh-cover" style="background-image: url({$keyword.cover_url})">
-                            <span class="num num-1">{$i}</span>
+                            <span class="num num-{$i}">{$i}</span>
                         </p>
                         {/if}
                         <div class="mh-item-detali">
@@ -59,7 +58,7 @@
                 <div class="mh-itme-top">
                     <a href="/book/{$keyword.id}" onmouseover="pop(this)" onmouseout="hide(this)"
                        title="{$keyword.book_name}" style="width:100%; display: block;">
-                        <span class="num num-1">{$i}</span>{$keyword.book_name}
+                        <span class="num num-{$i}">{$i}</span>{$keyword.book_name}
                     </a>
                     <div class="mh-tip-wrap" style="z-index: 10; display: none; opacity: 1; margin-left: 0px;">
                         <div class="mh-item-tip">
