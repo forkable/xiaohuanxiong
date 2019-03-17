@@ -89,7 +89,7 @@ CREATE TABLE `xwx_chapter` (
   `chapter_name` varchar(255) NOT NULL,
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  `book_id` bigint(20) NOT NULL,
+  `book_id` int(10) unsigned NOT NULL,
   `order` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `chapter_name` (`chapter_name`) USING BTREE,
