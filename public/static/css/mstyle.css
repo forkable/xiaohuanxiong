@@ -224,7 +224,7 @@ img.normal-top-right-avatar{height: 25px;vertical-align: top;margin-top: 11px;ma
 .manga-list-title{height: 44px;line-height: 44px;padding: 0 10px;font-size: 17px;color: #252525;letter-spacing: 0.3px;font-weight: bold;}
 .manga-list-title.index{padding-top: 10px;padding-left: 23px;position: relative;}
 .manga-list-title.index:after{content: '';width: 3px;height: 20px;background-color: #FD113A;border-radius: 1.5px;display: block;position: absolute;top: 24px;left: 10px;}
-.manga-list-title-more{font-size: 13px;color: #252525;letter-spacing: 0;font-weight: normal;float: right;padding-right: 12px;background-image: url(/dm5/images/mobile/manga-list-title-more.png);background-repeat: no-repeat;background-size: 7px;background-position: center right;padding-left: 10px;}
+.manga-list-title-more{font-size: 13px;color: #252525;letter-spacing: 0;font-weight: normal;float: right;padding-right: 12px;background-image: url(/static/images/manga-list-title-more.png);background-repeat: no-repeat;background-size: 7px;background-position: center right;padding-left: 10px;}
 .manga-list-title.index .manga-list-title-more{color: #666;}
 .manga-list-title-logo-1{padding-left: 36px;background-image: url(/dm5/images/mobile/index-title-logo-1.png);background-size: 16px 20px;background-repeat: no-repeat;background-position: 12px 13px;}
 .manga-list-title-logo-2{padding-left: 36px;background-image: url(/dm5/images/mobile/index-title-logo-2.png);background-size: 20px 20px;background-repeat: no-repeat;background-position: 12px 13px;}
