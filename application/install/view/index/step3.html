@@ -11,42 +11,42 @@
         <div class="layui-form-item">
             <label class="layui-form-label">服务器地址</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="hostname" lay-verify="title" value="127.0.0.1">
+                <input type="text" class="layui-input" name="hostname" value="127.0.0.1">
             </div>
             <div class="layui-form-mid layui-word-aux">数据库服务器地址，一般为127.0.0.1</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数据库端口</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="hostport" lay-verify="title" value="3306">
+                <input type="text" class="layui-input" name="hostport" value="3306">
             </div>
             <div class="layui-form-mid layui-word-aux">系统数据库端口，一般为3306</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数据库名称</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="database" lay-verify="title">
+                <input type="text" class="layui-input" name="database">
             </div>
             <div class="layui-form-mid layui-word-aux">系统数据库名,必须包含字母</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数据库账号</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="username" lay-verify="title">
+                <input type="text" class="layui-input" name="username">
             </div>
             <div class="layui-form-mid layui-word-aux">连接数据库的用户名</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数据库密码</label>
             <div class="layui-input-inline w200">
-                <input type="password" class="layui-input" name="password" lay-verify="title">
+                <input type="password" class="layui-input" name="password">
             </div>
             <div class="layui-form-mid layui-word-aux">连接数据库的密码</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数据库前缀</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="prefix" lay-verify="title" value="xwx_">
+                <input type="text" class="layui-input" name="prefix" value="xwx_" placeholder="以下划线结尾">
             </div>
             <div class="layui-form-mid layui-word-aux">建议使用默认,数据库前缀必须带 '_'</div>
         </div>
@@ -90,7 +90,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">redis前缀</label>
             <div class="layui-input-inline w200">
-                <input type="text" class="layui-input" name="redis_prefix">
+                <input type="text" class="layui-input" name="redis_prefix" placeholder="以下划线结尾">
             </div>
             <div class="layui-form-mid layui-word-aux">区分一台机器上多个网站的缓存</div>
         </div>

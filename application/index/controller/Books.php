@@ -21,12 +21,12 @@ class Books extends Base
     {
         $id = $request->param('id');
         $book = cache('book' . $id);
-        $tags = cache('book' . $id . 'tags');
+        $tags = cache('tags:book' . $id );
         if ($book ==false) {
             $book = Book::with('chapters,author')->find($id);
             $tags = explode('|', $book->tags);
             cache('book' . $id, $book,null,'redis');
-            cache('book' . $id . 'tags', $tags,null,'redis');
+            cache('tags:book' . $id , $tags,null,'redis');
         }
         $redis = new_redis();
         $redis->zIncrBy($this->redis_prefix.'hot_books',1,json_encode([
@@ -56,11 +56,11 @@ class Books extends Base
             $updates = $this->bookService->getBooks('update_time',[],10);
             cache('update_books',$updates,null,'redis');
         }
-        $start = cache('book_start' . $id);
+        $start = cache('book_start:' . $id);
         if ($start == false) {
             $db = Db::query('SELECT id FROM '.$this->prefix.'chapter WHERE book_id = ' . $request->param('id') . ' ORDER BY id LIMIT 1');
             $start = $db ? $db[0]['id'] : -1;
-            cache('book_start' . $id, $start,null,'redis');
+            cache('book_start:' . $id, $start,null,'redis');
         }
 
         $this->assign([
