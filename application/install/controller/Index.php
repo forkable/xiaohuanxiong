@@ -101,13 +101,15 @@ class Index extends Controller
                 'database|数据库名称' => 'require',
                 'username|数据库账号' => 'require',
                 'password|数据库密码' => 'require',
-                'prefix|数据库前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}',
+                //'prefix|数据库前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}',
+                'prefix|数据库前缀' => 'require|alphaNum',
                 'cover|覆盖数据库' => 'require|in:0,1',
             ];
             $validate = $this->validate($data, $rule);
             if (true !== $validate) {
                 return $this->error($validate);
             }
+            $data['prefix'] = $data['prefix'].'-';
             $cover = $data['cover'];
             unset($data['cover']);
             $config = include App::getRootPath() . 'config/database.php';
@@ -168,14 +170,15 @@ class Index extends Controller
             'username|管理员账号' => 'require|alphaNum',
             'password|管理员密码' => 'require|length:6,20',
             'salt|密码盐' => 'require|alphaNum',
-            'redis_prefix|缓存前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}'
+            //'redis_prefix|缓存前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}'
+            'redis_prefix|缓存前缀' => 'require|alphaNum'
         ];
 
         $validate = $this->validate($param, $rule);
         if (true !== $validate) {
             return $this->error($validate);
         }
-
+        $param['redis_prefix'] = $param['redis_prefix'].'-';
         // 导入系统初始数据库结构
         // 导入SQL
         $sql_file = App::getRootPath() . 'application/install/sql/install.sql';
