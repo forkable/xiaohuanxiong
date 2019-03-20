@@ -109,7 +109,7 @@ class Index extends Controller
             if (true !== $validate) {
                 return $this->error($validate);
             }
-            $data['prefix'] = $data['prefix'].'-';
+            $data['prefix'] = $data['prefix'].'_';
             $cover = $data['cover'];
             unset($data['cover']);
             $config = include App::getRootPath() . 'config/database.php';
@@ -178,7 +178,7 @@ class Index extends Controller
         if (true !== $validate) {
             return $this->error($validate);
         }
-        $param['redis_prefix'] = $param['redis_prefix'].'-';
+        $param['redis_prefix'] = $param['redis_prefix'].'_';
         // 导入系统初始数据库结构
         // 导入SQL
         $sql_file = App::getRootPath() . 'application/install/sql/install.sql';
