@@ -13,6 +13,14 @@
     <a href="javascript:void(0);" onclick="doSearch();" class="search-top-right">搜索</a>
 </div>
 
+<p class="search-title">热门搜索</p>
+
+<div class="search-label">
+    {volist name="hot_search" id="vo"}
+    <a class="search-label-item" href="/search?keyword={$vo}">山海逆战</a>
+    {/volist}
+</div>
+
 <ul class="book-list">
     {volist name="$books" id="vo"}
     <li>
