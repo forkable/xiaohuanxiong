@@ -44,10 +44,10 @@
                         <thead>
                         <tr class="text-c">
                             <th width="80">ID</th>
-                            <th width="150">漫画名</th>
+                            <th width="120">漫画名</th>
                             <th width="100">封面</th>
                             <th width="100">章节数</th>
-                            <th width="150">分类</th>
+                            <th width="120">分类</th>
                             <th width="100">地区</th>
                             <th width="100">是否完结</th>
                             <th width="120">操作</th>
@@ -71,7 +71,6 @@
                             </td>
                             <td>{$vo.tags}</td>
                             <td>{$vo.area.area_name}</td>
-                            <td>{$vo.src}</td>
                             <td>{$vo.end?"完结":"连载中"}</td>
                             <td class="f-14 td-manage">
                                 <a href="{:url('chapters/index',['book_id'=>$vo.id])}"
