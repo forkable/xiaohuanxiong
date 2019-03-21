@@ -24,7 +24,7 @@ img.normal-top-right-avatar{height: 25px;vertical-align: top;margin-top: 11px;ma
 .search-top-input input{margin: 0;padding: 0;border: none;background: #FFFFFF;border-radius: 2px;height: 35px;width: 80%;outline: none;vertical-align: top;margin-top: 5px;padding: 0 5%;padding-left: 15%;background-repeat: no-repeat;background-size: 15px 15px;background-position: 10px 10px;font-size: 15px;font-family: 'Microsoft YaHei';}
 .search-top-right{height: 45px;line-height: 45px;position: absolute;color: #fff;top: 0;right: 20px;font-size: 15px;}
 
-.search-title{height: 38px;line-height: 38px;padding: 0 10px;font-size: 13px;color: #666666;letter-spacing: 0;}
+.search-title{height: 38px;line-height: 38px;padding: 0 10px;font-size: 13px;color: #666666;letter-spacing: 0; margin-top: 50px;}
 .search-label{padding: 0 10px;}
 .search-label-item{font-size: 15px;color: #252525;letter-spacing: 0;padding: 0 15px;background: #FFFFFF;border: 1px solid #F4F4F4;border-radius: 20px;height: 40px;line-height: 40px;display: inline-block;margin-bottom: 10px;}
 
@@ -565,7 +565,7 @@ li.detail-list-comment-sublist-more{padding: 4px 0;background: #EBEBEB;}
 
 .book-desc{font-size: 15px;color: #252525;letter-spacing: 0;padding: 5px 10px;padding-bottom: 0;}
 
-.book-list{font-size: 0;overflow: hidden;margin-top: 50px;}
+.book-list{font-size: 0;overflow: hidden;}
 .book-list li{border-top: 1px solid #F4F4F4;border-bottom: 1px solid #F4F4F4;height: 115px;padding: 10px;overflow: hidden;position: relative;background-color: #fff;margin-top: 10px;}
 .book-list-cover{height: 109px;width: 81px;padding: 3px;float: left;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.10);position: absolute;}
 .book-list-cover img{height: 100%;width: 100%;}

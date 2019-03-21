@@ -57,7 +57,10 @@ class Index extends Base
         $keyword = input('keyword');
         $redis = new_redis();
         $redis->zIncrBy($this->redis_prefix.'hot_search',1,$keyword);
-        $hot_search = $redis->zRevRange($this->redis_prefix.'hot_search',0,4,true);
+        $hot_search_json = $redis->zRevRange($this->redis_prefix.'hot_search',0,4,true);
+        foreach ($hot_search_json as $k => $v){
+            $hot_search[] = $k;
+        }
         $books = cache('searchresult'.$keyword);
         if (!$books){
             $books = $this->bookService->search($keyword);
