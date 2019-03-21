@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c5f9d75-19ef-4c9b-ae59-bb3279b1839b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/application/index/controller/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/index/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/index/search.html" afterDir="false" />
-    </list>
+    <list default="true" id="6c5f9d75-19ef-4c9b-ae59-bb3279b1839b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/index/controller/Index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -28,7 +25,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/index/view/index/search.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -37,6 +34,15 @@
                 <element signature="n#ul#0;n#!!top" />
                 <element signature="n#style#0;n#a#0;n#p#0;n#div#1;n#li#0;n#ul#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/static/css/mstyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="26" column="128" selection-start-line="26" selection-start-column="128" selection-end-line="26" selection-end-column="128" />
             </state>
           </provider>
         </entry>
@@ -62,8 +68,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;end</find>
-      <find>style.marginBottom</find>
       <find>download-cross</find>
       <find>mySwiper_rank.slideTo</find>
       <find>banner</find>
@@ -92,6 +96,8 @@
       <find>bookshelf</find>
       <find>num-1</find>
       <find>新书</find>
+      <find>book-list</find>
+      <find>search-title</find>
     </findStrings>
     <replaceStrings>
       <replace>小涴熊CMS</replace>
@@ -128,7 +134,6 @@
         <option value="$PROJECT_DIR$/application/index/controller/Rank.php" />
         <option value="$PROJECT_DIR$/application/index/view/pub/base.html" />
         <option value="$PROJECT_DIR$/public/static/js/index.js" />
-        <option value="$PROJECT_DIR$/public/static/css/mstyle.css" />
         <option value="$PROJECT_DIR$/application/index/view/pub/return_top.html" />
         <option value="$PROJECT_DIR$/application/index/view/books/index.html" />
         <option value="$PROJECT_DIR$/application/index/view/books/pc_index.html" />
@@ -161,6 +166,7 @@
         <option value="$PROJECT_DIR$/application/install/sql/install.sql" />
         <option value="$PROJECT_DIR$/application/index/controller/Index.php" />
         <option value="$PROJECT_DIR$/application/index/view/index/search.html" />
+        <option value="$PROJECT_DIR$/public/static/css/mstyle.css" />
       </list>
     </option>
   </component>
@@ -196,7 +202,20 @@
             <path>
               <item name="hanman" type="b2602c69:ProjectViewProjectNode" />
               <item name="hanman" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hanman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hanman" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hanman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hanman" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -400,15 +419,16 @@
       <workItem from="1553142460155" duration="250000" />
       <workItem from="1553143115274" duration="28000" />
       <workItem from="1553146999910" duration="410000" />
-      <workItem from="1553152842652" duration="439000" />
+      <workItem from="1553152842652" duration="780000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="342071000" />
+    <option name="totallyTimeSpent" value="342412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22859451" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -500,13 +520,6 @@
           <folding>
             <element signature="n#style#0;n#i#0;n#a#0;n#li#4;n#ul#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/css/mstyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="374" column="76" selection-start-line="374" selection-start-column="76" selection-end-line="374" selection-end-column="76" />
         </state>
       </provider>
     </entry>
@@ -852,16 +865,6 @@
         <state relative-caret-position="-794" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/index/controller/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
-          <folding>
-            <element signature="e#253#1627#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/index/view/index/search.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -869,6 +872,23 @@
           <folding>
             <element signature="n#ul#0;n#!!top" />
             <element signature="n#style#0;n#a#0;n#p#0;n#div#1;n#li#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/css/mstyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="26" column="128" selection-start-line="26" selection-start-column="128" selection-end-line="26" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/index/controller/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
+          <folding>
+            <element signature="e#253#1627#0#PHP" />
           </folding>
         </state>
       </provider>
