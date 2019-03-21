@@ -70,6 +70,7 @@ class Index extends Base
         $this->assign([
             'books' => $books,
             'count' => count($books),
+            'hot_search' => $hot_search
         ]);
         return view($this->tpl);
     }
