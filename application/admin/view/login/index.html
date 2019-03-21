@@ -49,5 +49,41 @@
 
 <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/admin/js/H-ui.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+      /* 表单验证，提交 */
+      $("#form-admin-login").validate({
+        rules: {
+            admin: {
+            required:true,
+          },
+          password: {
+            required:true,
+            rangelength: [6, 16]
+          },
+          captcha: {
+            required:true,
+          }
+        },
+        messages: {
+            admin: {
+            required: "账户不能为空"
+          },
+          password: {
+            required: "密码不能为空",
+            rangelength: "密码长度6到16个字符"
+          },
+          captcha: {
+            required: "验证码不能为空"
+          },
+        },
+        onkeyup: false,
+        focusCleanup: false,
+        submitHandler: function(form) {
+          //在这里执行表单提交
+        }
+      });
+    });
+  </script>
 </body>
 </html>
