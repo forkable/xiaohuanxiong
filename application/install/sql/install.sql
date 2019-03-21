@@ -68,7 +68,6 @@ CREATE TABLE `xwx_book` (
   `summary` text,
   `end` tinyint(4) DEFAULT '0',
   `author_id` int(11) NOT NULL,
-  `src` varchar(50) DEFAULT '',
   `cover_url` varchar(255) DEFAULT '',
   `start_pay` int(10) NOT NULL DEFAULT '99999' COMMENT '第m话开始需要付费',
   `money` decimal(10,2) DEFAULT '0',

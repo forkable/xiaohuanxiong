@@ -13,7 +13,7 @@
         <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1875px, 0px, 0px);">
             {volist name="banners" id="vo" key="k"}
             <div class="swiper-slide" data-swiper-slide-index="{$k}" style="width: 375px;">
-                <a href="/book/{$vo.id}" title="{$vo.title}">
+                <a href="/book/{$vo.book_id}" title="{$vo.title}">
                     <img src="{$img_site}/static/upload/banner/{$vo.pic_name}" alt="{$vo.title}">
                 </a>
             </div>
