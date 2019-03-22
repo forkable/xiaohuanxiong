@@ -8,7 +8,7 @@
             // 缓存保存目录
             'path'   => '../runtime/cache/',
             // 缓存前缀
-            'prefix' => 'novel',
+            'prefix' => 'sfsfsfsf_',
             // 缓存有效期 0表示永久缓存
             'expire' => 600,
         ];
