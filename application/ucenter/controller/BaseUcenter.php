@@ -10,6 +10,7 @@ namespace app\ucenter\controller;
 
 
 use think\Controller;
+use think\facade\Session;
 
 class BaseUcenter extends Controller
 {

@@ -1,0 +1,56 @@
+{extend name="pub/base" /}
+{block name="seo"}
+<title>个人书架-{$site_name}</title>
+{/block}
+{block name="content"}
+<main class="container mt30 mb20 overflow-Show clearfix" style="min-height:750px;">
+    <aside class="user-sidebar pull-left">
+        <section class="user-info">
+            <div class="avatar"> <img src="./index_files/mrtx.gif" alt="">        </div> <h1 style="text-align: left;"><span style="width:120px;margin:0 0 0 50px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;line-height: initial;">15079522262</span><i class="icon icon-edit" onclick="window.location.href = &#39;/userinfo/&#39;;" style="cursor:pointer"></i></h1>
+            <p style="text-align: center;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; line-height: initial;"></p>
+        </section>
+        <ul class="user-menu">
+            <li><a class="active" href="http://tel.1kkk.com/bookmarker/"><i class="icon icon-bookrack"></i><span>我的书架</span></a></li>
+            <li><a href="http://tel.1kkk.com/userwallet/"><i class="icon icon-wallet"></i><span>我的钱包</span></a></li>
+            <li><a href="http://tel.1kkk.com/userbuyworks/"><i class="icon icon-cart"></i><span>我购买的作品</span></a></li>
+            <li><a href="http://tel.1kkk.com/uservip/"><i class="sp sp-icon-vip"></i><span>VIP会员</span></a></li>
+            <li><a href="http://tel.1kkk.com/vipexchange/" target="_blank"><i class="icon icon-bag"></i><span>兑换VIP</span></a></li>
+            <li><a href="http://tel.1kkk.com/bindphone/"><i class="icon icon-password"></i><span>安全中心</span></a></li>
+            <li><a href="http://i.manben.com/" target="_blank"><i class="icon icon-up"></i><span>上传作品</span></a></li>
+        </ul>
+    </aside>
+    <article class="article-main pull-right">
+        <section class="box">
+            <header class="box-header"> <h1><span>我的书架</span></h1>
+                <ul class="box-simple-tabs">
+                    <li><a class="active" href="http://tel.1kkk.com/bookmarker/">我的收藏</a></li>
+                    <li><a href="http://tel.1kkk.com/comichistory/">阅读记录</a></li>
+                </ul>
+                <div class="pull-right"> <a href="http://tel.1kkk.com/bookmarker/#" class="more js_edit_booklist_btn"><i class="icon icon-box mr5"></i>整理我的收藏</a>
+                    <div href="#" class="box-booklist-edit-head" style="display: none">
+                        <form> <span>已选<span class="color-main js_count_num">0</span></span> <span><label><input class="js_allsel_checkbox" type="checkbox" value="">全选</label></span> <span><button id="book_del" type="button" class="del-btn">删除</button></span> <span><button type="button" class="finish-btn js_esc_booklist_btn">完成</button></span> <input id="ids" name="ids" type="hidden"> <input name="uid" type="hidden" value="274756461"> </form>
+                    </div>
+                </div>
+            </header>
+            <div class="box-body">
+                <div class="bg-gray box-sub-head clearfix">
+                    <dl class="box-head-sort pull-left"> <dt>排序:</dt>
+                        <dd style="cursor: pointer;color: #fd113a;" data-sort="1">未读更新<i class="icon icon-d-caret"></i></dd>
+                        <dd style="cursor: pointer;" data-sort="3">更新时间<i class="icon icon-d-caret"></i></dd>
+                        <dd style="cursor: pointer;" data-sort="6">阅读时间<i class="icon icon-d-caret"></i></dd>
+                    </dl>
+                    <div class="pull-right"> <span class="search-input">                            <input name="title" type="text" class="" value="" placeholder="请输入作品名称">                            <button type="button" name="btnsearch">                                <i class="icon icon-search"></i>                            </button>                        </span> </div>
+                </div>
+                <div class="mt20">
+                    <ul class="mh-list col7"> </ul>
+                </div>
+            </div>
+            <footer class="mt20">
+                <div class="page-pagination pull-right mt20">
+                    <ul> </ul>
+                </div>
+            </footer>
+        </section>
+    </article> <input id="hidCount" type="hidden" value="0">
+</main>
+{/block}

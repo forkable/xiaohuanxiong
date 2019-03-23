@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS `xwx_user`;
 CREATE TABLE `xwx_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` char(32) NOT NULL,
+  `nick_name` varchar(100) DEFAULT '',
   `mobile` char(11) DEFAULT '',
   `password` char(32) NOT NULL,
   `create_time` int(11) DEFAULT '0',

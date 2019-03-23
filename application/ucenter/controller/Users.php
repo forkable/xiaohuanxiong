@@ -11,5 +11,7 @@ namespace app\ucenter\controller;
 
 class Users extends BaseUcenter
 {
-
+    public function bookshelf(){
+        return view();
+    }
 }
