@@ -72,8 +72,12 @@
             </li>
          </ul>
         <div class="header_login hover">
-            <a href="{:url('ucenter/account/login')}" class="js_header_login_btn">
-                <img data-isload="0" class="header-avatar" src="/static/images/mrtx.gif">
+            {if $Think.Session.xwx_user == null}
+            <a href="/login" class="js_header_login_btn">
+            {else /}
+            <a href="/ucenter/userinfo" class="js_header_login_btn">
+            {/if}
+                    <img data-isload="0" class="header-avatar" src="/static/images/mrtx.gif">
             </a>
         </div>
     </div>
@@ -96,6 +100,7 @@
 </div>
 <script src="/static/js/vendor.js"></script>
 <script src="/static/js/index.js"></script>
+<script src="/static/js/user-booklist.js"></script>
 <script type="text/javascript">
     $('#btnSearch').click(function () {
         var keyword = $('#txtKeywords').val();

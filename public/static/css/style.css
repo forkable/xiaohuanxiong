@@ -4686,6 +4686,11 @@ hr {
     text-decoration: underline
 }
 
+.box .box-header .title {
+    font-size: 28px;
+
+}
+
 .box .box-body {
     position: relative
 }

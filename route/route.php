@@ -21,3 +21,8 @@ Route::rule('/rank', 'index/rank/index');
 Route::rule('/author/:id', 'index/authors/index');
 Route::rule('/bookshelf', 'index/index/bookshelf');
 Route::rule('/rank', 'index/rank/index');
+Route::rule('/ucenter/bookshelf', 'ucenter/users/bookshelf');
+Route::rule('/ucenter/userinfo', 'ucenter/users/userinfo');
+Route::rule('/login', 'ucenter/account/login');
+Route::rule('/register', 'ucenter/account/register');
+Route::rule('/logout', 'ucenter/account/logout');

@@ -10,11 +10,22 @@ namespace app\ucenter\controller;
 
 
 use app\model\User;
+use think\App;
 use think\Controller;
 use think\Request;
 
 class Account extends Controller
 {
+    public function __construct(App $app = null)
+    {
+        parent::__construct($app);
+        if ($this->request->isMobile()){
+            $this->tpl = $this->request->action();
+        }else{
+            $this->tpl = 'pc_'.$this->request->action();
+        }
+    }
+
     public function register(Request $request){
         if ($request->isPost()){
             $user = User::where('username','=',trim($request->param('username')))->find();
@@ -31,10 +42,11 @@ class Account extends Controller
             }else{
                 return ['err' => 1, 'msg' => '注册失败，请尝试重新注册'];
             }
+        }else{
+            $this->assign('site_name',config('site.site_name'));
+            return view($this->tpl);
         }
-        $site_name = config('site.site_name');
-        $this->assign('site_name',$site_name);
-        return view();
+
     }
 
     public function login(Request $request){
@@ -50,9 +62,15 @@ class Account extends Controller
                 session('xwx_user_id',$user->id);
                 return ['err' => 0, 'msg' => '登录成功'];
             }
+        }else{
+            $this->assign('site_name',config('site.site_name'));
+            return view($this->tpl);
         }
-        $site_name = config('site.site_name');
-        $this->assign('site_name',$site_name);
-        return view();
+    }
+
+    public function logout(){
+        session('xwx_user',null);
+        session('xwx_user_id',null);
+        $this->success('成功登出','/login');
     }
 }

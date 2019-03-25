@@ -47,7 +47,11 @@
                     {$book.summary}
                 </p>
                 <div class="bottom" style="width: 850px;bottom: 30px;">
-                    <a href="javascript:void(0);" class="btn-1 btn_collection" rel="nofollow"><i class="icon icon-fav2"></i>收藏</a>
+                    {if $Think.session.xwx_user != null}
+                    <a href="javascript:void(0);" class="btn-1 btn_collection" onclick="addfavor()"><i class="icon icon-fav2"></i>收藏</a>
+                    {else /}
+                    <a href="/login" class="btn-1 btn_collection"><i class="icon icon-fav2"></i>收藏</a>
+                    {/if}
                     {if $start == -1}
                     <a href="#" class="btn-2" rel="nofollow">暂无章节</a>
                     {else /}
@@ -220,4 +224,9 @@
         </div>
     </div>
 </div>
+<script>
+    function addfavor() {
+        alert('hello');
+    }
+</script>
 {/block}

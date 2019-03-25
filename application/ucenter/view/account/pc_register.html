@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+
     <link href="/static/admin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/admin/css/H-ui.ucenter.css" rel="stylesheet" type="text/css" />
     <link href="/static/admin/lib/Hui-iconfont/1.0.9/iconfont.min.css" rel="stylesheet" type="text/css" />
-    <title>用户登录-{$site_name}</title>
+    <title>用户注册-{$site_name}</title>
 </head>
 <body>
 <div class="login-wraper">
@@ -17,8 +18,8 @@
         <div class="clearfix pt-20">
             <i class="iconpic iconpic-logo"></i>
         </div>
-        <div class="row clearfix form-title">网站登录</div>
-        <form class="form form-horizontal" id="form-login">
+        <div class="row clearfix form-title">网站注册</div>
+        <form class="form form-horizontal" id="form-reg">
             <div class="row clearfix">
                 <input type="text" class="input-text radius size-L" name="username" id="username" value="" placeholder="用户名">
             </div>
@@ -26,14 +27,13 @@
                 <input type="password" class="input-text radius size-L" name="password" id="password" value="" placeholder="密码">
             </div>
             <div class="row clearfix">
-                <button class="btn btn-primary btn-block radius size-L">登 录</button>
+                <input type="password" class="input-text radius size-L" name="password2" id="password2" value="" placeholder="确认密码">
             </div>
-            <div class="row clearfix f-12">
-                <a href="/password/reset/">忘记密码?</a>
+            <div class="row clearfix">
+                <button class="btn btn-primary btn-block radius size-L">注 册</button>
                 <div class="line mt-20"></div>
             </div>
-
-            <div class="row clearfix">没有账户? <a href="{:url('ucenter/account/register')}"><strong>注 册</strong></a></div>
+            <div class="row clearfix">已有账户 <a href="{:url('ucenter/account/login')}"><strong>登 录</strong></a></div>
         </form>
     </div>
 </div>
@@ -45,43 +45,55 @@
 <script type="text/javascript" src="/static/admin/lib/layer/3.1.1/layer.js"></script>
 <script type="text/javascript">
     $(function() {
-        $("#form-login").validate({
+        $("#form-reg").validate({
             rules: {
                 username: {
                     required: true,
+                    rangelength: [6, 20]
                 },
                 password: {
                     required: true,
+                    rangelength: [6, 16]
+                },
+                password2: {
+                    required: true,
+                    equalTo:"#password"
                 }
             },
             messages: {
                 username: {
                     required: "用户名不能为空",
+                    rangelength: "用户名长度6-20个字符"
                 },
                 password: {
                     required: "密码不能为空",
+                    rangelength: "密码长度6-16个字符"
+                },
+                password2: {
+                    required: "确认密码不能为空",
+                    equalTo:"两次密码输入不一致"
                 }
             },
             onkeyup: false,
             focusCleanup: false,
             submitHandler: function(form) {
                 $(".label.error").hide();
-                login();
+                reg();
             }
         });
     });
 
-    function login(){
+    function reg() {
         $.ajax({
             type: 'POST',
-            url: "{:url('login')}",
-            data: $('#form-login').serialize(),
+            url: "/register",
+            data: $('#form-reg').serialize(),
             dataType: 'json',
             success: function (data) {
                 var result = data;
-                if (result.err == 0){ //登录成功
+                if (result.err == 0){ //注册成功
                     layer.msg(result.msg, {icon: 1, time:1000}, function () {
-                        //location.href = '{:url("index/index")}';
+                        location.href = '/login';
                     });
                 } else {
                     layer.msg(result.msg, {icon: 2});
@@ -92,7 +104,6 @@
             },
         });
     }
-
 </script>
 </body>
 </html>

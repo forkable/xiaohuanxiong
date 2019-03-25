@@ -60,10 +60,10 @@
                             <td>{$vo.book_name}</td>
                             <td>
                                 {if empty($vo.cover_url)}
-                                <img width="50%" class="picture-thumb"
+                                <img width="45px;" height="auto" class="picture-thumb"
                                      src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">                                
                                 {else /}
-                                <img width="50%" class="picture-thumb" src="{$vo.cover_url}">
+                                <img width="45px;" height="auto" class="picture-thumb" src="{$vo.cover_url}">
                                 {/if}
                             </td>
                             <td>

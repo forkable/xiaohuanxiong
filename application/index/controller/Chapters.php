@@ -24,6 +24,20 @@ class Chapters extends Base
             $chapters = Chapter::where('book_id','=',$book_id)->select();
             cache('mulu'.$book_id,$chapters,null,'redis');
         }
+
+        $uid = session('xwx_user_id');
+        if ($uid){
+            $redis = new_redis();
+            $arr = [
+                'book_id' => $chapter->book->id,
+                'cover' => $chapter->book->cover_url,
+                'chapter_id' => $chapter->id,
+                'chapter_name' => $chapter->chapter_name,
+                'book_name' => $chapter->book->book_name,
+                'author_name' => $chapter->book->author->author_name
+            ];
+            $redis->hSet('history:'.$uid,$chapter->book->id,json_encode($arr)); //利用hash表，保证用户及book的唯一性
+        }
         $prev = cache('chapter_prev'.$id);
         if (!$prev){
             $prev = Db::query(
