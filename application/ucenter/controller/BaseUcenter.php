@@ -28,10 +28,12 @@ class BaseUcenter extends Controller
             $this->redirect(url('/login'));
         }
         $tpl_root = './template/'.config('site.tpl').'/ucenter/';
+        $controller = strtolower($this->request->controller());
+        $action = strtolower($this->request->action());
         if ($this->request->isMobile()){
-            $this->tpl = $tpl_root.$this->request->controller().'/'.$this->request->action().'.html';
+            $this->tpl = $tpl_root.$controller.'/'.$action.'.html';
         }else{
-            $this->tpl = $tpl_root.$this->request->controller().'/'.'pc_'.$this->request->action().'.html';
+            $this->tpl = $tpl_root.$controller.'/'.'pc_'.$action.'.html';
         }
 
         $this->user = \app\model\User::get($this->uid);

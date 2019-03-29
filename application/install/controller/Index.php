@@ -101,7 +101,6 @@ class Index extends Controller
                 'database|数据库名称' => 'require',
                 'username|数据库账号' => 'require',
                 'password|数据库密码' => 'require',
-                //'prefix|数据库前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}',
                 'prefix|数据库前缀' => 'require|alphaNum',
                 'cover|覆盖数据库' => 'require|in:0,1',
             ];
@@ -170,7 +169,6 @@ class Index extends Controller
             'username|管理员账号' => 'require|alphaNum',
             'password|管理员密码' => 'require|length:6,20',
             'salt|密码盐' => 'require|alphaNum',
-            //'redis_prefix|缓存前缀' => 'require|regex:^[a-z0-9]{1,20}[_]{1}'
             'redis_prefix|缓存前缀' => 'require|alphaNum'
         ];
 
@@ -234,7 +232,8 @@ class Index extends Controller
             'site_name' => '{$site_name}',
             'xiongzhang' => '{$xzh}',
             'salt' => '{$salt}',
-            'api_key' => '{$api_key}',               
+            'api_key' => '{$api_key}',   
+            'tpl' => 'default'            
             ];
 INFO;
         file_put_contents(App::getRootPath() . 'config/site.php', $code);

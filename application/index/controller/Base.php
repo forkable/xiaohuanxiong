@@ -27,10 +27,12 @@ class Base extends Controller
         $this->prefix = config('database.prefix');
         $this->redis_prefix = config('cache.prefix')."_";
         $tpl_root = './template/'.config('site.tpl').'/index/';
+        $controller = strtolower($this->request->controller());
+        $action = strtolower($this->request->action());
         if ($this->request->isMobile()){
-            $this->tpl = $tpl_root.$this->request->controller().'/'.$this->request->action().'.html';
+            $this->tpl = $tpl_root.$controller.'/'.$action.'.html';
         }else{
-            $this->tpl = $tpl_root.$this->request->controller().'/'.'pc_'.$this->request->action().'.html';
+            $this->tpl = $tpl_root.$controller.'/'.'pc_'.$action.'.html';
         }
         $links = cache('friendship_link');
         if ($links == false){
