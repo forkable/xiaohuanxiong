@@ -1,4 +1,4 @@
-{extend name="pub/base" /}
+{extend name="./template/default/pub/base.html" /}
 {block name="seo"}
 <title>{$book.book_name}全集免费高清无修在线阅读-{$site_name}</title>
 <meta name="description" content="{$book.book_name}是一本地区为{$book.area.area_name}，类型为{$book.tags}的高人气漫画，漫画简介：{$book.summary}">
@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/css/jquery-ui-1.7.3.custom.css">
 {/block}
 {block name="content"}
-{include file="pub/top2" /}
+{include file="./template/default/index/pub/top2.html" /}
 <div class="detail-main">
     {if empty($book.cover_url)}
     <img class="detail-main-bg" src="{$img_site}/static/upload/book/{$book.id}/cover.jpg">
@@ -157,6 +157,6 @@
         $(id).show();
     }
 </script>
-{include file="pub/return_top"}
+{include file="./template/default/index/pub/return_top.html"}
 
 {/block}

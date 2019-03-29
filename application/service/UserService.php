@@ -28,4 +28,9 @@ class UserService extends Controller
                 ]);
         return $books;
     }
+
+    public function delFavors($uid,$ids){
+        $user = User::get($uid);
+        $user->books()->detach($ids);
+    }
 }

@@ -17,6 +17,13 @@ function setActive(myLi) {
     }
 }
 
+function ShowDialog(title) {
+    $(".toast").text(title);
+    $(".toast").show();
+    setTimeout(function () {
+        $(".toast").hide();
+    }, 1000);
+}
 
 window.onresize = function () {
     if ($(window).width() < 1420) {
