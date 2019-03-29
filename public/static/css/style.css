@@ -6309,7 +6309,6 @@ body {
 .banner_detail_form .info .bottom .btn-1.active {
     color: #666;
     background: #f6f6f6;
-    background-image: url(/static/images/detail-collection-a.png);
     background-repeat: no-repeat;
     background-position: 12px 8px
 }

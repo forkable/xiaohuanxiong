@@ -5,5 +5,6 @@
             'site_name' => '新新漫画',
             'xiongzhang' => '',
             'salt' => 'sss',
-            'api_key' => 'hahaha',               
+            'api_key' => 'hahaha',
+            'tpl' => 'default'
             ];

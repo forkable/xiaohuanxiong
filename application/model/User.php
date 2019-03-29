@@ -27,4 +27,8 @@ class User extends Model
     public function setPasswordAttr($value){
         return md5(strtolower(trim($value)).config('site.salt'));
     }
+
+    public function books(){
+        return $this->belongsToMany('Book','\\app\\model\\UserBook');
+    }
 }

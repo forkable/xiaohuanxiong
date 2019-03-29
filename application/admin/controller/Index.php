@@ -18,23 +18,23 @@ class Index extends BaseAdmin
         $url = config('site.url');
         $img_site = config('site.img_site');
         $salt = config('site.salt');
-        $xzh = config('site.xzh');
         $api_key = config('site.api_key');
         $redis_host = config('cache.host');
         $redis_port = config('cache.port');
         $redis_auth = config('cache.password');
         $redis_prefix= config('cache.prefix');
+        $front_tpl = config('site.tpl');
         $this->assign([
             'site_name' => $site_name,
             'url' => $url,
             'img_site' => $img_site,
             'salt' => $salt,
-            'xzh' => $xzh,
             'api_key' => $api_key,
             'redis_host' => $redis_host,
             'redis_port' => $redis_port,
             'redis_auth' => $redis_auth,
-            'redis_prefix' => $redis_prefix
+            'redis_prefix' => $redis_prefix,
+            'front_tpl' => $front_tpl
         ]);
         return view();
     }
@@ -45,21 +45,21 @@ class Index extends BaseAdmin
         $url = input('url');
         $img_site = input('img_site'); 
         $salt = input('salt');
-        $xzh = input('xzh');
         $api_key = input('api_key');
         $redis_host = input('redis_host');
         $redis_port = input('redis_port');
         $redis_auth = input('redis_auth');
         $redis_prefix = input('redis_prefix');
+        $front_tpl = input('front_tpl');
         $site_code = <<<INFO
         <?php
         return [
             'url' => '{$url}',
             'img_site' => '{$img_site}',
             'site_name' => '{$site_name}',
-            'xiongzhang' => '{$xzh}',
             'salt' => '{$salt}',
-            'api_key' => '{$api_key}',           
+            'api_key' => '{$api_key}', 
+            'front_tpl' => '{$front_tpl}'         
         ];
 INFO;
         file_put_contents(App::getRootPath() . 'config/site.php', $site_code);

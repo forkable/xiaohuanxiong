@@ -44,9 +44,8 @@ class Account extends Controller
             }
         }else{
             $this->assign('site_name',config('site.site_name'));
-            return view($this->tpl);
+            return view('./template/default/ucenter/account/register.html');
         }
-
     }
 
     public function login(Request $request){
@@ -64,7 +63,7 @@ class Account extends Controller
             }
         }else{
             $this->assign('site_name',config('site.site_name'));
-            return view($this->tpl);
+            return view('./template/default/ucenter/account/login.html');
         }
     }
 

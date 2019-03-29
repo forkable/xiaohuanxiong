@@ -8,7 +8,6 @@
 
 namespace app\ucenter\controller;
 
-
 use app\service\UserService;
 
 class Users extends BaseUcenter
@@ -21,12 +20,32 @@ class Users extends BaseUcenter
     }
 
     public function bookshelf(){
-        $uid = session('xwx_user_id');
-        $favors = $this->userService->getFavors($uid);
+        $favors = $this->userService->getFavors($this->uid);
         $this->assign([
-            'favors' => $favors
+            'favors' => $favors,
+            'header_title' => '我的收藏'
         ]);
-       // halt($favors);
+        return view($this->tpl);
+    }
+
+    public function history(){
+        $redis = new_redis();
+        $vals = $redis->hVals('history:'.$this->uid);
+        $books = array();
+        foreach ($vals as $val){
+            $books[] = json_decode($val,true);
+        }
+        $this->assign([
+            'books' => $books,
+            'header_title' => '阅读历史'
+        ]);
+        return view($this->tpl);
+    }
+
+    public function ucenter(){
+        $this->assign([
+            'header_title' => '个人中心'
+        ]);
         return view($this->tpl);
     }
 

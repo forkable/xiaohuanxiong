@@ -76,8 +76,8 @@ CREATE TABLE `xwx_book` (
   `area_id` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `tags` (`tags`) USING BTREE,
-  KEY `end` (`end`) USING HASH,
-  KEY `author_id` (`author_id`) USING HASH,
+  KEY `end` (`end`) USING BTREE,
+  KEY `author_id` (`author_id`) USING BTREE,
   FULLTEXT KEY `fidx` (`book_name`,`summary`) with parser ngram
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
@@ -94,8 +94,8 @@ CREATE TABLE `xwx_chapter` (
   `order` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `chapter_name` (`chapter_name`) USING BTREE,
-  KEY `book_id` (`book_id`) USING HASH,
-  KEY `order` (`order`) USING HASH
+  KEY `book_id` (`book_id`) USING BTREE,
+  KEY `order` (`order`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -110,8 +110,8 @@ CREATE TABLE `xwx_photo` (
   `order` decimal(10,2) NOT NULL,
   `img_url` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `chapter_id` (`chapter_id`) USING HASH,
-  KEY `order` (`order`) USING HASH
+  KEY `chapter_id` (`chapter_id`) USING BTREE,
+  KEY `order` (`order`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -124,7 +124,7 @@ CREATE TABLE `xwx_tags` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `tag_name` (`tag_name`) USING BTREE
+  KEY `tag_name` (`tag_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -151,4 +151,15 @@ CREATE TABLE `xwx_area` (
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE `user_book` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `book_id` int(10) unsigned NOT NULL,
+  `create_time` int(11) DEFAULT '0',
+  `update_time` int(11) DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  key book_id (`book_id`) USING BTREE,
+  key user_id (`user_id`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 

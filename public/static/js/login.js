@@ -56,8 +56,8 @@ $(function () {
  */
 function verifyform(action) {
     var parent = action === 1 ? ".login-modal" : ".right";
-    var $username = $(parent + " input[type=text][name=" + (action !== 3 ? "txt_name" : "txt_reg_name") + "]");
-    var $pwd = $(parent + " input[type=password][name=" + (action !== 3 ? "txt_password" : "txt_reg_password") + "]");
+    var $username = $(parent + " input[type=text][name=" + (action !== 3 ? "username" : "txt_reg_name") + "]");
+    var $pwd = $(parent + " input[type=password][name=" + (action !== 3 ? "password" : "txt_reg_password") + "]");
     var $phone = $(parent + " input[type=text][name=" + "txt_phone" + "]");
     var $phonecode = $(parent + " input[type=text][name=" + "txt_phonecode" + "]");
     var $pwd1 = $(parent + " input[type=password][name=txt_reg_password2]");
@@ -111,7 +111,7 @@ function verifyform(action) {
         return false;
     }
     if (!checkcode(action)) {
-        $tip.text("请点击下方图片，旋转至正确方向~");
+        $tip.text("验证码错误");
         return false;
     }
 

@@ -34,9 +34,16 @@ class Chapters extends Base
                 'chapter_id' => $chapter->id,
                 'chapter_name' => $chapter->chapter_name,
                 'book_name' => $chapter->book->book_name,
-                'author_name' => $chapter->book->author->author_name
+                'author_name' => $chapter->book->author->author_name,
+                'end' => $chapter->book->end,
+                'last_time' => $chapter->book->last_time
             ];
             $redis->hSet('history:'.$uid,$chapter->book->id,json_encode($arr)); //利用hash表，保证用户及book的唯一性
+            $redis->rPush('history:log',$chapter->book->id); //将key记录进队列，用于日后按顺序删除
+            if ($redis->hLen('history:'.$uid) > 10){
+                $key = $redis->lPop('history:log'); //拿到队列最早的key
+                $redis->hDel('history:'.$uid,$key); //按照key从hash表删除
+            }
         }
         $prev = cache('chapter_prev'.$id);
         if (!$prev){

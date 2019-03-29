@@ -19,15 +19,18 @@ class Base extends Controller
     protected $tpl;
     protected $prefix;
     protected $redis_prefix;
+    protected $uid;
     public function __construct(App $app = null)
     {
         parent::__construct($app);
+        $this->uid = session('xwx_user_id');
         $this->prefix = config('database.prefix');
         $this->redis_prefix = config('cache.prefix')."_";
+        $tpl_root = './template/'.config('site.tpl').'/index/';
         if ($this->request->isMobile()){
-            $this->tpl = $this->request->action();
+            $this->tpl = $tpl_root.$this->request->controller().'/'.$this->request->action().'.html';
         }else{
-            $this->tpl = 'pc_'.$this->request->action();
+            $this->tpl = $tpl_root.$this->request->controller().'/'.'pc_'.$this->request->action().'.html';
         }
         $links = cache('friendship_link');
         if ($links == false){

@@ -8,7 +8,7 @@
 
 namespace app\service;
 
-use app\model\UserFavor;
+use app\model\User;
 use think\Controller;
 
 class UserService extends Controller
@@ -18,15 +18,14 @@ class UserService extends Controller
         if ($this->request->isMobile()){
             $type = 'util\MPage';
         }
-        $favors = UserFavor::where('user_id','=',$uid)->with(['book' => function($query){
-            $query->order('last_time','desc');
-        }])->select();
-//            ->paginate(10,false,
-//                [
-//                    'query' => request()->param(),
-//                    'type'     => $type,
-//                    'var_page' => 'page',
-//                ]);
-        return $favors;
+        $user = User::get($uid);
+        $books = $user->books()
+            ->paginate(10,false,
+                [
+                    'query' => request()->param(),
+                    'type'     => $type,
+                    'var_page' => 'page',
+                ]);
+        return $books;
     }
 }

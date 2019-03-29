@@ -3,8 +3,9 @@
 namespace app\index\controller;
 
 use app\model\Book;
+use app\model\User;
+use app\model\UserBook;
 use think\Db;
-use think\facade\Cache;
 use think\Request;
 
 class Books extends Base
@@ -20,13 +21,13 @@ class Books extends Base
     public function index(Request $request)
     {
         $id = $request->param('id');
-        $book = cache('book' . $id);
-        $tags = cache('tags:book' . $id );
+        $book = cache('book:' . $id);
+        $tags = cache('tags:book:' . $id );
         if ($book ==false) {
             $book = Book::with('chapters,author')->find($id);
             $tags = explode('|', $book->tags);
-            cache('book' . $id, $book,null,'redis');
-            cache('tags:book' . $id , $tags,null,'redis');
+            cache('book:' . $id, $book,null,'redis');
+            cache('tags:book:' . $id , $tags,null,'redis');
         }
         $redis = new_redis();
         $redis->zIncrBy($this->redis_prefix.'hot_books',1,json_encode([
@@ -63,6 +64,17 @@ class Books extends Base
             cache('book_start:' . $id, $start,null,'redis');
         }
 
+        $isfavor = 0;
+        if (!is_null($this->uid)){
+            $where[] = ['user_id','=',$this->uid];
+            $where[] = ['book_id','=',$id];
+            $userfavor = UserBook::where($where)->find();
+            if (!is_null($userfavor)){ //未收藏本漫画
+                $isfavor = 1;
+            }
+        }
+
+
         $this->assign([
             'book' => $book,
             'tags' => $tags,
@@ -70,7 +82,8 @@ class Books extends Base
             'updates' => $updates,
             'hot' => $hot_books,
             'recommand' => $recommand,
-            'header_title' => $book->book_name
+            'header_title' => $book->book_name,
+            'isfavor' => $isfavor
         ]);
         return view($this->tpl);
 
@@ -116,5 +129,34 @@ class Books extends Base
             'header_title' => $cate_selector
         ]);
         return view($this->tpl);
+    }
+
+    public function addfavor(){
+        if ($this->request->isPost()){
+            if (is_null($this->uid)){
+                return ['err' => 1, 'msg' => '用户未登录'];
+            }
+            $redis = new_redis();
+            if ($redis->exists('favor_lock:'.$this->uid)){ //如果存在锁
+                return ['err' => 1,'msg' => '操作太频繁'];
+            }else{
+                $redis->set('favor_lock:'.$this->uid,1,3); //写入锁
+
+                $val = input('val');
+                $book_id = input('book_id');
+
+                if ($val == 0){ //未收藏
+                    $user = User::get($this->uid);
+                    $book = Book::get($book_id);
+                    $user->books()->save($book);
+                    return ['err' => 0, 'isfavor' => 1]; //isfavor表示已收藏
+                }else{
+                    $user = User::get($this->uid);
+                    $user->books()->detach(['book_id' => $book_id]);
+                    return ['err' => 0, 'isfavor' => 0]; //isfavor为0表示未收藏
+                }
+            }
+        }
+        return ['err' => 1,'msg' => '不是post请求'];
     }
 }

@@ -1,0 +1,268 @@
+{extend name="./template/default/pub/pc_base.html" /}
+{block name="seo"}
+<title>{$book.book_name}全集免费高清无修在线阅读-{$site_name}</title>
+<meta name="description" content="{$book.book_name}是一本地区为{$book.area.area_name}，类型为{$book.tags}的高人气漫画，漫画简介：{$book.summary}">
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/css/jquery-ui-1.7.3.custom.css">
+{/block}
+{block name="content"}
+<div class="">
+    <section class="banner_detail">
+        <div class="banner_border_bg">
+            {if empty($book.cover_url)}
+            <img class="banner_detail_bg" src="{$img_site}/static/upload/book/{$book.id}/cover.jpg" alt="{$book.book_name}" style="width: 100%;height:auto;filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=60, MakeShadow=false);">
+            {else /}
+            <img class="banner_detail_bg" src="{$book.cover_url}" alt="{$book.book_name}" style="width: 100%;height:auto;filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=60, MakeShadow=false);">
+            {/if}
+        </div>
+        <div class="banner_detail_form">
+            <div class="cover">
+                {if empty($book.cover_url)}
+                <img src="{$img_site}/static/upload/book/{$book.id}/cover.jpg" alt="{$book.book_name}">
+                {else /}
+                <img src="{$book.cover_url}" alt="{$book.book_name}">
+                {/if}
+                <div class="sr-qrcode">
+                    <img src="/static/images/wxqrcode.jpg" alt="{$book.book_name}">
+                    <div class="sr-qrcode__text">~扫码关注公众号~</div>
+                </div>
+            </div>
+            <div class="info">
+                <h1>{$book.book_name}</h1>
+                <p class="subtitle">作者：{$book.author.author_name}</p>
+                <p class="tip">
+                    <span class="block">状态：<span>{$book.end?'已完结':'连载中'}</span></span>
+                    <span class="block ticai">地区：<a href="#" target="_blank">{$book.area.area_name}</a></span>
+                    <span class="block">更新时间：{$book.last_time|date='Y-m-d'}</span>
+                </p>
+                <p class="tip" style="margin-top:10px;">
+                    <span class="block">标签：
+                        {volist name="tags" id="vo"}
+                        <a href="/booklist/?tag={$vo}" target="_blank">{$vo}</a>
+                        {/volist}
+                    </span>
+                </p>
+                <p class="content" style="position: relative;overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;">
+                    {$book.summary}
+                </p>
+                <div class="bottom" style="width: 850px;bottom: 30px;">
+                    {if $Think.session.xwx_user != null}
+                        {if $isfavor == 1}
+                        <a href="javascript:void(0);" class="btn-1 btn_collection active" id="addfavor" data-val="1">
+                            <i class="icon icon-fav2-full"></i>已收藏</a>
+                        {else /}
+                        <a href="javascript:void(0);" class="btn-1 btn_collection" id="addfavor" data-val="0">
+                            <i class="icon icon-fav2"></i>收藏</a>
+                        {/if}
+                    {else /}
+                    <a href="/login" class="btn-1 btn_collection"><i class="icon icon-fav2"></i>收藏</a>
+                    {/if}
+                    {if $start == -1}
+                    <a href="#" class="btn-2" rel="nofollow">暂无章节</a>
+                    {else /}
+                    <a href="/chapter/{$start}" class="btn-2" rel="nofollow">开始阅读</a>
+                    {/if}
+                </div>
+            </div>
+            <script>
+                $('#addfavor').click(function () {
+                    var val = $(this).attr('data-val');
+                    $.post({
+                        url:`/addfavor`,
+                        data:{'book_id' : {$book.id}, 'val' : val },
+                        success: function (res) {
+                            if (res.err == 1){
+                                ShowDialog(res.msg);
+                            } else {
+                                if (res.isfavor == 1){ //表示收藏了，将控件状态改为已收藏
+                                    $('a.btn-1').html('<i class="icon icon-fav2-full"></i>已收藏</a>').attr('data-val',1).addClass('active');
+                                    ShowDialog('收藏成功');
+                                } else { //更改为未收藏
+                                    $('a.btn-1').html('<i class="icon icon-fav2"></i>收藏</a>').attr('data-val',0).removeClass('active');
+                                    ShowDialog('取消收藏');
+                                }
+                            }
+                        },
+                    })
+                })
+
+                function ShowDialog(title) {
+                    $("#alertTop_1").text(title);
+                    $(".alertTop_1").show();
+                    setTimeout(function () {
+                        alertTopHide_1();
+                    }, 1000);
+                }
+
+                function alertTopHide_1() {
+                    $(".alertTop_1").hide();
+                }
+            </script>
+            <div style="clear: both;"></div>
+        </div>
+    </section>
+</div>
+<div class="view-comment" style="position:relative;">
+    <div class="container">
+        <div class="view-comment-sub">
+            <div class="sub-manga">
+                <h2 class="top">阅读排行</h2>
+                <ul class="list">
+                    {volist name="hot" id="vo"}
+                    <li>
+                        <div class="cover">
+                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                {if empty($vo.cover_url)}
+                                <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
+                                {else /}
+                                <img src="{$book.cover_url}" alt="{$vo.book_name}">
+                                {/if}
+                            </a>
+                        </div>
+                        <div class="info">
+                            <p class="title">
+                                <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                            </p>
+                            <p class="subtitle-new">{$vo.summary|subtext="15"}</p>
+                            <p class="tip"><span>评分:</span><span class="mh-star-line star-5"></span></p>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="sub-manga">
+                <h2 class="top">最新更新</h2>
+                <ul class="list">
+                    {volist name="updates" id="vo"}
+                    <li>
+                        <div class="cover">
+                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                {if empty($vo.cover_url)}
+                                <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
+                                {else /}
+                                <img src="{$book.cover_url}" alt="{$vo.book_name}">
+                                {/if}
+                            </a>
+                        </div>
+                        <div class="info">
+                            <p class="title">
+                                <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                            </p>
+                            <p class="subtitle-new">{$vo.summary|subtext="15"}</p>
+                            <p class="tip"><span>评分:</span><span class="mh-star-line star-5"></span></p>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+        <div class="left-bar">
+            <div id="tempc">
+                <div class="detail-list-title" id="detail-list-title">
+                    <a href="javascript:void(0);" onclick="sortBtnClick();" mode="0" class="order desc inverted">倒序</a>
+                </div>
+                <div id="chapterlistload">
+                    <ul class="view-win-list detail-list-select" id="detail-list-select">
+                        {volist name="book.chapters" id="vo"}
+                        <li>
+                            <a href="/chapter/{$vo.id}" target="_blank" rel="nofollow">{$vo.chapter_name}</a>
+                        </li>
+                        {/volist}
+                    </ul>
+                    <script>
+                        ;(function(){
+                            $("#detail-list-select li").each(function(){
+                                var tsi=$(this).index();
+                                $(this).attr("idx",tsi);
+                            })
+                        })();
+                    </script>
+                    <div class="m-load-more-sm" id="detail-list-more">
+                        <a href="javascript:void(0);" onclick="charpterMore(this);" class="detail-more" rel="nofollow">显示全部章节</a>
+                    </div>
+                </div>
+            </div>
+            <div class="index-title">
+                <h2>相关推荐</h2>
+            </div>
+            <div class="index-manga">
+                <ul class="mh-list col7">
+                    {volist name="recommand" id="vo"}
+                    <li>
+                        <div class="mh-item">
+                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                {if empty($vo.cover_url)}
+                                <p class="mh-cover" style="background-image: url({$img_site}/static/upload/book/{$vo.id}/cover.jpg)"></p>
+                                {else /}
+                                <p class="mh-cover" style="background-image: url({$book.cover_url})"></p>
+                                {/if}
+                            </a>
+                            <div class="mh-item-detali">
+                                <h2 class="title">
+                                    <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                                </h2>
+                                <p class="zl">{$vo.summary|subtext=13}...</p>
+                                <p class="chapter">
+                                    <span>总共{$vo.chapter_count}话</span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+        <div class="view-comment-main" style="margin-top:5px;">
+            <div class="top">
+                <a href="javascript:void(0);" id="btnnewposts">
+                    <h2 class="active">{$book.book_name}网友评论</h2>
+                </a>
+            </div>
+            <ul class="list">
+                <li>
+                    <ul class="postlist">
+                        <li class="dashed">
+                            <div class="cover"><img src="https://wx1.sinaimg.cn/mw1024/ab72f980gy1fzt2dv2q6rj20dw0a93zb.jpg"></div>
+                            <div class="info">
+                                <p class="title">点点</p>
+                                <p class="content">更新挺快的，喜欢，希望有的别的能更新多一点</p>
+                                <p class="bottom">
+                                    2019-03-04
+                                    <span class="right">
+                                        <a href="javascript:void(0)" data-id="55994" class="zan zanbtn" onclick="dianzan(this)">
+                                            <span>0</span>人赞
+                                        </a>
+                                        <a href="javascript:void(0)" class="huifu" onclick="scrollTopComment()">回复</a>
+                                        </span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="cover">
+                        <img src="/static/images/mrtx.gif">
+                    </div>
+                    <div class="info">
+                        <form name="formpl2" id="formpl2" method="post" class="postForm">
+                            <div class="clearfix">
+                                <textarea class="comment-input js_max_text_length" name="Des" id="des" placeholder="我来说两句..."></textarea>
+                                <p class="comment-item">
+                                    <span>请您文明上网，理性发言，注意文明用语</span>
+                                    <input type="button" id="sendbutton" class="btn commentbtn" value="发表评论">
+                                </p>
+
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            <div class="bottom-bar footer-bar" style="display:none;">
+                <div class="bottom-page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}
