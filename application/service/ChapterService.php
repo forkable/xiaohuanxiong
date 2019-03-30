@@ -15,7 +15,9 @@ class ChapterService
 {
     public function getChapters($where = '1=1'){
         $chapters = Chapter::where($where);
-        $pages = $chapters->with('photos')->order('id','desc')->paginate(5,false,[
+        $pages = $chapters->with(['photos' => function($query) {
+            $query->order('order');
+        }])->order('order','desc')->paginate(5,false,[
             'query' => request()->param(),
             'type'     => 'util\AdminPage',
             'var_page' => 'page',
@@ -34,6 +36,6 @@ class ChapterService
     }
 
     public function getLastChapter($book_id){
-        return Chapter::where('book_id','=',$book_id)->order('id','desc')->limit(1)->find();
+        return Chapter::where('book_id','=',$book_id)->order('order','desc')->limit(1)->find();
     }
 }

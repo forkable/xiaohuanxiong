@@ -9,7 +9,6 @@
 namespace app\ucenter\controller;
 
 use app\service\UserService;
-use think\Request;
 
 class Users extends BaseUcenter
 {
@@ -29,17 +28,25 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
-    public function delbookshelf(){
-//        if ($request->isPost()){
-//            $ids = explode(',', $request->param('mid')) ; //书籍id;
-//            $this->userService->delFavors($this->uid,$ids);
-//            return ['err' => 0, 'msg' => '删除收藏'] ;
-//        }else{
-//            return ['err' => 1, 'msg' => '非法请求'] ;
-//        }
-        return ['err' => 1, 'msg' => 'ggggg'];
+    public function delfavors(){
+        if ($this->request->isPost()){
+            $ids = explode(',', input('ids')) ; //书籍id;
+            $this->userService->delFavors($this->uid,$ids);
+            return ['err' => 0, 'msg' => '删除收藏'] ;
+        }else{
+            return ['err' => 1, 'msg' => '非法请求'] ;
+        }
     }
 
+    public function delhistory(){
+        if ($this->request->isPost()){
+            $keys = explode(',',input('keys'));
+            $this->userService->delHistory($this->uid,$keys);
+            return ['err' => 0, 'msg' => '删除阅读历史'] ;
+        } else {
+            return ['err' => 1, 'msg' => '非法请求'] ;
+        }
+    }
 
     public function history(){
         $redis = new_redis();

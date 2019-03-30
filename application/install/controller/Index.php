@@ -222,7 +222,6 @@ class Index extends Controller
         $site_name = config('site.site_name');
         $url = config('site.url');
         $img_site = config('site.img_site');
-        $xzh = config('site.xzh');
         $api_key = config('site.api_key');
         $code = <<<INFO
         <?php
@@ -230,7 +229,6 @@ class Index extends Controller
             'url' => '{$url}',
             'img_site' => '{$img_site}',
             'site_name' => '{$site_name}',
-            'xiongzhang' => '{$xzh}',
             'salt' => '{$salt}',
             'api_key' => '{$api_key}',   
             'tpl' => 'default'            

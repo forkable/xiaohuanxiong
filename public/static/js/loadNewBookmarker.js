@@ -18,16 +18,15 @@ function deleteBookmarker() {
         var str = $(temparr).map(function () {
             return $(this).attr('mid');
         }).get().join(',');
+        console.log(str);
         $.ajax({
-            url: '/ucenter/users/delbookshelf',
+            url: '/delfavors',
             data: {ids: str},
             type: 'POST',
             dataType:'json',
             success:function(res){
-                console.log(res);
                 if (res.err === "0") {
                     ShowDialog(res.msg);
-                    window.location.reload();
                 } else {
                     ShowDialog(res.msg);
                 }
@@ -36,6 +35,9 @@ function deleteBookmarker() {
     } else {
         ShowDialog('请选择要删除的收藏~');
     }
+    setTimeout(function () {
+        location.reload();
+    },2);
 }
 
 var temparr = [];

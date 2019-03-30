@@ -12,33 +12,36 @@
     </a>
     <a class="selector-top-right-font" href="javascript:editReadhistoryClose();" style="display:none;" id="btneditclose">完成编辑</a>
 </div>
-{volist name="books" id="vo"}
-<div class="buy-manga" style="margin-top: 105px;">
-    <div class="buy-manga-cover">
-        <a href="/book/{$vo.book_id}">
-            {if empty($vo.cover_url)}
-            <img src="{$img_site}/static/upload/book/{$vo.book_id}/cover.jpg">
-            {else /}
-            <img src="{$vo.cover_url}">
-            {/if}
-        </a>
-        <a class="buy-manga-cover-hover" href="javascript:void(0);" mid="{$vo.book_id}" style="display:none;"></a>
+<div style="margin-top: 105px;">
+    {volist name="books" id="vo"}
+    <div class="buy-manga">
+        <div class="buy-manga-cover">
+            <a href="/book/{$vo.book_id}">
+                {if empty($vo.cover_url)}
+                <img src="{$img_site}/static/upload/book/{$vo.book_id}/cover.jpg">
+                {else /}
+                <img src="{$vo.cover_url}">
+                {/if}
+            </a>
+            <a class="buy-manga-cover-hover" href="javascript:void(0);" mid="{$vo.book_id}" style="display:none;"></a>
+        </div>
+        <div class="buy-manga-info">
+            <a href="/book/{$vo.book_id}" class="readlink" mid="{$vo.book_id}">
+                <p class="buy-manga-title">{$vo.book_name}</p>
+            </a>
+            <p class="buy-manga-author">{$vo.last_time|date='Y-m-d'}更新</p>
+            <a href="/chapter/{$vo.chapter_id}" class="readlink" mid="40683">
+                <p class="buy-manga-new">{$vo.chapter_name}</p>
+            </a>
+            <a class="buy-manga-right-a readlink" mid="{$vo.book_id}" href="/chapter/{$vo.chapter_id}">
+                <img class="buy-manga-right-img" src="/static/images/buy-manga-right.png">
+                <p class="buy-manga-right-title">续看</p>
+            </a>
+        </div>
     </div>
-    <div class="buy-manga-info">
-        <a href="/book/{$vo.book_id}" class="readlink" mid="{$vo.book_id}">
-        <p class="buy-manga-title">{$vo.book_name}</p>
-    </a>
-        <p class="buy-manga-author">{$vo.last_time|date='Y-m-d'}更新</p>
-        <a href="/chapter/{$vo.chapter_id}" class="readlink" mid="40683">
-            <p class="buy-manga-new">{$vo.chapter_name}</p>
-        </a>
-        <a class="buy-manga-right-a readlink" mid="{$vo.book_id}" href="/chapter/{$vo.chapter_id}">
-            <img class="buy-manga-right-img" src="/static/images/buy-manga-right.png">
-            <p class="buy-manga-right-title">续看</p>
-        </a>
-    </div>
+    {/volist}
 </div>
-{/volist}
+
  <a href="javascript:$(&#39;.win-pay2&#39;).show();$(&#39;.mask&#39;).show();" class="center-main-bottom-btn l50" style="display:none;">清空</a>
 <a href="javascript:deleteReadhistory();" class="center-main-bottom-btn r50" style="display:none;">删除</a>
 <div class="mask" style="display: none;"></div>

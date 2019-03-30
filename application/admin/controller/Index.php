@@ -59,7 +59,7 @@ class Index extends BaseAdmin
             'site_name' => '{$site_name}',
             'salt' => '{$salt}',
             'api_key' => '{$api_key}', 
-            'front_tpl' => '{$front_tpl}'         
+            'tpl' => '{$front_tpl}'         
         ];
 INFO;
         file_put_contents(App::getRootPath() . 'config/site.php', $site_code);

@@ -16,8 +16,8 @@ class Chapters extends Base
     public function index($id)
     {
         $chapter = Chapter::with(['photos' => function ($query) {
-            $query->order('id');
-        }], 'book')->cache('chapter' . $id,600,'redis')->find($id);
+            $query->order('order');
+        }], 'book')->cache('chapter:' . $id,600,'redis')->find($id);
         $book_id = $chapter->book_id;
         $chapters = cache('mulu'.$book_id);
         if (!$chapters){
@@ -45,13 +45,13 @@ class Chapters extends Base
                 $redis->hDel('history:'.$uid,$key); //按照key从hash表删除
             }
         }
-        $prev = cache('chapter_prev'.$id);
+        $prev = cache('chapter_prev:'.$id);
         if (!$prev){
             $prev = Db::query(
                 'select * from '.$this->prefix.'chapter where book_id='.$book_id.' and `order`<' . $chapter->order . ' order by id desc limit 1');
             cache('chapter_prev'.$id,$prev,null,'redis');
         }
-        $next = cache('chapter_next'.$id);
+        $next = cache('chapter_next:'.$id);
         if (!$next){
             $next = Db::query(
                 'select * from '.$this->prefix.'chapter where book_id='.$book_id.' and `order`>' . $chapter->order . ' order by id limit 1');

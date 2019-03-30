@@ -23,6 +23,8 @@ Route::rule('/ucenter', 'ucenter/users/ucenter');
 Route::rule('/bookshelf', 'ucenter/users/bookshelf');
 Route::rule('/history', 'ucenter/users/history');
 Route::rule('/userinfo', 'ucenter/users/userinfo');
+Route::rule('/delfavors', 'ucenter/users/delfavors');
+Route::rule('/delhistory', 'ucenter/users/delhistory');
 Route::rule('/login', 'ucenter/account/login');
 Route::rule('/register', 'ucenter/account/register');
 Route::rule('/logout', 'ucenter/account/logout');

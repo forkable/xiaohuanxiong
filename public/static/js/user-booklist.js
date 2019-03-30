@@ -29,8 +29,8 @@ $(document).ready(function () {
         ev.preventDefault();
         $(this).hide();
         $('.box-booklist-edit-head').show();
-        $('.mh-item > .mh-cover .edit-state').not('.lock').show()
-        $('.mh-item > .mh-cover .edit-state.lock').hide()
+        $('span.edit-state').show();
+        $('span.edit-state.lock').hide();
     })
     // 隐
     $('.js_esc_booklist_btn').click(function (ev) {

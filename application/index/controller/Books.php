@@ -24,7 +24,9 @@ class Books extends Base
         $book = cache('book:' . $id);
         $tags = cache('tags:book:' . $id );
         if ($book ==false) {
-            $book = Book::with('chapters,author')->find($id);
+            $book = Book::with(['chapters' => function($query){
+                $query->order('order');
+            }],'author')->find($id);
             $tags = explode('|', $book->tags);
             cache('book:' . $id, $book,null,'redis');
             cache('tags:book:' . $id , $tags,null,'redis');

@@ -33,4 +33,11 @@ class UserService extends Controller
         $user = User::get($uid);
         $user->books()->detach($ids);
     }
+
+    public function delHistory($uid,$keys){
+        $redis = new_redis();
+        foreach ($keys as $key){
+            $redis->hDel('history:'.$uid,$key);
+        }
+    }
 }
