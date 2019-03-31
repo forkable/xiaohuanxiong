@@ -2,10 +2,6 @@ function slide() {
     $('html,body').stop().animate({ scrollTop: 0 }, 500);
 }
 
-function showLoginModal() {
-    $('.modal-wrap .login-modal').parents('.modal-wrap').css('display', 'table');
-}
-
 function setActive(myLi) {
     $('.header-search-list li').removeClass('active');
     myLi.addClass('active');
@@ -20,6 +16,8 @@ function setActive(myLi) {
 function ShowDialog(title) {
     $(".toast").text(title);
     $(".toast").show();
+    $("#alertTop_1").text(title);
+    $(".alertTop_1").show();
     setTimeout(function () {
         $(".toast").hide();
     }, 1000);
@@ -34,19 +32,6 @@ window.onresize = function () {
         $('.top-menu').show();
     }
 };
-
-function addFavoritea() {
-	var a = window.location.href;
-	try {
-		window.external.addFavorite(a, document.title)
-	} catch (b) {
-		try {
-			window.sidebar.addPanel(document.title, a, "")
-		} catch (b) {
-			alert("请使用Ctrl+D为您的浏览器添加书签！")
-		}
-	}
-}
 
 var showmorechapter = false;
 //章节加载更多事件

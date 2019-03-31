@@ -47,7 +47,7 @@ function deleteReadhistory()
         console.log(str);
         $.ajax({
             url: '/delhistory',
-            data: {keys: str},
+            data: {ids: str},
             type: 'POST',
             dataType:'json',
             success:function(res){

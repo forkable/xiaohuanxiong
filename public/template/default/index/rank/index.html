@@ -1,9 +1,9 @@
-{extend name="pub/base" /}
+{extend name="./template/default/pub/base.html" /}
 {block name="seo"}
 <title>排行榜-{$site_name}</title>
 {/block}
 {block name="content"}
-{include file="pub/top2" /}
+{include file="./template/default/index/pub/top2.html" /}
 <div class="rank-selector">
     <a class="rank-selector-item active" href="javascript:void(0);" onclick="btnClick(this,'#rankList_1'); ">新番榜</a>
     <a class="rank-selector-item" href="javascript:void(0);" onclick="btnClick(this,'#rankList_2'); ">人气榜</a>

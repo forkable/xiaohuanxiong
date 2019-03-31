@@ -24,6 +24,6 @@ class Tags extends Base
         ]);
 
 
-        return view();
+        return view($this->tpl);
     }
 }

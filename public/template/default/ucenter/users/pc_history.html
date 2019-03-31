@@ -15,24 +15,16 @@
                 </ul>
                 <div class="pull-right">
                     <a href="#" class="more js_edit_booklist_btn">
-                        <i class="icon icon-box mr5"></i>整理我的收藏</a>
+                        <i class="icon icon-box mr5"></i>整理阅读历史</a>
                     <div href="#" class="box-booklist-edit-head" style="display: none">
                         <form>
-                            <span>已选
-                                <span class="color-main js_count_num">0</span>
-                            </span>
-                            <span>
-                                <label>
-                                    <input class="js_allsel_checkbox" type="checkbox" value="">全选</label>
-                            </span>
                             <span>
                                 <button id="book_del" type="button" class="del-btn">删除</button>
                             </span>
+                            <input id="url_param" type="hidden" value="delhistory">
                             <span>
                                 <button type="button" class="finish-btn js_esc_booklist_btn">完成</button>
                             </span>
-                            <input id="ids" name="ids" type="hidden">
-                            <input name="uid" type="hidden" value="274756461">
                         </form>
                     </div>
                 </div>
@@ -67,7 +59,7 @@
                                         {/if}
                                         <span class="tag  mh-tag">{$vo.end?"完结":"连载"}</span>
                                         <span class="read-section">{$vo.last_time|date='Y-m-d'}更新</span>
-                                        <span favor-id="1" class="edit-state">
+                                        <span mid="{$vo.book_id}" class="edit-state">
                                         <i class="icon icon-ok"></i>
                                     </span>
                                     </a>

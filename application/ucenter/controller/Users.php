@@ -9,6 +9,7 @@
 namespace app\ucenter\controller;
 
 use app\service\UserService;
+use think\response\Json;
 
 class Users extends BaseUcenter
 {
@@ -40,7 +41,7 @@ class Users extends BaseUcenter
 
     public function delhistory(){
         if ($this->request->isPost()){
-            $keys = explode(',',input('keys'));
+            $keys = explode(',',input('ids'));
             $this->userService->delHistory($this->uid,$keys);
             return ['err' => 0, 'msg' => '删除阅读历史'] ;
         } else {
