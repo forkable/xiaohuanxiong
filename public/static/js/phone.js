@@ -9,7 +9,7 @@
             var code = $(".txt_phonecode").val();
             var areacode = $(".txt_areacode").val();
             $.ajax({
-                url: '/verifycode',
+                url: '/sendcode',
                 data: { code: code, areacode: areacode, phone: phone },
                 async: false,
                 error: function (msg) {
@@ -17,6 +17,7 @@
                 success: function (res) {
                     ShowDialog(res.msg)
                     $('.btnphonecodeget').attr('isok',0);
+                    $('.line-container-btn').attr('isok',1);
                     startTime();
                 }
             });
@@ -30,12 +31,39 @@ $('#sub').click(function () {
         url:'/bindphone',
         data:$('form').serialize(),
         success(res){
-            ShowDialog(res.msg);
+            if (res.err == 0) {
+                ShowDialog(res.msg);
+                setTimeout(function () {
+                    location.href = '/ucenter';
+                },2);
+            } else {
+                ShowDialog(res.msg);
+            }
         }
     })
-    setTimeout(function () {
-        location.href = '/ucenter';
-    },2);
+
+})
+
+$('#sub1').click(function () {
+    if ($('.line-container-btn').attr('isok') == 1) {
+        $.get({
+            url:'/verifycode',
+            data:{
+                code:$('#txt_phonecode').val(),
+                phone:$('.txt_phone').val()
+            },
+            success(res){
+                if (res == '0'){
+                    ShowDialog('验证码错误');
+                }else {
+                    location.href = '/bindphone';
+                }
+            }
+        })
+
+    } else {
+        ShowDialog('验证码不正确');
+    }
 })
 
 function resetpwdbyphone()

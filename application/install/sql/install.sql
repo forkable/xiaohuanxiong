@@ -152,7 +152,7 @@ CREATE TABLE `xwx_area` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE `user_book` (
+CREATE TABLE `xwx_user_book` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `book_id` int(10) unsigned NOT NULL,
   `create_time` int(11) DEFAULT '0',
