@@ -5,6 +5,26 @@
 {block name="content"}
 <main class="container mt30 mb20 overflow-Show clearfix" style="min-height:750px;">
 {include file="./template/default/ucenter/pub/pc_menu.html"}
-
+    <article class="article-main pull-right">
+        <section class="box-userinfo box ">
+            <header class="box-header ">
+                <h1><span class="small">编辑资料</span></h1>
+            </header>
+            <div class="box-body">
+                <form method="post" class="user-info-form mt20" novalidate="novalidate">
+                    <div>
+                        <label>昵称：</label>
+                        <span>
+                            <input id="nick_name" type="text" value="{$Think.session.xwx_nick_name}">
+                        </span>
+                    </div>
+                    <div class="mt20 text-center">
+                        <button id="btnsave" class="save-btn btn" type="button">保存</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </article>
 </main>
+<script src="/static/js/userinfo.js"></script>
 {/block}

@@ -3,7 +3,7 @@
 <title>{$cate_selector}漫画-{$site_name}</title>
 {/block}
 {block name="content"}
-{include file="./template/default/index/pub/top2.html" /}
+{include file="./template/default/pub/top2.html" /}
 <div class="manga-list-bar" id="end">
     <a class="manga-list-bar-item {$end_selector=='全部'?'active':''}" onclick="active(this)" data-val="-1">全部</a>
     <a class="manga-list-bar-item {$end_selector=='0'?'active':''}" onclick="active(this)" data-val="0">连载中</a>
@@ -62,5 +62,5 @@
         });
     });
 </script>
-{include file="./template/default/index/pub/return_top.html"}
+{include file="./template/default/pub/return_top.html"}
 {/block}

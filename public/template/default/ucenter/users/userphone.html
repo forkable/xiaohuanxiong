@@ -1,0 +1,19 @@
+{extend name="./template/default/pub/base.html" /}
+{block name="seo"}
+<title>绑定手机-{$site_name}</title>
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/css/account.css">
+{/block}
+{block name="content"}
+{include file="./template/default/pub/top4.html" /}
+<form method="post" action="http://m.1kkk.com/bindphone/">
+    <div class="line-container">
+        <p class="input-con-phone">手机号：150****2262</p>
+        <p class="input-con-tip2">该手机号可用于登录、重置密码</p> <input type="hidden" class="hdphonetype" name="hdphonetype"
+                                                            value="1"> <a href="javascript:$(&#39;form&#39;).submit();" class="line-container-btn">更改</a>
+    </div>
+</form>
+<div class="toast" style="display: none;"></div>
+<script src="/static/js/phone.js"></script>
+{/block}

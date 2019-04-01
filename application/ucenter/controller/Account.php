@@ -59,6 +59,8 @@ class Account extends Controller
             }else {
                 session('xwx_user',$user->username);
                 session('xwx_user_id',$user->id);
+                session('xwx_nick_name',$user->nick_name);
+                session('xwx_user_mobile',$user->mobile);
                 return ['err' => 0, 'msg' => '登录成功'];
             }
         }else{
