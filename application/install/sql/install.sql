@@ -10,7 +10,8 @@ CREATE TABLE `xwx_admin` (
   `update_time` int(11) DEFAULT '0',
   `last_login_time` int(11) DEFAULT '0',
   `last_login_ip` varchar(100) DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  key `username` (`username`) unique
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -26,7 +27,9 @@ CREATE TABLE `xwx_user` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `delete_time` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  key `username` (`username`) unique,
+  key `mobile` (`mobile`) unique
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -124,7 +127,7 @@ CREATE TABLE `xwx_tags` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `tag_name` (`tag_name`) USING BTREE
+  KEY `tag_name` (`tag_name`) unique
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -149,7 +152,8 @@ CREATE TABLE `xwx_area` (
   `area_name` varchar(32) NOT NULL,
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  key `area_name` (`area_name`) unique
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE `xwx_user_book` (

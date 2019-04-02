@@ -19,10 +19,12 @@ class BaseUcenter extends Controller
     protected $tpl;
     protected $uid;
     protected $user;
+    protected $redis_prefix;
 
     public function __construct(App $app = null)
     {
         parent::__construct($app);
+        $this->redis_prefix = config('cache.prefix');
         $this->uid = session('xwx_user_id');
         if (is_null($this->uid)){
             $this->redirect(url('/login'));

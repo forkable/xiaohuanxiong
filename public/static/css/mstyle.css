@@ -299,7 +299,7 @@ img.normal-top-right-avatar{height: 25px;vertical-align: top;margin-top: 11px;ma
 .selector-top-right-logo{height: 17px;position: absolute;right: 10px;top: 11.5px;}
 .selector-top-right-font{position: absolute;right: 10px;top: 0;font-size: 13px;color: #252525;letter-spacing: 0;}
 
-.line-container{padding-top: 20px;text-align: center;}
+.line-container{padding-top: 20px;text-align: center;margin-top: 45px;}
 .line-container input{margin-top: 10px;width: 74%;border: 1px solid #F4F4F4;height: 50px;border-radius: 25px;outline: none;font-family: 'Microsoft YaHei';padding: 0 5%;font-size: 15px;}
 .line-container-btn{width: 84%;background: #FD113A;border-radius: 2px;height: 50px;display: block;line-height: 50px;text-align: center;margin: 30px auto;font-size: 15px;color: #FFFFFF;letter-spacing: 0;}
 

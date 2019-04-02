@@ -6,11 +6,10 @@
                 ShowDialog("手机不填可是不行的哦~");
                 return false;
             }
-            var code = $(".txt_phonecode").val();
             var areacode = $(".txt_areacode").val();
             $.ajax({
                 url: '/sendcode',
-                data: { code: code, areacode: areacode, phone: phone },
+                data: { areacode: areacode, phone: phone },
                 async: false,
                 error: function (msg) {
                 },
@@ -50,7 +49,7 @@ $('#sub1').click(function () {
             url:'/verifycode',
             data:{
                 code:$('#txt_phonecode').val(),
-                phone:$('.txt_phone').val()
+                phone:$('#txt_phone').val()
             },
             success(res){
                 if (res == '0'){
@@ -60,56 +59,58 @@ $('#sub1').click(function () {
                 }
             }
         })
-
     } else {
         ShowDialog('验证码不正确');
     }
 })
 
-function resetpwdbyphone()
+$('#resetpwd_sub').click(function () {
+    console.log(resetpwd());
+    if (resetpwd() == true){
+        $.post({
+            url:'/recovery',
+            data:$('form').serialize(),
+            success(res){
+                if (res.err == '1'){
+                    ShowDialog(res.msg);
+                } else {
+                    ShowDialog(res.msg);
+                    setTimeout(function () {
+                        location.href = '/ucenter';
+                    },2);
+                }
+            }
+        })
+    }
+})
+
+function resetpwd()
 {
-    var $pwd = $(".txt_reg_password");
-    var $pwd2 = $(".txt_reg_password2");
-    var $hint = $('.toast');
-    $hint.text("");
+    var $pwd = $("#txt_password");
+    var $pwd2 = $("#txt_password2");
     var $phonecode = $(".txt_phonecode");
     if (!$pwd || $.trim($pwd.val()) === "") {
-        $hint.text("密码不填可是不行的哦~");
+        ShowDialog("密码不填可是不行的哦~");
         $pwd.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         return false;
     }
     else if (!$pwd2 || $.trim($pwd2.val()) === "") {
-        $hint.text("新密码不填可是不行的哦~");
+        ShowDialog("新密码不填可是不行的哦~");
         $pwd.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         return false;
     }
     else if ($pwd.val() != $pwd2.val()) {
-        $hint.text("两次密码输入不一致~");
+        ShowDialog("两次密码输入不一致~");
         $pwd.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         $pwd2.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         return false;
     }
     else if (!$phonecode || $.trim($phonecode.val()) === "") {
         $phonecode.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
-        $hint.text("短信验证码不填可是不行的哦~");
+        ShowDialog("短信验证码不填可是不行的哦~");
         return false;
     }
-}
-
-function forgetpwdbyphone() {
-    var $username = $(".right input[type=text][name=txt_username]");
-    var $hint = $('.toast');
-    $hint.text("");
-    if (!$username || $.trim($username.val()) === "") {
-        $tip.text("账号信息不填可是不行的哦~");
-        $username.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
-        return false;
-    } 
-    if (!checkcode(3)) {
-        $hint.text("请点击下方图片，旋转至正确方向~");
-        return false;
-    }
-    return true;
+    return  true;
 }
 
 function startTime() {

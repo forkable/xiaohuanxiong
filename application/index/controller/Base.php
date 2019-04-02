@@ -25,7 +25,7 @@ class Base extends Controller
         parent::__construct($app);
         $this->uid = session('xwx_user_id');
         $this->prefix = config('database.prefix');
-        $this->redis_prefix = config('cache.prefix')."_";
+        $this->redis_prefix = config('cache.prefix');
         $tpl_root = './template/'.config('site.tpl').'/index/';
         $controller = strtolower($this->request->controller());
         $action = strtolower($this->request->action());

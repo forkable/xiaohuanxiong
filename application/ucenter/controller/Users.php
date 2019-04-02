@@ -51,7 +51,7 @@ class Users extends BaseUcenter
 
     public function history(){
         $redis = new_redis();
-        $vals = $redis->hVals('history:'.$this->uid);
+        $vals = $redis->hVals($this->redis_prefix.':history:'.$this->uid);
         $books = array();
         foreach ($vals as $val){
             $books[] = json_decode($val,true);
@@ -97,10 +97,13 @@ class Users extends BaseUcenter
         $user = User::get($this->uid);
         $redis = new_redis();
         if ($this->request->isPost()){
-            $code = input('txt_phonecode');
-            $phone = input('phone');
+            $code = trim(input('txt_phonecode'));
+            $phone = trim(input('phone'));
             if ($this->verifycode($code,$phone) == 0){
                 return ['err' => 1, 'msg' => '验证码错误'];
+            }
+            if (User::where('mobile','=',$phone)->find()){
+                return ['err' => 1, 'msg' => '该手机号码已经存在'];
             }
             $user->mobile = $phone;
             $user->isUpdate(true)->save();
@@ -108,7 +111,7 @@ class Users extends BaseUcenter
         }
 
         //如果用户手机已经存在，并且没有进行修改手机验证，也就是没有解锁缓存
-        if (!$redis->exists('xwx_mobile_unlock:'.$this->uid) && !empty($user->mobile)) {
+        if (!$redis->exists($this->redis_prefix.':xwx_mobile_unlock:'.$this->uid) && !empty($user->mobile)) {
             $this->redirect('/userphone'); //则重定向至手机信息页
         }
 
@@ -118,6 +121,7 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
+    //验证session中的验证码和手机号码是否正确
     public function verifycode($code,$phone){
         if (is_null(session('xwx_sms_code')) || $code != session('xwx_sms_code')){
             return 0;
@@ -130,7 +134,7 @@ class Users extends BaseUcenter
 
     public function sendcode(){
         $code = generateRandomString();
-        $phone = input('phone');
+        $phone = trim(input('phone'));
         $validate = Validate::make([
             'phone'  => 'mobile'
         ]);
@@ -140,14 +144,17 @@ class Users extends BaseUcenter
         if (!$validate->check($data)) {
             return ['msg' => '手机格式不正确'];
         }
-        $result = sendcode($this->uid,$code,$phone);
-        if ($result['status'] == 0){ //如果发送成功
-            session('xwx_sms_code',$code); //写入session
-            session('xwx_cms_phone',$phone);
-            $redis = new_redis();
-            $redis->set('xwx_mobile_unlock:'.$this->uid,1,300); //设置解锁缓存，让用户可以更改手机
-        }
-        return ['msg' => $result['msg']];
+//        $result = sendcode($this->uid,$code,$phone);
+//        if ($result['status'] == 0){ //如果发送成功
+//            session('xwx_sms_code',$code); //写入session
+//            session('xwx_cms_phone',$phone);
+//            $redis = new_redis();
+//            $redis->set($this->redis_prefix.':xwx_mobile_unlock:'.$this->uid,1,300); //设置解锁缓存，让用户可以更改手机
+//        }
+//        return ['msg' => $result['msg']];
+        session('xwx_sms_code',$code); //写入session
+        session('xwx_cms_phone',$phone);
+        return ['msg' => $code];;
     }
 
     public function userphone(){
@@ -159,4 +166,27 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
+    public function recovery(){
+        if ($this->request->isPost()){
+            $code = trim(input('txt_phonecode'));
+            $phone = trim(input('txt_phone'));
+            if ($this->verifycode($code,$phone) == 0){
+                return ['err' => 1, 'msg' => '验证码不正确'];
+            }
+            $pwd = input('txt_password');
+            $user = User::where('mobile','=',$phone)->find();
+            if (is_null($user)){
+                return ['err' => 1, 'msg' => '该手机号不存在'];
+            }
+            $user->password = $pwd;
+            $user->isUpdate(true)->save();
+            return ['err' => 0, 'msg' => '修改成功'];
+        }
+        $phone = input('phone');
+        $this->assign([
+            'phone' => $phone,
+            'header_title' => '找回密码'
+        ]);
+        return view($this->tpl);
+    }
 }

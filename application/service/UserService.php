@@ -35,9 +35,10 @@ class UserService extends Controller
     }
 
     public function delHistory($uid,$keys){
+        $redis_prefix = config('cache.prefix');
         $redis = new_redis();
         foreach ($keys as $key){
-            $redis->hDel('history:'.$uid,$key);
+            $redis->hDel($redis_prefix.':history:'.$uid,$key);
         }
     }
 }
