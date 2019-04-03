@@ -11,7 +11,7 @@ CREATE TABLE `xwx_admin` (
   `last_login_time` int(11) DEFAULT '0',
   `last_login_ip` varchar(100) DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
-  key `username` (`username`) unique
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -29,7 +29,7 @@ CREATE TABLE `xwx_user` (
   `delete_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   key `username` (`username`) unique,
-  key `mobile` (`mobile`) unique
+  unique key `mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -127,7 +127,7 @@ CREATE TABLE `xwx_tags` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `tag_name` (`tag_name`) unique
+  unique KEY `tag_name` (`tag_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -153,7 +153,7 @@ CREATE TABLE `xwx_area` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
-  key `area_name` (`area_name`) unique
+  unique key `area_name` (`area_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 CREATE TABLE `xwx_user_book` (

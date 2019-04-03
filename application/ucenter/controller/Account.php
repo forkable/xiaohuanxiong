@@ -16,6 +16,7 @@ use think\Request;
 
 class Account extends Controller
 {
+    protected $tpl;
     public function __construct(App $app = null)
     {
         parent::__construct($app);
@@ -73,5 +74,29 @@ class Account extends Controller
         session('xwx_user',null);
         session('xwx_user_id',null);
         $this->success('成功登出','/login');
+    }
+
+    public function recovery(){
+        if ($this->request->isPost()){
+            $code = trim(input('txt_phonecode'));
+            $phone = trim(input('txt_phone'));
+            if (verifycode($code,$phone) == 0){
+                return ['err' => 1, 'msg' => '验证码不正确'];
+            }
+            $pwd = input('txt_password');
+            $user = User::where('mobile','=',$phone)->find();
+            if (is_null($user)){
+                return ['err' => 1, 'msg' => '该手机号不存在'];
+            }
+            $user->password = $pwd;
+            $user->isUpdate(true)->save();
+            return ['err' => 0, 'msg' => '修改成功'];
+        }
+        $phone = input('phone');
+        $this->assign([
+            'phone' => $phone,
+            'header_title' => '找回密码'
+        ]);
+        return view($this->tpl);
     }
 }

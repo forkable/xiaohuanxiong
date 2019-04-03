@@ -212,3 +212,14 @@ function generateRandomString($length = 4) {
     }
     return $randomString;
 }
+
+//验证session中的验证码和手机号码是否正确
+function verifycode($code,$phone){
+    if (is_null(session('xwx_sms_code')) || $code != session('xwx_sms_code')){
+        return 0;
+    }
+    if (is_null(session('xwx_cms_phone')) || $phone != session('xwx_cms_phone')){
+        return 0;
+    }
+    return 1;
+}

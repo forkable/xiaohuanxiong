@@ -99,7 +99,7 @@ class Users extends BaseUcenter
         if ($this->request->isPost()){
             $code = trim(input('txt_phonecode'));
             $phone = trim(input('phone'));
-            if ($this->verifycode($code,$phone) == 0){
+            if (verifycode($code,$phone) == 0){
                 return ['err' => 1, 'msg' => '验证码错误'];
             }
             if (User::where('mobile','=',$phone)->find()){
@@ -119,17 +119,6 @@ class Users extends BaseUcenter
             'header_title' => '绑定手机'
         ]);
         return view($this->tpl);
-    }
-
-    //验证session中的验证码和手机号码是否正确
-    public function verifycode($code,$phone){
-        if (is_null(session('xwx_sms_code')) || $code != session('xwx_sms_code')){
-            return 0;
-        }
-        if (is_null(session('xwx_cms_phone')) || $phone != session('xwx_cms_phone')){
-            return 0;
-        }
-        return 1;
     }
 
     public function sendcode(){
@@ -166,27 +155,5 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
-    public function recovery(){
-        if ($this->request->isPost()){
-            $code = trim(input('txt_phonecode'));
-            $phone = trim(input('txt_phone'));
-            if ($this->verifycode($code,$phone) == 0){
-                return ['err' => 1, 'msg' => '验证码不正确'];
-            }
-            $pwd = input('txt_password');
-            $user = User::where('mobile','=',$phone)->find();
-            if (is_null($user)){
-                return ['err' => 1, 'msg' => '该手机号不存在'];
-            }
-            $user->password = $pwd;
-            $user->isUpdate(true)->save();
-            return ['err' => 0, 'msg' => '修改成功'];
-        }
-        $phone = input('phone');
-        $this->assign([
-            'phone' => $phone,
-            'header_title' => '找回密码'
-        ]);
-        return view($this->tpl);
-    }
+
 }
