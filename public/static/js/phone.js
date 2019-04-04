@@ -33,9 +33,12 @@ $('#sub').click(function () {
                 ShowDialog(res.msg);
                 setTimeout(function () {
                     location.href = '/ucenter';
-                },2);
+                },2000);
             } else {
                 ShowDialog(res.msg);
+                setTimeout(function () {
+                    location.reload();
+                },1000);
             }
         }
     })
@@ -43,7 +46,7 @@ $('#sub').click(function () {
 })
 
 $('#sub1').click(function () {
-    $.get({
+    $.post({
         url:'/verifyphone',
         data:{
             txt_phonecode:$('#txt_phonecode').val(),
@@ -52,6 +55,9 @@ $('#sub1').click(function () {
         success(res){
             if (res.err == '1'){
                 ShowDialog(res.msg);
+                setTimeout(function () {
+                    location.reload();
+                },1000);
             }else {
                 location.href = '/bindphone';
             }
@@ -60,30 +66,36 @@ $('#sub1').click(function () {
 })
 
 $('#resetpwd_sub').click(function () {
-    console.log(resetpwd());
     if (resetpwd() == true){
         $.post({
-            url:'/recovery',
-            data:$('form').serialize(),
+            url:'/resetpwd',
+            data:{password:$("#txt_password").val()},
             success(res){
                 if (res.err == '1'){
                     ShowDialog(res.msg);
+                    setTimeout(function () {
+                        location.reload();
+                    },1000);
                 } else {
                     ShowDialog(res.msg);
                     setTimeout(function () {
                         location.href = '/ucenter';
-                    },2);
+                    },2000);
                 }
             }
         })
+    }else {
+        setTimeout(function () {
+            location.reload();
+        },1000);
     }
 })
 
 function resetpwd()
 {
+    var regpwd = new RegExp("^[0-9A-Za-z\\-=\\[\\];,./~!@#$%^*()_+}{:?]{6,21}$");
     var $pwd = $("#txt_password");
     var $pwd2 = $("#txt_password2");
-    var $phonecode = $(".txt_phonecode");
     if (!$pwd || $.trim($pwd.val()) === "") {
         ShowDialog("密码不填可是不行的哦~");
         $pwd.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
@@ -99,10 +111,10 @@ function resetpwd()
         $pwd.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         $pwd2.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
         return false;
-    }
-    else if (!$phonecode || $.trim($phonecode.val()) === "") {
-        $phonecode.focus().css({ outlineWidth: 1, outlineColor: "#fd113a" });
-        ShowDialog("短信验证码不填可是不行的哦~");
+    }else if (!regpwd.test($pwd.val())) {
+        ShowDialog('请输入6位及以上密码');
+        $pwd.val('');
+        $pwd1.val('');
         return false;
     }
     return  true;

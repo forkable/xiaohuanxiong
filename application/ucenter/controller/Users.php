@@ -162,5 +162,26 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
+    public function resetpwd(){
+        if ($this->request->isPost()){
+            $pwd = input('password');
+            $validate = new \think\Validate;
+            $validate->rule('password', 'require|min:6|max:21');
 
+            $data = [
+                'password'  => $pwd,
+            ];
+            if (!$validate->check($data)) {
+              return[ 'msg' => '密码在6到21位之间','err' => 1];
+            }
+            $user = User::get($this->uid);
+            $user->password = $pwd;
+            $user->isUpdate(true)->save();
+            return ['msg' => '修改成功', 'err' => 0];
+        }
+        $this->assign([
+            'header_title' => '修改密码'
+        ]);
+        return view($this->tpl);
+    }
 }
