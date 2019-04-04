@@ -16,7 +16,6 @@
                 success: function (res) {
                     ShowDialog(res.msg)
                     $('.btnphonecodeget').attr('isok',0);
-                    $('.line-container-btn').attr('isok',1);
                     startTime();
                 }
             });
@@ -44,24 +43,20 @@ $('#sub').click(function () {
 })
 
 $('#sub1').click(function () {
-    if ($('.line-container-btn').attr('isok') == 1) {
-        $.get({
-            url:'/verifycode',
-            data:{
-                code:$('#txt_phonecode').val(),
-                phone:$('#txt_phone').val()
-            },
-            success(res){
-                if (res == '0'){
-                    ShowDialog('验证码错误');
-                }else {
-                    location.href = '/bindphone';
-                }
+    $.get({
+        url:'/verifyphone',
+        data:{
+            txt_phonecode:$('#txt_phonecode').val(),
+            txt_phone:$('#txt_phone').val()
+        },
+        success(res){
+            if (res.err == '1'){
+                ShowDialog(res.msg);
+            }else {
+                location.href = '/bindphone';
             }
-        })
-    } else {
-        ShowDialog('验证码不正确');
-    }
+        }
+    })
 })
 
 $('#resetpwd_sub').click(function () {

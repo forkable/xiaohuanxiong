@@ -1,16 +1,16 @@
 {extend name="./template/default/pub/pc_base.html" /}
 {block name="seo"}
-<title>个人书架-{$site_name}</title>
+<title>个人中心-{$site_name}</title>
 {/block}
 {block name="content"}
 <main class="container mt30 mb20 overflow-Show clearfix" style="min-height:750px;">
-{include file="./template/default/ucenter/pub/pc_menu.html"}
+    {include file="./template/default/ucenter/pub/pc_menu.html"}
     <article class="article-main pull-right">
         <section class="box-userinfo box ">
             <div class="table-head">
                 <ul class="table-tabs">
                     <li>
-                        <a class="active">编辑资料</a>
+                        <a class="active">个人中心</a>
                     </li>
                 </ul>
             </div>
@@ -19,16 +19,30 @@
                     <div>
                         <label>昵称：</label>
                         <span>
-                            <input id="nick_name" type="text" value="{$Think.session.xwx_nick_name}">
+                           {$Think.session.xwx_nick_name}
                         </span>
                     </div>
-                    <div class="mt20 text-center">
-                        <button id="btnsave" class="save-btn btn" type="button">保存</button>
+                    <div>
+                        <label>绑定手机：</label>
+                        <span>
+                           {$Think.session.xwx_user_mobile}
+                        </span>
+                    </div>
+                    <div>
+                        <label>我的余额：</label>
+                        <span>
+                           0 金币
+                        </span>
+                    </div>
+                    <div>
+                        <label>我的VIP：</label>
+                        <span>
+                           剩余 0 天
+                        </span>
                     </div>
                 </form>
             </div>
         </section>
     </article>
 </main>
-<script src="/static/js/userinfo.js"></script>
 {/block}

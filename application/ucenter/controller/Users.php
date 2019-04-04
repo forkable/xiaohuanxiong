@@ -98,7 +98,7 @@ class Users extends BaseUcenter
         $redis = new_redis();
         if ($this->request->isPost()){
             $code = trim(input('txt_phonecode'));
-            $phone = trim(input('phone'));
+            $phone = trim(input('txt_phone'));
             if (verifycode($code,$phone) == 0){
                 return ['err' => 1, 'msg' => '验证码错误'];
             }
@@ -107,6 +107,7 @@ class Users extends BaseUcenter
             }
             $user->mobile = $phone;
             $user->isUpdate(true)->save();
+            session('xwx_user_mobile',$phone);
             return ['err' => 0, 'msg' => '绑定成功'];
         }
 
@@ -121,6 +122,15 @@ class Users extends BaseUcenter
         return view($this->tpl);
     }
 
+    public function verifyphone(){
+        $phone = input('txt_phone');
+        $code = input('txt_phonecode');
+        if (verifycode($code,$phone) == 0){
+            return ['err' => 1, 'msg' => '验证码错误'];
+        }
+        return ['err' => 0];
+    }
+
     public function sendcode(){
         $code = generateRandomString();
         $phone = trim(input('phone'));
@@ -133,17 +143,14 @@ class Users extends BaseUcenter
         if (!$validate->check($data)) {
             return ['msg' => '手机格式不正确'];
         }
-//        $result = sendcode($this->uid,$code,$phone);
-//        if ($result['status'] == 0){ //如果发送成功
-//            session('xwx_sms_code',$code); //写入session
-//            session('xwx_cms_phone',$phone);
-//            $redis = new_redis();
-//            $redis->set($this->redis_prefix.':xwx_mobile_unlock:'.$this->uid,1,300); //设置解锁缓存，让用户可以更改手机
-//        }
-//        return ['msg' => $result['msg']];
-        session('xwx_sms_code',$code); //写入session
-        session('xwx_cms_phone',$phone);
-        return ['msg' => $code];;
+        $result = sendcode($this->uid,$code,$phone);
+        if ($result['status'] == 0){ //如果发送成功
+            session('xwx_sms_code',$code); //写入session
+            session('xwx_cms_phone',$phone);
+            $redis = new_redis();
+            $redis->set($this->redis_prefix.':xwx_mobile_unlock:'.$this->uid,1,300); //设置解锁缓存，让用户可以更改手机
+        }
+        return ['msg' => $result['msg']];
     }
 
     public function userphone(){

@@ -29,7 +29,7 @@ Route::rule('/updateUserinfo', 'ucenter/users/update');
 Route::rule('/bindphone', 'ucenter/users/bindphone');
 Route::rule('/userphone', 'ucenter/users/userphone');
 Route::rule('/sendcode', 'ucenter/users/sendcode');
-Route::rule('/verifycode', 'ucenter/users/verifycode');
+Route::rule('/verifyphone', 'ucenter/users/verifyphone');
 Route::rule('/recovery', 'ucenter/users/recovery');
 Route::rule('/login', 'ucenter/account/login');
 Route::rule('/register', 'ucenter/account/register');

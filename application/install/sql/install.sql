@@ -28,7 +28,7 @@ CREATE TABLE `xwx_user` (
   `update_time` int(11) DEFAULT '0',
   `delete_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
-  key `username` (`username`) unique,
+  unique key `username` (`username`) ,
   unique key `mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
