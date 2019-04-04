@@ -156,6 +156,7 @@ CREATE TABLE `xwx_area` (
   unique key `area_name` (`area_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
+DROP TABLE IF EXISTS `xwx_user_book`;
 CREATE TABLE `xwx_user_book` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `book_id` int(10) unsigned NOT NULL,
