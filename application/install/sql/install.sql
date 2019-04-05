@@ -29,8 +29,8 @@ CREATE TABLE `xwx_user` (
   `delete_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   unique key `username` (`username`) ,
-  key `mobile` (`mobile`) USING BTREE,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  key `mobile` (`mobile`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for author
