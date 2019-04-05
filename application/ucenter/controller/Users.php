@@ -199,6 +199,7 @@ class Users extends BaseUcenter
             $comment->book_id = $book_id;
             $result = $comment->save();
             if ($result){
+                $redis->set('comment_lock:'.$this->uid,1,10);
                 $dir = App::getRootPath().'public/static/upload/comments/'.$book_id;
                 if (!file_exists($dir)){
                     mkdir($dir, 0777, true);
