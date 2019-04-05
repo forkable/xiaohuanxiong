@@ -8,8 +8,10 @@
 
 namespace app\ucenter\controller;
 
+use app\model\Comments;
 use app\model\User;
 use app\service\UserService;
+use think\facade\App;
 use think\facade\Validate;
 class Users extends BaseUcenter
 {
@@ -183,5 +185,30 @@ class Users extends BaseUcenter
             'header_title' => '修改密码'
         ]);
         return view($this->tpl);
+    }
+
+    public function commentadd(){
+        $content = strip_tags(input('comment')) ;
+        $book_id = input('book_id');
+        $redis = new_redis();
+        if ($redis->exists('comment_lock:'.$this->uid)){
+            return json(['msg' => '每10秒只能评论一次','err' => 1]) ;
+        }else{
+            $comment = new Comments();
+            $comment->user_id = $this->uid;
+            $comment->book_id = $book_id;
+            $result = $comment->save();
+            if ($result){
+                $dir = App::getRootPath().'public/static/upload/comments/'.$book_id;
+                if (!file_exists($dir)){
+                    mkdir($dir, 0777, true);
+                }
+                file_put_contents($dir.'/'.$comment->id. '.txt',$content);
+                cache('comments:'.$book_id,null);
+                return json(['msg' => '评论成功','err' => 0]) ;
+            }else{
+                return json(['msg' => '评论失败','err' => 1]) ;
+            }
+        }
     }
 }

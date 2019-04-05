@@ -3,9 +3,11 @@
 namespace app\index\controller;
 
 use app\model\Book;
+use app\model\Comments;
 use app\model\User;
 use app\model\UserBook;
 use think\Db;
+use think\facade\App;
 use think\Request;
 
 class Books extends Base
@@ -20,7 +22,7 @@ class Books extends Base
 
     public function index(Request $request)
     {
-        $id = $request->param('id');
+        $id = input('id');
         $book = cache('book:' . $id);
         $tags = cache('tags:book:' . $id );
         if ($book ==false) {
@@ -31,24 +33,8 @@ class Books extends Base
             cache('book:' . $id, $book,null,'redis');
             cache('tags:book:' . $id , $tags,null,'redis');
         }
-        $redis = new_redis();
-        $redis->zIncrBy($this->redis_prefix.'hot_books',1,json_encode([
-            'id' => $book->id,
-            'book_name' => $book->book_name,
-            'cover_url' => $book->cover_url,
-            'last_time' => $book->last_time,
-            'chapter_count' => count($book->chapters),
-            'summary' => $book->summary,
-            'area' => $book->area,
-            'author' => $book->author,
-            'taglist' => explode('|',$book->tags),
-        ]));
+        $hot_books = $this->savehot($book);
 
-        $hots = $redis->zRevRange($this->redis_prefix.'hot_books',0,10,true);
-        $hot_books = array();
-        foreach ($hots as $k => $v){
-            $hot_books[] = json_decode($k,true);
-        }
         $recommand = cache('rand_books');
         if (!$recommand){
             $recommand = $this->bookService->getRandBooks();
@@ -66,6 +52,8 @@ class Books extends Base
             cache('book_start:' . $id, $start,null,'redis');
         }
 
+        $comments = $this->getComments($book->id);
+
         $isfavor = 0;
         if (!is_null($this->uid)){
             $where[] = ['user_id','=',$this->uid];
@@ -76,7 +64,6 @@ class Books extends Base
             }
         }
 
-
         $this->assign([
             'book' => $book,
             'tags' => $tags,
@@ -85,7 +72,8 @@ class Books extends Base
             'hot' => $hot_books,
             'recommand' => $recommand,
             'header_title' => $book->book_name,
-            'isfavor' => $isfavor
+            'isfavor' => $isfavor,
+            'comments' => $comments
         ]);
         return view($this->tpl);
 
@@ -160,5 +148,41 @@ class Books extends Base
             }
         }
         return ['err' => 1,'msg' => '不是post请求'];
+    }
+
+    private function savehot($book)
+    {
+        $redis = new_redis();
+        $redis->zIncrBy($this->redis_prefix . 'hot_books', 1, json_encode([
+            'id' => $book->id,
+            'book_name' => $book->book_name,
+            'cover_url' => $book->cover_url,
+            'last_time' => $book->last_time,
+            'chapter_count' => count($book->chapters),
+            'summary' => $book->summary,
+            'area' => $book->area,
+            'author' => $book->author,
+            'taglist' => explode('|', $book->tags),
+        ]));
+        $hots = $redis->zRevRange($this->redis_prefix.'hot_books',0,10,true);
+        $hot_books = array();
+        foreach ($hots as $k => $v){
+            $hot_books[] = json_decode($k,true);
+        }
+        return $hot_books;
+    }
+
+    private function getComments($book_id){
+        $comments = cache('comments:'.$book_id);
+        if (!$comments){
+            $comments = Comments::where('book_id','=',$book_id)->order('create_time','desc')
+                ->limit(0,5)->select();
+            cache('comments:'.$book_id,$comments);
+        }
+        $dir = App::getRootPath().'public/static/upload/comments/'.$book_id;
+        foreach ($comments as &$comment){
+            $comment['content'] = file_get_contents($dir.'/'.$comment->id.'.txt');
+        }
+        return $comments;
     }
 }

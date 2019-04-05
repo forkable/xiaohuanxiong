@@ -32,6 +32,8 @@ Route::rule('/sendcode', 'ucenter/users/sendcode');
 Route::rule('/verifyphone', 'ucenter/users/verifyphone');
 Route::rule('/recovery', 'ucenter/users/recovery');
 Route::rule('/resetpwd', 'ucenter/users/resetpwd');
+Route::rule('/commentadd', 'ucenter/users/commentadd');
+
 Route::rule('/login', 'ucenter/account/login');
 Route::rule('/register', 'ucenter/account/register');
 Route::rule('/logout', 'ucenter/account/logout');

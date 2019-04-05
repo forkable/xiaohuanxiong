@@ -220,41 +220,43 @@
                 </a>
             </div>
             <ul class="list">
+                {volist name="comments" id="vo"}
                 <li>
                     <ul class="postlist">
                         <li class="dashed">
-                            <div class="cover"><img src="https://wx1.sinaimg.cn/mw1024/ab72f980gy1fzt2dv2q6rj20dw0a93zb.jpg"></div>
+                            <div class="cover">
+                                <img src="/static/images/mrtx.gif"></div>
                             <div class="info">
-                                <p class="title">点点</p>
-                                <p class="content">更新挺快的，喜欢，希望有的别的能更新多一点</p>
+                                <p class="title">{$Think.session.xwx_user}</p>
+                                <p class="content">{$vo.content|raw}</p>
                                 <p class="bottom">
-                                    2019-03-04
+                                    {$vo.create_time|date='Y-m-d'}
                                     <span class="right">
-                                        <a href="javascript:void(0)" data-id="55994" class="zan zanbtn" onclick="dianzan(this)">
+                                        <a href="javascript:void(0)" data-id="55994" class="zan zanbtn">
                                             <span>0</span>人赞
                                         </a>
-                                        <a href="javascript:void(0)" class="huifu" onclick="scrollTopComment()">回复</a>
-                                        </span>
+                                        <a href="javascript:void(0)" class="huifu">回复</a>
+                                    </span>
                                 </p>
                             </div>
                         </li>
                     </ul>
                 </li>
+                {/volist}
                 <li>
                     <div class="cover">
                         <img src="/static/images/mrtx.gif">
                     </div>
                     <div class="info">
-                        <form name="formpl2" id="formpl2" method="post" class="postForm">
-                            <div class="clearfix">
-                                <textarea class="comment-input js_max_text_length" name="Des" id="des" placeholder="我来说两句..."></textarea>
-                                <p class="comment-item">
-                                    <span>请您文明上网，理性发言，注意文明用语</span>
-                                    <input type="button" id="sendbutton" class="btn commentbtn" value="发表评论">
-                                </p>
-
-                            </div>
-                        </form>
+                        <div class="clearfix">
+                            <textarea class="comment-input js_max_text_length" id="comment" placeholder="我来说两句..."></textarea>
+                            <p class="comment-item">
+                                <span>请您文明上网，理性发言，注意文明用语</span>
+                                <input type="button" onclick="subcomment();" class="btn commentbtn" value="发表评论">
+                            </p>
+                            <input type="hidden" id="book_id" value="{$book.id}">
+                            <input type="hidden" id="session_uid" value="{$Think.session.xwx_user_id|default=-1}">
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -264,5 +266,5 @@
         </div>
     </div>
 </div>
-
+<script src="/static/js/comment.js"></script>
 {/block}

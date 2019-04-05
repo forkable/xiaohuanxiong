@@ -176,7 +176,7 @@ class Index extends Controller
         if (true !== $validate) {
             return $this->error($validate);
         }
-        $param['redis_prefix'] = $param['redis_prefix'].'_';
+        $param['redis_prefix'] = $param['redis_prefix'].':';
         // 导入系统初始数据库结构
         // 导入SQL
         $sql_file = App::getRootPath() . 'application/install/sql/install.sql';
