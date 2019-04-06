@@ -10,10 +10,13 @@ use app\model\Chapter;
 class Chapters extends BaseAdmin
 {
     protected $chapterService;
+    protected $validate;
 
     public function initialize()
     {
         $this->chapterService = new \app\service\ChapterService();
+        $this->validate = new \app\admin\validate\Chapter;
+
     }
 
     public function index($book_id)
@@ -49,14 +52,7 @@ class Chapters extends BaseAdmin
     public function save(Request $request)
     {
         $data = $request->param();
-        $validate = new \app\admin\validate\Chapter();
-        if ($validate->check($data)){
-            $map[] = ['chapter_name','=',$data['chapter_name']];
-            $map[] = ['book_id','=',$data['book_id']];
-            $chapter = Chapter::where($map)->find();
-            if ($chapter){
-                $this->error('存在同名章节');
-            }
+        if ($this->validate->check($data)){
             $result = Chapter::create($data);
             if ($result){
                 $param = [
@@ -69,7 +65,7 @@ class Chapters extends BaseAdmin
                 $this->error('新增失败');
             }
         }else{
-            $this->error($validate->getError());
+            $this->error($this->validate->getError());
         }
 
     }
@@ -89,18 +85,19 @@ class Chapters extends BaseAdmin
         return view();
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        $returnUrl = input('returnUrl');
-        $id = input('id');
-        $chapter_name = input('chapter_name');
-        $chapter = Chapter::get($id);
-        if ($chapter){
-            $chapter->chapter_name = $chapter_name;
-            $chapter->save();
-            $this->success('编辑成功',$returnUrl,'',1);
+        $data = $request->param();
+        if ($this->validate->check($data)) {
+            $chapter = Chapter::get($data['id']);
+            if ($chapter) {
+                $chapter->isUpdate(true)->save($data);
+                $this->success('编辑成功', $data['returnUrl'], '', 1);
+            } else {
+                $this->error('章节不存在');
+            }
         }else{
-            $this->error('章节不存在');
+            $this->error($this->validate->getError());
         }
     }
 

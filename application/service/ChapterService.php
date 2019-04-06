@@ -17,7 +17,7 @@ class ChapterService
         $chapters = Chapter::where($where);
         $pages = $chapters->with(['photos' => function($query) {
             $query->order('order');
-        }])->order('order','desc')->paginate(5,false,[
+        }])->order('id','desc')->paginate(5,false,[
             'query' => request()->param(),
             'type'     => 'util\AdminPage',
             'var_page' => 'page',

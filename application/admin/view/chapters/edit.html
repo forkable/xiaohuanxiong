@@ -1,6 +1,6 @@
 {extend name="pub/base" /}
 {block name="title"}
-<title>章节新增</title>
+<title>章节修改</title>
 {/block}
 
 {block name="body"}
@@ -8,10 +8,18 @@
     <form action="{:url('update')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{$chapter.id}">
         <input type="hidden" value="{$returnUrl}" name="returnUrl">
+        <input type="hidden" value="{$chapter.book_id}" name="book_id">
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>章节名：</label>
             <div class="formControls col-xs-4 col-sm-3">
                 <input type="text" class="input-text" value="{$chapter.chapter_name}" name="chapter_name">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">章节序</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$chapter.order}" name="order">
             </div>
         </div>
 
@@ -33,6 +41,10 @@
                     required:true,
                     minlength:1,
                     maxlength:50
+                },
+                order:{
+                    required:true,
+                    number: true
                 }
             },
             onkeyup:false,
