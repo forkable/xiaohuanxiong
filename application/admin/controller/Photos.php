@@ -29,7 +29,13 @@ class Photos extends BaseAdmin
         $book_id = input('book_id');
         $book = Book::get($book_id);
         $photos = Photo::where('chapter_id','=',$chapter_id)
-            ->order('order')->select();
+            ->order('order','desc')
+            ->paginate(5,false,
+                [
+                    'query' => request()->param(),
+                    'type'     => 'util\AdminPage',
+                    'var_page' => 'page',
+                ]);
         $this->assign([
             'photos'=>$photos,
             'chapter_id'=>$chapter_id,

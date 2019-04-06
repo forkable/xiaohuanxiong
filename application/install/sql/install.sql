@@ -168,3 +168,18 @@ CREATE TABLE `xwx_user_book` (
   key user_id (`user_id`) USING BTREE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
+-- ----------------------------
+-- Table structure for xwx_comments
+-- ----------------------------
+DROP TABLE IF EXISTS `xwx_comments`;
+CREATE TABLE `xwx_comments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `book_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `create_time` int(11) DEFAULT '0',
+  `update_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `book_id` (`book_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
