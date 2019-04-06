@@ -6,7 +6,6 @@ use app\model\Area;
 use app\model\Book;
 use think\facade\App;
 use think\Request;
-use app\model\Tags;
 
 class Books extends BaseAdmin
 {

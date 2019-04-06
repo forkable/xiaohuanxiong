@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e28971b-6d16-47ff-83e3-4ccc7a041382" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/application/admin/view/photos/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/admin/controller/Books.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/controller/Books.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/admin/controller/Photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/controller/Photos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/admin/validate/Photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/validate/Photo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/admin/view/photos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/admin/view/photos/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,43 +33,50 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/admin/view/photos/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+            <state relative-caret-position="288">
+              <caret line="22" column="79" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="22" selection-end-column="79" />
               <folding>
-                <element signature="e#1349#1355#1" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#article#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="e#1538#1544#1" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#article#0;n#section#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Photos.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="707">
+              <caret line="108" column="36" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="36" />
+              <folding>
+                <element signature="e#121#140#0#PHP" expanded="true" />
+                <element signature="e#422#1183#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/view/books/index.html">
+        <entry file="file://$PROJECT_DIR$/application/admin/controller/Books.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="98" selection-end-column="7" />
+            <state relative-caret-position="72">
+              <caret line="76" column="13" lean-forward="true" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+              <folding>
+                <element signature="e#40#59#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/controller/Photos.php">
+        <entry file="file://$PROJECT_DIR$/application/admin/view/photos/edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/service/BookService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="43" column="19" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="43" selection-end-column="19" />
+            <state relative-caret-position="198">
+              <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -76,14 +87,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.login-form .form-title</find>
       <find>buy-manga-cover-logo.png</find>
       <find>manga-list</find>
       <find>mid</find>
@@ -113,6 +123,7 @@
       <find>result</find>
       <find>.view-comment-main .bottom-page</find>
       <find>redis</find>
+      <find>validate</find>
     </findStrings>
     <replaceStrings>
       <replace>小涴熊CMS</replace>
@@ -131,9 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/index/controller/Tags.php" />
-        <option value="$PROJECT_DIR$/public/template/default/index/tags/index.html" />
-        <option value="$PROJECT_DIR$/public/static/js/index.js" />
         <option value="$PROJECT_DIR$/public/template/default/ucenter/users/pc_bookshelf.html" />
         <option value="$PROJECT_DIR$/public/static/js/loadNewHistory.js" />
         <option value="$PROJECT_DIR$/public/template/default/ucenter/users/pc_history.html" />
@@ -180,8 +188,11 @@
         <option value="$PROJECT_DIR$/public/static/js/comment.js" />
         <option value="$PROJECT_DIR$/application/index/controller/Books.php" />
         <option value="$PROJECT_DIR$/public/template/default/index/books/pc_index.html" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Photos.php" />
         <option value="$PROJECT_DIR$/application/admin/view/photos/index.html" />
+        <option value="$PROJECT_DIR$/application/admin/validate/Photo.php" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Photos.php" />
+        <option value="$PROJECT_DIR$/application/admin/view/photos/edit.html" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Books.php" />
       </list>
     </option>
   </component>
@@ -233,15 +244,32 @@
               <item name="xiaohuanxiong" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xiaohuanxiong" type="b2602c69:ProjectViewProjectNode" />
               <item name="xiaohuanxiong" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="books" type="462c0819:PsiDirectoryNode" />
+              <item name="validate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaohuanxiong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaohuanxiong" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaohuanxiong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaohuanxiong" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaohuanxiong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaohuanxiong" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -293,7 +321,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6c5f9d75-19ef-4c9b-ae59-bb3279b1839b" name="Default Changelist" comment="" />
+      <changelist id="7e28971b-6d16-47ff-83e3-4ccc7a041382" name="Default Changelist" comment="" />
       <created>1541818297444</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -479,17 +507,18 @@
       <workItem from="1554354302509" duration="9600000" />
       <workItem from="1554386635704" duration="5363000" />
       <workItem from="1554442723264" duration="10237000" />
+      <workItem from="1554555355158" duration="4707000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="484408000" />
+    <option name="totallyTimeSpent" value="489115000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20710456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -540,42 +569,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/model/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/install/sql/install.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="129" column="37" selection-start-line="129" selection-start-column="37" selection-end-line="129" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/index/controller/Chapters.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="57" column="54" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/ucenter/controller/BaseUcenter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/service/UserService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/template/default/ucenter/users/recovery.html" />
     <entry file="file://$PROJECT_DIR$/public/template/default/ucenter/account/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -921,32 +914,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/service/BookService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="43" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Photos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        <state relative-caret-position="414">
+          <caret line="46" column="37" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/books/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="98" selection-end-column="7" />
+        <state relative-caret-position="486">
+          <caret line="66" column="37" lean-forward="true" selection-start-line="61" selection-start-column="31" selection-end-line="66" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/pub/validate_scripts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/books/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="89" selection-start-line="89" selection-end-line="89" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/photos/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+        <state relative-caret-position="288">
+          <caret line="22" column="79" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="22" selection-end-column="79" />
           <folding>
-            <element signature="e#1349#1355#1" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#article#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="e#1538#1544#1" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#article#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/validate/Book.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/validate/Photo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/photos/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Books.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="76" column="13" lean-forward="true" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+          <folding>
+            <element signature="e#40#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Photos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="108" column="36" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="36" />
+          <folding>
+            <element signature="e#121#140#0#PHP" expanded="true" />
+            <element signature="e#422#1183#0#PHP" />
           </folding>
         </state>
       </provider>

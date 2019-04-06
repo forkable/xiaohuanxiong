@@ -21,7 +21,8 @@ class Photo extends Validate
      */
     protected $rule = [
         'chapter_id' => 'require',
-        'order' => 'require'
+        'book_id' => 'require',
+        'order' => 'require|float'
     ];
 
     /**
@@ -32,6 +33,7 @@ class Photo extends Validate
      */
     protected $message = [
         'chapter_id' => '章节id必须',
+        'book_id' => '漫画id必须',
         'order' => '图片order必须'
     ];
 }

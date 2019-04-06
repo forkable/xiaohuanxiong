@@ -14,9 +14,10 @@
            href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
     <article class="Hui-admin-content clearfix">
-        <div class="panel">
+
+        <div class="panel mt-20">
             <div class="panel-body">
-                <div class="text-c">
+                <div class="clearfix">
                     <form action="{:url('upload')}" enctype="multipart/form-data" method="post">
                         <input type="hidden" value="{$chapter_id}" name="chapter_id">
                         <input type="hidden" value="{$book_id}" name="book_id">
@@ -25,66 +26,53 @@
                         </div>
                         <div class="formControls col-xs-6 col-sm-6">
                             <input class="btn btn-primary radius" type="submit" value="上传"/>&nbsp;<span
-                                style="color: red">图片大小不要超过500kb，格式只能是jpg</span>
+                                style="color: red">图片大小不要超过2M，格式只能是jpg</span>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel mt-20">
-            <div class="panel-body">
-                <div class="clearfix">
-							<span class="f-l">
-                                <a class="btn btn-primary radius" href="{:url('create')}"><i class="Hui-iconfont">&#xe600;</i> 添加漫画</a>
-							</span>
+                    <a class="btn btn-primary radius" href="{:url('clear',['chapter_id' => $chapter_id])}"
+                       onClick="return confirm('确定清空?');">清空图片</a>
                     <span class="f-r">共有数据：<strong>{$count}</strong> 条</span>
                 </div>
                 <div class="mt-20 clearfix">
                     <table class="table table-border table-bordered table-bg table-hover table-sort">
                         <thead>
                         <tr class="text-c">
-                            <th width="80">ID</th>
-                            <th width="120">漫画名</th>
-                            <th width="100">封面</th>
-                            <th width="100">章节数</th>
-                            <th width="120">分类</th>
-                            <th width="100">地区</th>
-                            <th width="100">是否完结</th>
-                            <th width="120">操作</th>
+                            <th width="100">ID</th>
+                            <th width="150">图片</th>
+                            <th width="120">图片序</th>
+                            <th width="120">创建时间</th>
+                            <th width="120">更新时间</th>
+                            <th width="150">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {volist name="books" id="vo"}
+                        {volist name="photos" id="vo"}
                         <tr class="text-c">
                             <td>{$vo.id}</td>
-                            <td>{$vo.book_name}</td>
                             <td>
                                 {if empty($vo.cover_url)}
                                 <img width="45px;" height="auto" class="picture-thumb"
-                                     src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
+                                     src="{$img_site}/static/upload/book/{$book_id}/{$chapter_id}/{$vo.id}.jpg">
                                 {else /}
-                                <img width="45px;" height="auto" class="picture-thumb" src="{$vo.cover_url}">
+                                <img width="45px;" height="auto" class="picture-thumb" src="{$vo.img_url}">
                                 {/if}
                             </td>
-                            <td>
-                                {$vo.chapter_count}
-                            </td>
-                            <td>{$vo.tags}</td>
-                            <td>{$vo.area.area_name}</td>
-                            <td>{$vo.end?"完结":"连载中"}</td>
+                            <td>{$vo.order}</td>
+                            <td>{$vo.create_time|date='Y-m-d'}</td>
+                            <td>{$vo.update_time|date='Y-m-d'}</td>
                             <td class="f-14 td-manage">
-                                <a href="{:url('chapters/index',['book_id'=>$vo.id])}"
-                                   class="btn radius btn-success size-S">章节管理</a>
-                                <a style="text-decoration:none" class="ml-5" href="edit?id={$vo.id}&returnUrl={$returnUrl}"
-                                   title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
-                                <a style="text-decoration:none" class="ml-5" onclick="del(this,{$vo.id})"
-                                   href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                                <a style="text-decoration:none" class="ml-5" href="/admin/photos/edit?id={$vo.id}&book_id={$book_id}&chapter_id={$chapter_id}&returnUrl={$returnUrl}">
+                                    <i class="Hui-iconfont">&#xe6df;</i>
+                                </a>
+                                <a style="text-decoration:none" class="ml-5" onclick="del(this,{$vo.id})" href="javascript:;" title="删除">
+                                    <i class="Hui-iconfont">&#xe6e2;</i>
+                                </a>
+                            </td>
                         </tr>
                         {/volist}
                         </tbody>
                     </table>
-                    {$books|raw}
+                    {$photos|raw}
                 </div>
             </div>
         </div>

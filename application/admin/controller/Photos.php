@@ -18,9 +18,11 @@ use think\Request;
 class Photos extends BaseAdmin
 {
     protected $photoService;
+    protected $validate;
     protected function initialize()
     {
         $this->photoService = new PhotoService();
+        $this->validate = new \app\admin\validate\Photo;
     }
 
     public function index(){
@@ -28,8 +30,8 @@ class Photos extends BaseAdmin
         $chapter = Chapter::get($chapter_id);
         $book_id = input('book_id');
         $book = Book::get($book_id);
-        $photos = Photo::where('chapter_id','=',$chapter_id)
-            ->order('order','desc')
+        $data = Photo::where('chapter_id','=',$chapter_id);
+        $photos = $data->order('order','desc')
             ->paginate(5,false,
                 [
                     'query' => request()->param(),
@@ -41,7 +43,8 @@ class Photos extends BaseAdmin
             'chapter_id'=>$chapter_id,
             'book_id'=>$book_id,
             'book_name'=>$book->book_name,
-            'chapter_name'=>$chapter->chapter_name
+            'chapter_name'=>$chapter->chapter_name,
+            'count' => $data->count()
         ]);
         return view();
     }
@@ -61,14 +64,12 @@ class Photos extends BaseAdmin
     }
 
     public function upload(Request $request){
-        $book_id = $request->post('book_id');
-        if (is_null(Book::get($book_id))){
-            $this->error('没有选择书籍');
+        $data = $request->param();
+        if (!$this->validate->check($data)){
+            $this->error($this->validate->getError());
         }
-        $chapter_id = $request->post('chapter_id');
-        if (is_null(Chapter::get($chapter_id))){
-            $this->error('没有选择章节');
-        }
+        $book_id = $data('book_id');
+        $chapter_id = $data('chapter_id');
         $lastPhoto = $this->photoService->getLastPhoto($chapter_id);
         if (!$lastPhoto){
             $order = 1;
@@ -91,5 +92,45 @@ class Photos extends BaseAdmin
             $order++;
         }
         $this->success('上传成功');
+    }
+
+    public function edit(Request $request){
+        if ($request->isPost()){
+            $data = $request->param();
+            if (!$this->validate->check($data)){
+                $this->error($this->validate->getError());
+            }
+            $photo = new Photo();
+            $result = $photo->isUpdate(true)->save($data);
+            if ($result){
+                $file = $request->file('image');
+                $dir = App::getRootPath() . 'public/static/upload/book/'.$data['book_id'].'/'.$data['chapter_id'];
+                if (!file_exists($dir)){
+                    mkdir($dir,0777,true);
+                }
+                if ($file){
+                    $file->validate(['size'=>2048000,'ext'=>'jpg,png,gif'])->move($dir,$photo->id.'.jpg');
+                }
+                $this->success('编辑成功',$data['returnUrl'],'',1);
+            }else{
+                $this->error('编辑失败');
+            }
+        }
+        $book_id = input('book_id');
+        $chapter_id = input('chapter_id');
+        $id = input('id');
+        $returnUrl = input('returnUrl');
+        $photo = Photo::get($id);
+        if (!$photo){
+            $this->error('图片不存在');
+        }
+        $this->assign([
+            'id' => $id,
+            'book_id' => $book_id,
+            'chapter_id' => $chapter_id,
+            'order' => $photo->order,
+            'returnUrl' => $returnUrl
+        ]);
+        return view();
     }
 }
