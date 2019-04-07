@@ -8,7 +8,7 @@
             }
             var areacode = $(".txt_areacode").val();
             $.ajax({
-                url: '/sendcode',
+                url: '/sendcms',
                 data: { areacode: areacode, phone: phone },
                 async: false,
                 error: function (msg) {

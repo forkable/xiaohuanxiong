@@ -28,7 +28,7 @@ Route::rule('/delhistory', 'ucenter/users/delhistory');
 Route::rule('/updateUserinfo', 'ucenter/users/update');
 Route::rule('/bindphone', 'ucenter/users/bindphone');
 Route::rule('/userphone', 'ucenter/users/userphone');
-Route::rule('/sendcode', 'ucenter/users/sendcode');
+Route::rule('/sendcms', 'ucenter/users/sendcms');
 Route::rule('/verifyphone', 'ucenter/users/verifyphone');
 Route::rule('/recovery', 'ucenter/users/recovery');
 Route::rule('/resetpwd', 'ucenter/users/resetpwd');
