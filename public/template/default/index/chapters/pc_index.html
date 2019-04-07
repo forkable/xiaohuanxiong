@@ -90,7 +90,7 @@
                 <ul>
                     {volist name="chapters" id="vo"}
                     <li>
-                        <a href="/chapter/{$vo.id}" rel="nofollow" class="active">
+                        <a href="/chapter/{$vo.id}" rel="nofollow">
                             {$vo.chapter_name}
                         </a>
                     </li>
@@ -107,28 +107,39 @@
 </div>
 <script src="/static/js/swiper2.min.js"></script>
 <script src="/static/js/index.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script src="/static/js/jquery.slimscroll.min.js"></script>
 <script>
-    $("img.lazy").lazyload({threshold: 180});
-</script>
-<script>
-    document.body.oncopy = function () {
-        return false;
-    }; //阻止复制
-    document.body.onselectstart = function () {
-        return false;
-    }; //阻止选中
-    document.oncontextmenu = function () {
-        return false;
-    }; //阻止菜单弹出
-    if (document.images) {
-        for (i = 0; i < document.images.length; i++) {
-            document.images[i].onmousedown = function () {
-                return false;
-            };
+    $(function () {
+        $('.mCustomScrollBox').slimScroll({
+            height: 'auto'
+        });
+        $("img.lazy").lazyload({threshold: 180});
+        $('.sidebar-btn').click(function () { //给触发按钮绑定点击事件，也就是鼠标点击触发按钮后执行的动作
+            if($('.read-section').css('left')=="0px")
+                $('.read-section').animate({ left: '-212px' }, 200); //把左边栏的宽度设置为原来的宽度并显示出来， 根据设定的时间慢慢展现
+            else
+                $('.read-section').animate({ left: '0px' }, 200); //把左边栏的宽度设置为原来的宽度并显示出来， 根据设定的时间慢慢展现
+        });
+        document.body.oncopy = function () {
+            return false;
+        }; //阻止复制
+        document.body.onselectstart = function () {
+            return false;
+        }; //阻止选中
+        document.oncontextmenu = function () {
+            return false;
+        }; //阻止菜单弹出
+        if (document.images) {
+            for (i = 0; i < document.images.length; i++) {
+                document.images[i].onmousedown = function () {
+                    return false;
+                };
+            }
         }
-    }
+    });
+
 </script>
 {include file="./template/default/pub/others.html"}
 </body>
