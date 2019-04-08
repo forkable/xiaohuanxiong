@@ -108,7 +108,6 @@ class Index extends Controller
             if (true !== $validate) {
                 return $this->error($validate);
             }
-            $data['prefix'] = $data['prefix'].'_';
             $cover = $data['cover'];
             unset($data['cover']);
             $config = include App::getRootPath() . 'config/database.php';
@@ -264,7 +263,7 @@ INFO;
     {
         $items = [
             'os'      => ['操作系统', '不限制', 'Windows/Unix', PHP_OS, 'ok'],
-            'php'     => ['PHP版本', '5.5', '5.5及以上', PHP_VERSION, 'ok'],
+            'php'     => ['PHP版本', '7.0', '7.0及以上', PHP_VERSION, 'ok'],
             'gd'      => ['GD库', '2.0', '2.0及以上', '未知', 'ok'],
 
         ];

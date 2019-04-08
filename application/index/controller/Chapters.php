@@ -34,7 +34,6 @@ class Chapters extends Base
                 'chapter_id' => $chapter->id,
                 'chapter_name' => $chapter->chapter_name,
                 'book_name' => $chapter->book->book_name,
-                'author_name' => $chapter->book->author->author_name,
                 'end' => $chapter->book->end,
                 'last_time' => $chapter->book->last_time
             ];
