@@ -18,11 +18,9 @@ use think\Request;
 class Photos extends BaseAdmin
 {
     protected $photoService;
-    protected $validate;
     protected function initialize()
     {
         $this->photoService = new PhotoService();
-        $this->validate = new \app\admin\validate\Photo;
     }
 
     public function index(){
@@ -65,16 +63,16 @@ class Photos extends BaseAdmin
 
     public function upload(Request $request){
         $data = $request->param();
-        if (!$this->validate->check($data)){
-            $this->error($this->validate->getError());
+        $vali = $this->validate($data,'app\admin\validate\Photo.upload');
+        if (true !== $vali){
+            $this->error($vali);
         }
-        $book_id = $data('book_id');
-        $chapter_id = $data('chapter_id');
+        $book_id = $data['book_id'];
+        $chapter_id = $data['chapter_id'];
         $lastPhoto = $this->photoService->getLastPhoto($chapter_id);
-        if (!$lastPhoto){
-            $order = 1;
-        }else{
-            $order = $this->photoService->getLastPhoto($chapter_id)->order + 1; //拿到最新图片的order，加1
+        $order = 1;
+        if ($lastPhoto) {
+            $order = $lastPhoto->order + 1; //拿到最新图片的order，加1
         }
         $files = $request->file('image');
         foreach($files as $file){
@@ -97,8 +95,9 @@ class Photos extends BaseAdmin
     public function edit(Request $request){
         if ($request->isPost()){
             $data = $request->param();
-            if (!$this->validate->check($data)){
-                $this->error($this->validate->getError());
+            $vali = $this->validate($data,'app\admin\validate\Photo.edit');
+            if (true !== $vali){
+                $this->error($vali);
             }
             $photo = new Photo();
             $result = $photo->isUpdate(true)->save($data);

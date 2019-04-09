@@ -36,4 +36,9 @@ class Photo extends Validate
         'book_id' => '漫画id必须',
         'order' => '图片order必须'
     ];
+
+    protected $scene = [
+        'edit'  =>  ['chapter_id','book_id','order'],
+        'upload' => ['chapter_id','book_id']
+    ];
 }
