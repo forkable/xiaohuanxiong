@@ -48,7 +48,7 @@
             <li>
                 <div class="mh-item">
                     <a href="/book/{$vo.id}" title="{$vo.book_name}">
-                        {if empty($book.cover_url)}
+                        {if empty($vo.cover_url)}
                         <p class="mh-cover" style="background-image: url({$img_site}/static/upload/book/{$vo.id}/cover.jpg)"></p>
                         {else /}
                         <p class="mh-cover" style="background-image: url({$vo.cover_url})"></p>

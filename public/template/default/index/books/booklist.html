@@ -31,7 +31,7 @@
         <li>
             <div class="manga-list-2-cover">
                 <a href="/book/{$vo.id}">
-                    {if empty($book.cover_url)}
+                    {if empty($vo.cover_url)}
                     <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                     {else /}
                     <img class="manga-list-2-cover-img" src="{$vo.cover_url}">
