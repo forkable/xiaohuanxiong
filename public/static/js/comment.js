@@ -1,6 +1,6 @@
 function subcomment() {
     var uid = $('#session_uid').val();
-    var comment = $('#comment').val();
+    var comment = $('#content').val();
     var book_id = $('#book_id').val();
     if (uid == '-1') {
         ShowDialog('请先登录');
