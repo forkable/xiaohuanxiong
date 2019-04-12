@@ -25,7 +25,7 @@
     {volist name="$books" id="vo"}
     <li>
         <div class="book-list-cover">
-            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                 {if empty($vo.cover_url)}
                 <img class="book-list-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
                 {else /}
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="book-list-info">
-            <a href="/book/{$vo.id}">
+            <a href="/book/{$vo.id}{$id_salt}">
                 <p class="book-list-info-title">{$vo.book_name}</p>
                 <p class="book-list-info-desc">{$vo.summary|subtext=50}...</p>
             </a>

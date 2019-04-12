@@ -27,7 +27,7 @@
                     {volist name="newest" id="vo"}
                     <li>
                         <div class="mh-item">
-                            <a href="/book/{$vo.id}" target="_blank">
+                            <a href="/book/{$vo.id}{$id_salt}" target="_blank">
                                 {if empty($vo.cover_url)}
                                 <p class="mh-cover "
                                    style="background-image: url({$img_site}/static/upload/book/{$vo.id}/cover.jpg)"></p>
@@ -37,13 +37,13 @@
                             </a>
                             <div class="mh-item-detali">
                                 <h2 class="title">
-                                    <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                         {$vo.book_name}
                                     </a>
                                 </h2>
                                 <p class="zl"><span>评分:</span><span class="mh-star-line star-4"></span></p>
                                 <p class="chapter"><span>总计</span>
-                                    <a href="/book/{$vo.id}">{$vo.chapter_count}话</a>
+                                    <a href="/book/{$vo.id}{$id_salt}">{$vo.chapter_count}话</a>
                                 </p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         {volist name="hot" id="vo"}
                         <li>
                             <div class="cover">
-                                <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                     {if empty($vo.cover_url)}
                                     <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}"
                                          style="height:100%; max-width: 167px;_width:expression(this.width &gt; 167 ? &#39;167px&#39; : this.width);">
@@ -84,7 +84,7 @@
                                 </a>
                             </div>
                             <div class="info">
-                                <p class="title"><a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                                <p class="title"><a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a>
                                 </p>
                                 <div class="star"><span class="active"></span>
                                     <span class="active"></span>
@@ -94,7 +94,7 @@
                                 </div>
                                 <p class="subtitle" style="color: #252525;">更新至
                                     <span>
-                                        <a href="/book/{$vo.id}">第{$vo.chapter_count}话</a>
+                                        <a href="/book/{$vo.id}{$id_salt}">第{$vo.chapter_count}话</a>
                                     </span>
                                 </p>
                                 <p class="desc">{$vo.book_name}</p>
@@ -113,7 +113,7 @@
                         {volist name="hot" id="vo" offset="6" length="12"}
                         <li>
                             <div class="cover">
-                                <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                     {if empty($vo.cover_url)}
                                     <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}"
                                          style="height:100%; max-width: 167px;_width:expression(this.width &gt; 167 ? &#39;167px&#39; : this.width);">
@@ -124,7 +124,7 @@
                                 </a>
                             </div>
                             <div class="info">
-                                <p class="title"><a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                                <p class="title"><a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a>
                                 </p>
                                 <div class="star"><span class="active"></span>
                                     <span class="active"></span>
@@ -134,7 +134,7 @@
                                 </div>
                                 <p class="subtitle" style="color: #252525;">更新至
                                     <span>
-                                        <a href="/book/{$vo.id}">第{$vo.chapter_count}话</a>
+                                        <a href="/book/{$vo.id}{$id_salt}">第{$vo.chapter_count}话</a>
                                     </span>
                                 </p>
                                 <p class="desc">{$vo.book_name}</p>
@@ -165,7 +165,7 @@
             {volist name="newest" id="vo" key="k" offset="1" length="4"}
             <li>
                 <div class="cover">
-                    <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                         {if empty($vo.cover_url)}
                         <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
                         {else /}
@@ -176,7 +176,7 @@
                 <div class="sign"><span class="top-1">{$k}</span></div>
                 <div class="info">
                     <p class="title">
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a>
                     </p>
                     <p class="subtitle">{$vo.summary|subtext=15}</p>
                 </div>
@@ -190,7 +190,7 @@
             {volist name="hot" id="vo" key="k" offset="1" length="4"}
             <li>
                 <div class="cover">
-                    <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                         {if empty($vo.cover_url)}
                         <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
                         {else /}
@@ -201,7 +201,7 @@
                 <div class="sign"><span class="top-1">{$k}</span></div>
                 <div class="info">
                     <p class="title">
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a>
                     </p>
                     <p class="subtitle">{$vo.summary|subtext=15}</p>
                 </div>
@@ -210,13 +210,12 @@
         </ul>
     </div>
     <div class="index-rank">
-        <div class="index-rank-title">完结榜<a href="https://www.tohomh123.com/f-1-1-----hits--1.html"
-                                            class="more">更多</a></div>
+        <div class="index-rank-title">完结榜<a href="#" class="more">更多</a></div>
         <ul class="index-rank-list">
             {volist name="ends" id="vo" key="k" offset="1" length="4"}
             <li>
                 <div class="cover">
-                    <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                         {if empty($vo.cover_url)}
                         <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
                         {else /}
@@ -227,7 +226,7 @@
                 <div class="sign"><span class="top-1">{$k}</span></div>
                 <div class="info">
                     <p class="title">
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a>
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a>
                     </p>
                     <p class="subtitle">{$vo.summary|subtext=15}</p>
                 </div>
@@ -252,7 +251,7 @@
                     <li>
 
                         <div class="mh-item">
-                            <a href="/book/{$vo.id}" target="_blank">
+                            <a href="/book/{$vo.id}{$id_salt}" target="_blank">
                                 {if empty($vo.cover_url)}
                                 <p class="mh-cover "
                                    style="background-image: url({$img_site}/static/upload/book/{$vo.id}/cover.jpg)"></p>
@@ -262,13 +261,13 @@
                             </a>
                             <div class="mh-item-detali">
                                 <h2 class="title">
-                                    <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                         {$vo.book_name}
                                     </a>
                                 </h2>
                                 <p class="zl"><span>评分:</span><span class="mh-star-line star-4"></span></p>
                                 <p class="chapter"><span>更新至</span>
-                                    <a href="/book/{$vo.id}">第{$vo.chapter_count}话</a>
+                                    <a href="/book/{$vo.id}{$id_salt}">第{$vo.chapter_count}话</a>
                                 </p>
                             </div>
                         </div>

@@ -13,7 +13,7 @@
         <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1875px, 0px, 0px);">
             {volist name="banners" id="vo" key="k"}
             <div class="swiper-slide" data-swiper-slide-index="{$k}" style="width: 375px;">
-                <a href="/book/{$vo.book_id}" title="{$vo.title}">
+                <a href="/book/{$vo.book_id}{$id_salt}" title="{$vo.title}">
                     <img src="{$img_site}/static/upload/banner/{$vo.pic_name}" alt="{$vo.title}">
                 </a>
             </div>
@@ -63,7 +63,7 @@
                     {volist name="newest" id="vo" offset="0" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -72,9 +72,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -83,7 +83,7 @@
                     {volist name="newest" id="vo" offset="3" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -92,9 +92,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -103,7 +103,7 @@
                     {volist name="newest" id="vo" offset="6" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -112,9 +112,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -133,7 +133,7 @@
                     {volist name="hot" id="vo" offset="0" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -142,9 +142,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -153,7 +153,7 @@
                     {volist name="newest" id="vo" offset="3" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -162,9 +162,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -173,7 +173,7 @@
                     {volist name="newest" id="vo" offset="6" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -182,9 +182,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -203,7 +203,7 @@
                     {volist name="ends" id="vo" offset="$i*3" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -212,9 +212,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -223,7 +223,7 @@
                     {volist name="newest" id="vo" offset="3" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -232,9 +232,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -243,7 +243,7 @@
                     {volist name="newest" id="vo" offset="6" length="3"}
                     <li>
                         <div class="manga-list-2-cover">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                                 {if empty($vo.cover_url)}
                                 <img class="manga-list-2-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg">
                                 {else /}
@@ -252,9 +252,9 @@
                             </a>
                         </div>
                         <p class="manga-list-2-title">
-                            <a href="/book/{$vo.id}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
+                            <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">{$vo.book_name}</a> </p>
                         <p class="manga-list-2-tip">
-                            <a href="/book/{$vo.id}">总计 {$vo.chapter_count}话</a>
+                            <a href="/book/{$vo.id}{$id_salt}">总计 {$vo.chapter_count}话</a>
                         </p>
                     </li>
                     {/volist}
@@ -278,7 +278,7 @@
                 <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" id="rank_1" data-swiper-slide-index="0">
                     {volist name="hot" id="vo" offset="0" length="5"}
                     <li>
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                             <div class="rank-list-cover">
                                 {if empty($vo.cover_url)}
                                 <img class="rank-list-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
@@ -299,7 +299,7 @@
                 <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" id="rank_2" data-swiper-slide-index="1">
                     {volist name="newest" id="vo"  offset="0" length="5"}
                     <li>
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                             <div class="rank-list-cover">
                                 {if empty($vo.cover_url)}
                                 <img class="rank-list-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
@@ -320,7 +320,7 @@
                 <div class="swiper-slide swiper-slide-duplicate" id="rank_3" data-swiper-slide-index="2">
                     {volist name="ends" id="vo"  offset="0" length="5"}
                     <li>
-                        <a href="/book/{$vo.id}" title="{$vo.book_name}">
+                        <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                             <div class="rank-list-cover">
                                 {if empty($vo.cover_url)}
                                 <img class="rank-list-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">

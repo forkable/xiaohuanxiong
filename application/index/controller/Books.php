@@ -22,7 +22,7 @@ class Books extends Base
 
     public function index(Request $request)
     {
-        $id = input('id');
+        $id = str_replace($this->id_salt,'',input('id'));
         $book = cache('book:' . $id);
         $tags = cache('tags:book:' . $id );
         if ($book ==false) {
@@ -47,7 +47,7 @@ class Books extends Base
         }
         $start = cache('book_start:' . $id);
         if ($start == false) {
-            $db = Db::query('SELECT id FROM '.$this->prefix.'chapter WHERE book_id = ' . $request->param('id') . ' ORDER BY id LIMIT 1');
+            $db = Db::query('SELECT id FROM '.$this->prefix.'chapter WHERE book_id = ' . $id . ' ORDER BY id LIMIT 1');
             $start = $db ? $db[0]['id'] : -1;
             cache('book_start:' . $id, $start,null,'redis');
         }

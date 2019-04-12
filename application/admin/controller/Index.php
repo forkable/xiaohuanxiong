@@ -18,6 +18,7 @@ class Index extends BaseAdmin
         $url = config('site.url');
         $img_site = config('site.img_site');
         $salt = config('site.salt');
+        $id_salt = config('site.id_salt');
         $api_key = config('site.api_key');
         $redis_host = config('cache.host');
         $redis_port = config('cache.port');
@@ -29,6 +30,7 @@ class Index extends BaseAdmin
             'url' => $url,
             'img_site' => $img_site,
             'salt' => $salt,
+            'id_salt' => $id_salt,
             'api_key' => $api_key,
             'redis_host' => $redis_host,
             'redis_port' => $redis_port,
@@ -45,6 +47,7 @@ class Index extends BaseAdmin
         $url = input('url');
         $img_site = input('img_site'); 
         $salt = input('salt');
+        $id_salt = input('id_salt');
         $api_key = input('api_key');
         $redis_host = input('redis_host');
         $redis_port = input('redis_port');
@@ -58,6 +61,7 @@ class Index extends BaseAdmin
             'img_site' => '{$img_site}',
             'site_name' => '{$site_name}',
             'salt' => '{$salt}',
+            'id_salt' => '{$id_salt}',
             'api_key' => '{$api_key}', 
             'tpl' => '{$front_tpl}'         
         ];

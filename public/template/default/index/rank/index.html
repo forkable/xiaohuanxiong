@@ -18,7 +18,7 @@
         <ul class="rank-list" id="rankList_{$k}" style="display: none;">
     {/if}
         {volist name="item['keyword']" id="keyword" key="j"}
-        <a href="/book/{$keyword.id}" title="{$keyword.book_name}">
+        <a href="/book/{$keyword.id}{$id_salt}" title="{$keyword.book_name}">
             <li>
                 <div class="rank-list-cover">
                     {if empty($keyword.cover_url)}

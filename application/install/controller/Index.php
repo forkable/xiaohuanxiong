@@ -157,7 +157,7 @@ class Index extends Controller
      */
     private function step5()
     {
-        $param = $this->request->only(['username','password','salt','redis_prefix']);
+        $param = $this->request->only(['username','password','salt','redis_prefix','id_salt']);
 
         $config = include App::getRootPath() . 'config/database.php';
         if (empty($config['hostname']) || empty($config['database']) || empty($config['username'])) {
@@ -168,6 +168,7 @@ class Index extends Controller
             'username|管理员账号' => 'require|alphaNum',
             'password|管理员密码' => 'require|length:6,20',
             'salt|密码盐' => 'require|alphaNum',
+            'id盐' => 'alphaNum',
             'redis_prefix|缓存前缀' => 'require|alphaNum'
         ];
 
@@ -193,7 +194,11 @@ class Index extends Controller
                 }
             }
         }
-        $this->setSiteConfig(trim($param['salt'])); //写入网站配置文件
+        $id_salt = $param['id_salt'];
+        if (empty($id_salt) || is_null($id_salt)){
+            $id_salt = '';
+        }
+        $this->setSiteConfig(trim($param['salt']),trim($id_salt)); //写入网站配置文件
         $this->setCacheConfig(trim($param['redis_prefix'])); //写入cache配置文件
         // 注册管理员账号
         $data = [
@@ -217,7 +222,7 @@ class Index extends Controller
         $this->success('系统安装成功,欢迎您使用小涴熊CMS建站.');
     }
 
-    private function setSiteConfig($salt){
+    private function setSiteConfig($salt,$id_salt){
         $site_name = config('site.site_name');
         $url = config('site.url');
         $img_site = config('site.img_site');
@@ -229,6 +234,7 @@ class Index extends Controller
             'img_site' => '{$img_site}',
             'site_name' => '{$site_name}',
             'salt' => '{$salt}',
+            'id_salt' => '{$id_salt}',
             'api_key' => '{$api_key}',   
             'tpl' => 'default'            
             ];

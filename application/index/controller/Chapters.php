@@ -13,8 +13,9 @@ use think\Db;
 
 class Chapters extends Base
 {
-    public function index($id)
+    public function index()
     {
+        $id = str_replace($this->id_salt,'',input('id'));
         $chapter = Chapter::with(['photos' => function ($query) {
             $query->order('order');
         }], 'book')->cache('chapter:' . $id,600,'redis')->find($id);

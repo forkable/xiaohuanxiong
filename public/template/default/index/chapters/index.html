@@ -50,12 +50,12 @@
     {if $prev == "null"}
     <li style="width:50%;opacity: 0.6;"><a class="view-bottom-bar-item" href="javascript:void(0)">上一章</a></li>
     {else /}
-    <li style="width:50%;"><a class="view-bottom-bar-item" href="/chapter/{$prev.id}">上一章</a></li>
+    <li style="width:50%;"><a class="view-bottom-bar-item" href="/chapter/{$prev.id}{$id_salt}">上一章</a></li>
     {/if}
     {if $next == "null"}
     <li style="width:50%;opacity: 0.6;"><a class="view-bottom-bar-item" href="javascript:void(0)">下一章</a></li>
     {else /}
-    <li style="width:50%;"><a class="view-bottom-bar-item" href="/chapter/{$next.id}">下一章</a></li>
+    <li style="width:50%;"><a class="view-bottom-bar-item" href="/chapter/{$next.id}{$id_salt}">下一章</a></li>
     {/if}
 </ul>
 <div class="view-fix-bottom-bar" mode="0">
@@ -70,7 +70,7 @@
         <p class="view-fix-bottom-bar-title">上一章</p>
     </a>
     {else /}
-    <a class="view-fix-bottom-bar-item" href="/chapter/{$prev.id}">
+    <a class="view-fix-bottom-bar-item" href="/chapter/{$prev.id}{$id_salt}">
         <img class="view-fix-bottom-bar-logo" src="/static/images/view-bottom-logo-5.png">
         <p class="view-fix-bottom-bar-title">上一章</p>
     </a>
@@ -81,7 +81,7 @@
         <p class="view-fix-bottom-bar-title">下一章</p>
     </a>
     {else /}
-    <a class="view-fix-bottom-bar-item" href="/chapter/{$next.id}">
+    <a class="view-fix-bottom-bar-item" href="/chapter/{$next.id}{$id_salt}">
         <img class="view-fix-bottom-bar-logo" src="/static/images/view-bottom-logo-6.png">
         <p class="view-fix-bottom-bar-title">下一章</p>
     </a>
