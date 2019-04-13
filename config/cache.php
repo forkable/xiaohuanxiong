@@ -8,7 +8,7 @@
             // 缓存保存目录
             'path'   => '../runtime/cache/',
             // 缓存前缀
-            'prefix' => 'kkmh:',
+            'prefix' => 'hm:',
             // 缓存有效期 0表示永久缓存
             'expire' => 600,
         ];
