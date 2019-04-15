@@ -115,7 +115,14 @@
         $('.mCustomScrollBox').slimScroll({
             height: 'auto'
         });
-        $("img.lazy").lazyload({threshold: 180});
+        $("img.lazy")
+            .lazyload({
+                threshold: 360,
+                event: "lazyload",
+                effect: "fadeIn",
+                effectspeed: 2000
+            })
+            .trigger("lazyload");
         $('.sidebar-btn').click(function () { //给触发按钮绑定点击事件，也就是鼠标点击触发按钮后执行的动作
             if($('.read-section').css('left')=="0px")
                 $('.read-section').animate({ left: '-212px' }, 200); //把左边栏的宽度设置为原来的宽度并显示出来， 根据设定的时间慢慢展现

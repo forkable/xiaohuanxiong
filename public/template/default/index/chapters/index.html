@@ -89,7 +89,14 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
 <script>
-    $("img.lazy").lazyload({threshold: 180});
+    $("img.lazy")
+    .lazyload({
+        threshold: 180,
+        event: "lazyload",
+        effect: "fadeIn",
+        effectspeed: 2000
+    })
+        .trigger("lazyload");
 
     document.body.oncopy = function () {
         return false;

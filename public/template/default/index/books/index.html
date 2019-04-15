@@ -10,11 +10,11 @@
 {include file="./template/default/pub/top2.html" /}
 <div class="detail-main">
     {if empty($book.cover_url)}
-    <img class="detail-main-bg" src="{$img_site}/static/upload/book/{$book.id}/cover.jpg">
-    <div class="detail-main-cover"><img src="{$img_site}/static/upload/book/{$book.id}/cover.jpg"></div>
+    <img class="detail-main-bg" data-original="{$img_site}/static/upload/book/{$book.id}/cover.jpg" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg">
+    <div class="detail-main-cover"><img class="lazy" data-original="{$img_site}/static/upload/book/{$book.id}/cover.jpg" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg"></div>
     {else /}
-    <img class="detail-main-bg" src="{$book.cover_url}">
-    <div class="detail-main-cover"><img src="{$book.cover_url}"></div>
+    <img class="detail-main-bg" data-original="{$book.cover_url}" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg">
+    <div class="detail-main-cover"><img class="lazy" data-original="{$book.cover_url}" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg"></div>
     {/if}
     <div class="detail-main-info">
         <p class="detail-main-info-title">{$book.book_name}</p>

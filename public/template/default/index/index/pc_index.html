@@ -167,7 +167,8 @@
                 <div class="cover">
                     <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                         {if empty($vo.cover_url)}
-                        <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
+                        <img data-original="{$img_site}/static/upload/book/{$vo.id}/cover.jpg"
+                             src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}">
                         {else /}
                         <img src="{$vo.cover_url}" alt="{$vo.book_name}">
                         {/if}

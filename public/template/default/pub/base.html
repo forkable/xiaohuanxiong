@@ -16,6 +16,16 @@
 <body class="bg-gray" style="padding-top: 0px; zoom: 1;">
 {block name="content"}
 {/block}
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script>
+    $("img.lazy")
+        .lazyload({
+            event: "lazyload",
+            effect: "fadeIn",
+            effectspeed: 2000
+        })
+        .trigger("lazyload");
+</script>
 {include file="./template/default/pub/others.html"}
 </body>
 

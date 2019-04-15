@@ -27,9 +27,9 @@
         <div class="book-list-cover">
             <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
                 {if empty($vo.cover_url)}
-                <img class="book-list-cover-img" src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
+                <img class="book-list-cover-img lazy" data-original="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}">
                 {else /}
-                <img class="book-list-cover-img" src="{$vo.cover_url}" alt="{$vo.book_name}">
+                <img class="book-list-cover-img lazy" data-original="{$vo.cover_url}" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}">
                 {/if}
             </a>
         </div>
