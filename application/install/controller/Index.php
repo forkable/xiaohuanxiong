@@ -7,21 +7,22 @@
  */
 
 namespace app\install\controller;
+
 use think\Controller;
 use think\Db;
 use think\facade\App;
 
 class Index extends Controller
 {
-	
+
     protected function initialize()
     {
-		if(is_file( App::getRootPath(). 'application/install/install.lock')) {
-		    header("Location: /");
-		    exit;
-	    }
+        if (is_file(App::getRootPath() . 'application/install/install.lock')) {
+            header("Location: /");
+            exit;
+        }
     }
-    
+
     public function index($step = 0)
     {
         switch ($step) {
@@ -76,8 +77,8 @@ class Index extends Controller
     private function step3()
     {
         $install_dir = $_SERVER["SCRIPT_NAME"];
-        $install_dir = xwxcms_substring($install_dir, strripos($install_dir, "/")+1);
-        $this->assign('install_dir',$install_dir);
+        $install_dir = xwxcms_substring($install_dir, strripos($install_dir, "/") + 1);
+        $this->assign('install_dir', $install_dir);
         return $this->fetch('step3');
     }
 
@@ -92,7 +93,7 @@ class Index extends Controller
             if (!is_writable(App::getRootPath() . 'config/database.php')) {
                 return $this->error('[app/config/database.php]无读写权限！');
             }
-            $data = $this->request->only(['hostname','hostport','database','username','prefix','cover','password']);
+            $data = $this->request->only(['hostname', 'hostport', 'database', 'username', 'prefix', 'cover', 'password']);
             $data['type'] = 'mysql';
 
             $rule = [
@@ -113,7 +114,7 @@ class Index extends Controller
             $config = include App::getRootPath() . 'config/database.php';
             foreach ($data as $k => $v) {
                 if (array_key_exists($k, $config) === false) {
-                    return $this->error('参数'.$k.'不存在！');
+                    return $this->error('参数' . $k . '不存在！');
                 }
             }
             // 不存在的数据库会导致连接失败
@@ -123,9 +124,9 @@ class Index extends Controller
             // 创建数据库连接
             $db_connect = Db::connect($data);
             // 检测数据库连接
-            try{
+            try {
                 $db_connect->execute('select version()');
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 $this->error('数据库连接失败，请检查数据库配置！');
             }
 
@@ -133,18 +134,35 @@ class Index extends Controller
             $data['database'] = $database;
             self::make_database($data);
 
-            // 不覆盖检测是否已存在数据库
-            if (!$cover) {
-                $check = $db_connect->execute('SELECT * FROM information_schema.schemata WHERE schema_name="'.$database.'"');
-                if ($check) {
-                    $this->success('该数据库已存在，可直接安装。如需覆盖，请选择覆盖数据库！','');
+            if ($cover) { //如果选择覆盖数据库
+//                $check = $db_connect->execute('SELECT * FROM information_schema.schemata WHERE schema_name="' . $database . '"');
+//                if ($check) {
+//                    $this->success('该数据库已存在，可直接覆盖安装。', '');
+//                } else {
+//                    // 创建数据库
+//                    if (!$db_connect->execute("CREATE DATABASE IF NOT EXISTS `{$database}` DEFAULT CHARACTER SET utf8")) {
+//                        return $this->error($db_connect->getError());
+//                    }
+//                }
+
+                // 导入系统初始数据库结构
+                // 导入SQL
+                $sql_file = App::getRootPath() . 'application/install/sql/install.sql';
+                if (file_exists($sql_file)) {
+                    $sql = file_get_contents($sql_file);
+                    $sql_list = xwxcms_parse_sql($sql, 0, ['xwx_' => $config['prefix']]);
+                    if ($sql_list) {
+                        $sql_list = array_filter($sql_list);
+                        foreach ($sql_list as $v) {
+                            try {
+                                Db::execute($v);
+                            } catch (\Exception $e) {
+                                halt('导入SQL失败，请检查install.sql的语句是否正确。' . $e);
+                            }
+                        }
+                    }
                 }
             }
-            // 创建数据库
-            if (!$db_connect->execute("CREATE DATABASE IF NOT EXISTS `{$database}` DEFAULT CHARACTER SET utf8")) {
-                return $this->error($db_connect->getError());
-            }
-
             return $this->success('数据库连接成功', '');
         } else {
             return $this->error('非法访问');
@@ -157,7 +175,7 @@ class Index extends Controller
      */
     private function step5()
     {
-        $param = $this->request->only(['username','password','salt','redis_prefix','id_salt']);
+        $param = $this->request->only(['username', 'password', 'salt', 'redis_prefix', 'id_salt']);
 
         $config = include App::getRootPath() . 'config/database.php';
         if (empty($config['hostname']) || empty($config['database']) || empty($config['username'])) {
@@ -176,45 +194,29 @@ class Index extends Controller
         if (true !== $validate) {
             return $this->error($validate);
         }
-        $param['redis_prefix'] = $param['redis_prefix'].':';
-        // 导入系统初始数据库结构
-        // 导入SQL
-        $sql_file = App::getRootPath() . 'application/install/sql/install.sql';
-        if (file_exists($sql_file)) {
-            $sql = file_get_contents($sql_file);
-            $sql_list = xwxcms_parse_sql($sql, 0, ['xwx_' => $config['prefix']]);
-            if ($sql_list) {
-                $sql_list = array_filter($sql_list);
-                foreach ($sql_list as $v) {
-                    try {
-                        Db::execute($v);
-                    } catch(\Exception $e) {
-                        halt('导入SQL失败，请检查install.sql的语句是否正确。'. $e);
-                    }
-                }
-            }
-        }
+        $param['redis_prefix'] = $param['redis_prefix'] . ':';
+
         $id_salt = $param['id_salt'];
-        if (empty($id_salt) || is_null($id_salt)){
+        if (empty($id_salt) || is_null($id_salt)) {
             $id_salt = '';
         }
-        $this->setSiteConfig(trim($param['salt']),trim($id_salt)); //写入网站配置文件
+        $this->setSiteConfig(trim($param['salt']), trim($id_salt)); //写入网站配置文件
         $this->setCacheConfig(trim($param['redis_prefix'])); //写入cache配置文件
         // 注册管理员账号
         $data = [
             'username' => $param['username'],
-            'password' => md5(strtolower(trim($param['password'])).trim($param['salt'])) ,
+            'password' => md5(strtolower(trim($param['password'])) . trim($param['salt'])),
             'last_login_time' => time(),
             'last_login_ip' => $this->request->ip(),
         ];
         $admin = new \app\model\Admin();
         $res = $admin->save($data);
         if (!$res) {
-            return $this->error('管理员账号设置失败:'.$res['msg']);
+            return $this->error('管理员账号设置失败:' . $res['msg']);
         }
         $install = App::getRootPath() . 'application/install/install.lock';
         if (!is_dir(dirname($install))) {
-            @mkdir(dirname($install),0777,true);
+            @mkdir(dirname($install), 0777, true);
         }
 
         file_put_contents($install, date('Y-m-d H:i:s'));
@@ -222,7 +224,8 @@ class Index extends Controller
         $this->success('系统安装成功,欢迎您使用小涴熊CMS建站.');
     }
 
-    private function setSiteConfig($salt,$id_salt){
+    private function setSiteConfig($salt, $id_salt)
+    {
         $site_name = config('site.site_name');
         $url = config('site.url');
         $img_site = config('site.img_site');
@@ -242,7 +245,8 @@ INFO;
         file_put_contents(App::getRootPath() . 'config/site.php', $code);
     }
 
-    private function setCacheConfig($redis_prefix){
+    private function setCacheConfig($redis_prefix)
+    {
         $code = <<<INFO
         <?php
         return [
@@ -261,6 +265,7 @@ INFO;
 INFO;
         file_put_contents(App::getRootPath() . 'config/cache.php', $code);
     }
+
     /**
      * 环境检测
      * @return array
@@ -268,9 +273,9 @@ INFO;
     private function checkNnv()
     {
         $items = [
-            'os'      => ['操作系统', '不限制', 'Windows/Unix', PHP_OS, 'ok'],
-            'php'     => ['PHP版本', '7.0', '7.0及以上', PHP_VERSION, 'ok'],
-            'gd'      => ['GD库', '2.0', '2.0及以上', '未知', 'ok'],
+            'os' => ['操作系统', '不限制', 'Windows/Unix', PHP_OS, 'ok'],
+            'php' => ['PHP版本', '7.0', '7.0及以上', PHP_VERSION, 'ok'],
+            'gd' => ['GD库', '2.0', '2.0及以上', '未知', 'ok'],
 
         ];
         if ($items['php'][3] < $items['php'][1]) {
@@ -305,8 +310,8 @@ INFO;
         ];
         foreach ($items as &$v) {
             if ($v[0] == 'dir') {// 文件夹
-                if(!is_writable($v[1])) {
-                    if(is_dir($v[1])) {
+                if (!is_writable($v[1])) {
+                    if (is_dir($v[1])) {
                         $v[3] = '不可写';
                         $v[4] = 'no';
                     } else {
@@ -316,7 +321,7 @@ INFO;
                     session('install_error', true);
                 }
             } else {// 文件
-                if(!is_writable($v[1])) {
+                if (!is_writable($v[1])) {
                     $v[3] = '不可写';
                     $v[4] = 'no';
                     session('install_error', true);
@@ -343,12 +348,12 @@ INFO;
             ['gzopen', '支持', 'yes', '函数'],
         ];
 
-        if(version_compare(PHP_VERSION,'7.0.0','lt')){
-            $items[] = ['always_populate_raw_post_data','支持','yes','配置'];
+        if (version_compare(PHP_VERSION, '7.0.0', 'lt')) {
+            $items[] = ['always_populate_raw_post_data', '支持', 'yes', '配置'];
         }
 
         foreach ($items as &$v) {
-            if(('类'==$v[3] && !class_exists($v[0])) || ('模块'==$v[3] && !extension_loaded($v[0])) || ('函数'==$v[3] && !function_exists($v[0])) || ('配置'==$v[3] && ini_get('always_populate_raw_post_data')!=-1)) {
+            if (('类' == $v[3] && !class_exists($v[0])) || ('模块' == $v[3] && !extension_loaded($v[0])) || ('函数' == $v[3] && !function_exists($v[0])) || ('配置' == $v[3] && ini_get('always_populate_raw_post_data') != -1)) {
                 $v[1] = '不支持';
                 $v[2] = 'no';
                 session('install_error', true);
