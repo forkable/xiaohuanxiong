@@ -27,7 +27,10 @@
 $('#sub').click(function () {
     $.post({
         url:'/bindphone',
-        data:$('form').serialize(),
+        data:{
+            txt_phonecode : $('#txt_phonecode').val(),
+            txt_phone : $('#txt_phone').val()
+        },
         success(res){
             if (res.err == 0) {
                 ShowDialog(res.msg);
