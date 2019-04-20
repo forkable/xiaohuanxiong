@@ -1,7 +1,4 @@
 <?php
-
-
-class version
-{
-
-}
+return [
+   'v' => '1.0.0'
+];
