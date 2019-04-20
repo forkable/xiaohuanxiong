@@ -58,9 +58,10 @@ class Url extends Dispatch
         } else {
             // 解析控制器
             $controller = !empty($path) ? array_shift($path) : null;
-            if ($controller && !preg_match('/^[A-Za-z](\w|\.)*$/', $controller)) {
-                throw new HttpException(404, 'controller not exists:' . $controller);
-            }
+        }
+
+        if ($controller && !preg_match('/^[A-Za-z][\w|\.]*$/', $controller)) {
+            throw new HttpException(404, 'controller not exists:' . $controller);
         }
 
         // 解析操作
@@ -119,7 +120,9 @@ class Url extends Dispatch
 
         $host = $this->request->host(true);
 
-        if ($this->rule->getRouter()->getName($name, $host) || $this->rule->getRouter()->getName($name2, $host)) {
+        $method = $this->request->method();
+
+        if ($this->rule->getRouter()->getName($name, $host, $method) || $this->rule->getRouter()->getName($name2, $host, $method)) {
             return true;
         }
 

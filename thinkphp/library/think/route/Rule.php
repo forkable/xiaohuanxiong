@@ -81,13 +81,19 @@ abstract class Rule
      * 需要和分组合并的路由参数
      * @var array
      */
-    protected $mergeOptions = ['after', 'before', 'model', 'header', 'response', 'append', 'middleware'];
+    protected $mergeOptions = ['after', 'model', 'header', 'response', 'append', 'middleware'];
 
     /**
      * 是否需要后置操作
      * @var bool
      */
     protected $doAfter;
+
+    /**
+     * 是否锁定参数
+     * @var bool
+     */
+    protected $lockOption = false;
 
     abstract public function check($request, $url, $completeMatch = false);
 
@@ -675,20 +681,23 @@ abstract class Rule
 
     /**
      * 合并分组参数
-     * @access protected
-     * @return void
+     * @access public
+     * @return array
      */
-    protected function mergeGroupOptions()
+    public function mergeGroupOptions()
     {
-        $parentOption = $this->parent->getOption();
-        // 合并分组参数
-        foreach ($this->mergeOptions as $item) {
-            if (isset($parentOption[$item]) && isset($this->option[$item])) {
-                $this->option[$item] = array_merge($parentOption[$item], $this->option[$item]);
+        if (!$this->lockOption) {
+            $parentOption = $this->parent->getOption();
+            // 合并分组参数
+            foreach ($this->mergeOptions as $item) {
+                if (isset($parentOption[$item]) && isset($this->option[$item])) {
+                    $this->option[$item] = array_merge($parentOption[$item], $this->option[$item]);
+                }
             }
-        }
 
-        $this->option = array_merge($parentOption, $this->option);
+            $this->option     = array_merge($parentOption, $this->option);
+            $this->lockOption = true;
+        }
 
         return $this->option;
     }
@@ -713,13 +722,17 @@ abstract class Rule
 
         // 替换路由地址中的变量
         if (is_string($route) && !empty($matches)) {
-            foreach ($matches as $key => $val) {
-                if (false !== strpos($route, '<' . $key . '>')) {
-                    $route = str_replace('<' . $key . '>', $val, $route);
-                } elseif (false !== strpos($route, ':' . $key)) {
-                    $route = str_replace(':' . $key, $val, $route);
-                }
+            $search = $replace = [];
+
+            foreach ($matches as $key => $value) {
+                $search[]  = '<' . $key . '>';
+                $replace[] = $value;
+
+                $search[]  = ':' . $key;
+                $replace[] = $value;
             }
+
+            $route = str_replace($search, $replace, $route);
         }
 
         // 解析额外参数
@@ -727,7 +740,6 @@ abstract class Rule
         $url   = array_slice(explode('|', $url), $count + 1);
         $this->parseUrlParams($request, implode('|', $url), $matches);
 
-        $this->route   = $route;
         $this->vars    = $matches;
         $this->option  = $option;
         $this->doAfter = true;
@@ -989,7 +1001,7 @@ abstract class Rule
             }
         }
 
-        $regex = str_replace($match, $replace, $rule);
+        $regex = str_replace(array_unique($match), array_unique($replace), $rule);
         $regex = str_replace([')?/', ')/', ')?-', ')-', '\\\\/'], [')\/', ')\/', ')\-', ')\-', '\/'], $regex);
 
         if (isset($hasSlash)) {
@@ -1097,5 +1109,13 @@ abstract class Rule
     public function __wakeup()
     {
         $this->router = Container::get('route');
+    }
+
+    public function __debugInfo()
+    {
+        $data = get_object_vars($this);
+        unset($data['parent'], $data['router'], $data['route']);
+
+        return $data;
     }
 }

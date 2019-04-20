@@ -41,4 +41,23 @@ class UserService extends Controller
             $redis->hDel($redis_prefix.':history:'.$uid,$key);
         }
     }
+
+    public function getAdminPagedUsers($status){
+        if ($status == 1){ //正常用户
+            $data = User::order('id','desc');
+        } else {
+            $data = User::onlyTrashed()->order('id','desc');
+        }
+
+        $users =  $data->paginate(5,false,
+            [
+                'query' => request()->param(),
+                'type'     => 'util\AdminPage',
+                'var_page' => 'page',
+            ]);
+        return [
+            'users' => $users,
+            'count' => $data->count()
+        ];
+    }
 }

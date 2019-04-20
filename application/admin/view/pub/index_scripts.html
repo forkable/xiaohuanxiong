@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
     /*资讯-删除*/
     function del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
@@ -9,8 +9,8 @@
                 dataType: 'json',
                 success: function (data) {
                     var result = data;
-                    if (result.err == 0){ //删除成功
-                        layer.msg(result.msg, {icon: 1, time:1000}, function () {
+                    if (result.err == 0) { //删除成功
+                        layer.msg(result.msg, {icon: 1, time: 1000}, function () {
                             location.reload();
                         });
                     } else {
@@ -25,4 +25,48 @@
             });
         });
     }
+
+    function member_stop(id) {
+        layer.confirm('确认要停用吗？', function (index) {
+            $.get({
+                url: "{:url('disable')}",
+                data: {'id': id},
+                success: function (res) {
+                    if (res.status == 1) {
+                        layer.msg('已停用!', {
+                            icon: 6,
+                            time: 1000,
+                        },function() {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg('操作出错', {icon: 5, time: 1000})
+                    }
+                }
+            })
+        });
+    }
+
+    /*用户-启用*/
+    function member_start(id) {
+        layer.confirm('确认要启用吗？', function (index) {
+            $.get({
+                url: "{:url('enable')}",
+                data: {'id': id},
+                success: function (res) {
+                    if (res.status == 1) {
+                        layer.msg('已启用!', {
+                            icon: 6,
+                            time: 1000
+                        }, function() {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg('操作出错', {icon: 5, time: 1000})
+                    }
+                }
+            })
+        });
+    }
+
 </script>
