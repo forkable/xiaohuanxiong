@@ -26,8 +26,10 @@ class BaseAdmin extends Controller
     {
         parent::__construct($app);
         $img_site = config('site.img_site');
+        $version = config('version.v');
         View::share([
             'img_site' => $img_site,
+            'version' => $version,
             'returnUrl' => $this->request->url(true)
         ]);
     }
