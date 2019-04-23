@@ -116,7 +116,7 @@
                                 {if empty($vo.cover_url)}
                                 <img src="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" alt="{$vo.book_name}">
                                 {else /}
-                                <img src="{$book.cover_url}" alt="{$vo.book_name}">
+                                <img src="{$vo.cover_url}" alt="{$vo.book_name}">
                                 {/if}
                             </a>
                         </div>
@@ -195,7 +195,7 @@
                                 {if empty($vo.cover_url)}
                                 <p class="mh-cover" style="background-image: url({$img_site}/static/upload/book/{$vo.id}/cover.jpg)"></p>
                                 {else /}
-                                <p class="mh-cover" style="background-image: url({$book.cover_url})"></p>
+                                <p class="mh-cover" style="background-image: url({$vo.cover_url})"></p>
                                 {/if}
                             </a>
                             <div class="mh-item-detali">
