@@ -37,14 +37,12 @@ class Index extends Base
             $ends = $this->bookService->getBooks('update_time',[['end','=','1']],14);
             cache('ends_homepage',$ends,null,'redis');
         }
-        $rands = $this->bookService->getRandBooks();
         $this->assign([
             'banners' => $banners,
             'banners_count' => count($banners),
             'newest' => $newest,
             'hot' => $hot_books,
             'ends' => $ends,
-            'rands' => $rands
         ]);
         if (!$this->request->isMobile()){
             $tags = \app\model\Tags::all();

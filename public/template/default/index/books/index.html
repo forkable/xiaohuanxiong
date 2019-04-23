@@ -142,7 +142,7 @@
                     <img src="/static/images/mrtx.gif">
                 </div>
                 <div class="detail-list-comment-info">
-                    <p class="detail-list-comment-title">{$Think.session.xwx_user}
+                    <p class="detail-list-comment-title">{$Think.session.xwx_nick_name|default='无昵称'}
                         <a class="detail-list-comment-right zanbtn" href="javascript:void(0);">1</a>
                     </p>
                     <p class="detail-list-comment-subtitle"> {$vo.create_time|date='Y-m-d'}</p>

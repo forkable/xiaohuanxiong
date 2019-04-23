@@ -227,7 +227,7 @@
                             <div class="cover">
                                 <img src="/static/images/mrtx.gif"></div>
                             <div class="info">
-                                <p class="title">{$Think.session.xwx_user}</p>
+                                <p class="title">{$Think.session.xwx_nick_name|default='无昵称'}</p>
                                 <p class="content">{$vo.content|raw}</p>
                                 <p class="bottom">
                                     {$vo.create_time|date='Y-m-d'}

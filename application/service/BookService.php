@@ -73,7 +73,7 @@ class BookService extends Base
     public function getRandBooks(){
         $books = Db::query('SELECT ad1.id,book_name,summary,cover_url FROM '.$this->prefix.'book AS ad1 JOIN 
 (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM '.$this->prefix.'book)-(SELECT MIN(id) FROM '.$this->prefix.'book))+(SELECT MIN(id) FROM '.$this->prefix.'book)) AS id)
- AS t2 WHERE ad1.id >= t2.id ORDER BY ad1.id LIMIT 9');
+ AS t2 WHERE ad1.id >= t2.id ORDER BY ad1.id LIMIT 10');
         foreach ($books as &$book){
             $book['chapter_count'] = Chapter::where('book_id','=',$book['id'])->count();
         }
