@@ -82,11 +82,12 @@ class Books extends BaseAdmin
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
                 }
-                $cover = $request->file('cover');
-                if ($cover) {
+                if (count($request->file()) > 0) {
+                    $cover = $request->file('cover');
                     $cover->validate(['size' => 2048000, 'ext' => 'jpg,png,gif'])
                         ->move($dir,'cover.jpg');
                 }
+
                 $this->success('添加成功','index','',1);
             }else{
                 $this->error('添加失败');
@@ -130,13 +131,14 @@ class Books extends BaseAdmin
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
                 }
-                $cover = $request->file('cover');
-                if ($cover) {
+                if (count($request->file()) > 0) {
+                    $cover = $request->file('cover');
                     $cover->validate(['size' => 2048000, 'ext' => 'jpg,png,gif'])
                         ->move($dir,'cover.jpg');
                     //清理浏览器缓存
                     header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
                     header("Cache-Control: no-cache, must-revalidate" );
+
                 }
                 $this->success('编辑成功',$returnUrl,'',1);
             }else{
