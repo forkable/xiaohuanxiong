@@ -29,7 +29,7 @@
                         {/if}
                         <div class="mh-item-detali">
                             <h2 class="title">
-                                <a href="/book/{$keyword.id}{$id_salt}" title="{$keyword.book_name}">{$keyword.book_name}</a>
+                                <a href="/book/{:encode($keyword.id.$id_salt)}" title="{$keyword.book_name}">{$keyword.book_name}</a>
                             </h2>
                             <p class="zl">
                                 <span>作者：</span>
@@ -40,7 +40,7 @@
                             <div class="bottom">
                                 <p class="chapter" style="width:181px;">
                                     <span>总计</span>
-                                    <a href="book/{$keyword.id}{$id_salt}" target="_blank">{$keyword.chapter_count}话</a>
+                                    <a href="book/{:encode($keyword.id.$id_salt)}" target="_blank">{$keyword.chapter_count}话</a>
                                 </p>
                                 <div class="desc"> {$keyword.summary|subtext=35}...</div>
 
@@ -51,7 +51,7 @@
                                 </p>
 
                                 <p>
-                                    <a class="btn" href="book/{$keyword.id}{$id_salt}" title="{$keyword.book_name}">查看详情</a>
+                                    <a class="btn" href="book/{:encode($keyword.id.$id_salt)}" title="{$keyword.book_name}">查看详情</a>
                                 </p>
                             </div>
                         </div>
@@ -59,13 +59,13 @@
                 </div>
                 {else /}
                 <div class="mh-itme-top">
-                    <a href="/book/{$keyword.id}{$id_salt}" onmouseover="pop(this)" onmouseout="hide(this)"
+                    <a href="/book/{:encode($keyword.id.$id_salt)}" onmouseover="pop(this)" onmouseout="hide(this)"
                        title="{$keyword.book_name}" style="width:100%; display: block;">
                         <span class="num num-{$i}">{$i}</span>{$keyword.book_name}
                     </a>
                     <div class="mh-tip-wrap" style="z-index: 10; display: none; opacity: 1; margin-left: 0px;">
                         <div class="mh-item-tip">
-                            <a href="/book/{$keyword.id}{$id_salt}" title="{$keyword.book_name}"
+                            <a href="/book/{:encode($keyword.id.$id_salt)}" title="{$keyword.book_name}"
                                style="height:auto;padding-left: 0;">
                                 {if empty($keyword.cover_url)}
                                 <p class="mh-cover tip"
@@ -76,7 +76,7 @@
                             </a>
                             <div class="mh-item-tip-detali">
                                 <h2 class="title">
-                                    <a href="/book/{$keyword.id}{$id_salt}" title="{$keyword.book_name}">{$keyword.book_name}</a>
+                                    <a href="/book/{:encode($keyword.id.$id_salt)}" title="{$keyword.book_name}">{$keyword.book_name}</a>
                                     <span class="mh-star star-4">
 
                                     </span>
@@ -89,11 +89,11 @@
                                 </p>
                                 <p class="chapter" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                                     <span>总计</span>
-                                    <a href="book/{$keyword.id}{$id_salt}" target="_blank">{$keyword.chapter_count}话 </a>
+                                    <a href="book/{:encode($keyword.id.$id_salt)}" target="_blank">{$keyword.chapter_count}话 </a>
                                 </p>
                                 <div class="desc"> {$keyword.summary|subtext=20}...</div>
                                 <p>
-                                    <a class="btn" href="/book/{$keyword.id}{$id_salt}" target="_blank">查看详情</a>
+                                    <a class="btn" href="/book/{:encode($keyword.id.$id_salt)}" target="_blank">查看详情</a>
                                 </p>
                             </div>
                         </div>

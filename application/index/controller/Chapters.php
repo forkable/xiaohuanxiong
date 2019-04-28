@@ -15,7 +15,8 @@ class Chapters extends Base
 {
     public function index()
     {
-        $id = str_replace($this->id_salt,'',input('id'));
+        $temp = decode(input('id')); //id解密
+        $id = str_replace($this->id_salt,'',$temp); //去除id盐
         $chapter = Chapter::with(['photos' => function ($query) {
             $query->order('order');
         }], 'book')->cache('chapter:' . $id,600,'redis')->find($id);

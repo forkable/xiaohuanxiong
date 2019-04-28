@@ -37,13 +37,13 @@
                             </a>
                             <div class="mh-item-detali">
                                 <h2 class="title">
-                                    <a href="/book/{$vo.id}{$id_salt}" title="{$vo.book_name}">
+                                    <a href="/book/{:encode($vo.id.$id_salt)}" title="{$vo.book_name}">
                                         {$vo.book_name}
                                     </a>
                                 </h2>
                                 <p class="zl"><span>评分:</span><span class="mh-star-line star-4"></span></p>
                                 <p class="chapter"><span>总计</span>
-                                    <a href="/book/{$vo.id}{$id_salt}">{$vo.chapter_count}话</a>
+                                    <a href="/book/{:encode($vo.id.$id_salt)}">{$vo.chapter_count}话</a>
                                 </p>
                             </div>
                         </div>

@@ -30,7 +30,7 @@
         {volist name="books" id="vo"}
         <li>
             <div class="manga-list-2-cover">
-                <a href="/book/{$vo.id}{$id_salt}">
+                <a href="/book/{:encode($vo.id.$id_salt)}">
                     {if empty($vo.cover_url)}
                     <img class="manga-list-2-cover-img lazy" data-original="{$img_site}/static/upload/book/{$vo.id}/cover.jpg" src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg">
                     {else /}
@@ -39,10 +39,10 @@
                 </a>
             </div>
             <p class="manga-list-2-title">
-                <a href="/book/{$vo.id}{$id_salt}">{$vo.book_name}</a>
+                <a href="/book/{:encode($vo.id.$id_salt)}">{$vo.book_name}</a>
             </p>
             <p class="manga-list-2-tip">
-                <a href="/book/{$vo.id}{$id_salt}">已更新 {$vo.chapter_count}话</a>
+                <a href="/book/{:encode($vo.id.$id_salt)}">已更新 {$vo.chapter_count}话</a>
             </p>
         </li>
         {/volist}

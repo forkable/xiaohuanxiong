@@ -22,7 +22,8 @@ class Books extends Base
 
     public function index(Request $request)
     {
-        $id = str_replace($this->id_salt,'',input('id'));
+        $temp = decode(input('id')); //id解密
+        $id = str_replace($this->id_salt,'',$temp); //去除id盐
         $book = cache('book:' . $id);
         $tags = cache('tags:book:' . $id );
         if ($book ==false) {

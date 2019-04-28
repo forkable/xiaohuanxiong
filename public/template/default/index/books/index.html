@@ -51,7 +51,7 @@
         </div>
         <ul class="detail-list-1 detail-list-select" id="detail-list-select">
             {volist name="book.chapters" id="vo"}
-            <li><a href="/chapter/{$vo.id}{$id_salt}" title="{$vo.chapter_name}" class="chapteritem">{$vo.chapter_name}</a></li>
+            <li><a href="/chapter/{:encode($vo.id.$id_salt)}" title="{$vo.chapter_name}" class="chapteritem">{$vo.chapter_name}</a></li>
             {/volist}
         </ul>
         <div class="detail-fix-bottom">
@@ -76,7 +76,7 @@
             {if $start == -1}
             <a href="#" class="detail-bottom-btn">暂无章节</a>
             {else /}
-            <a href="/chapter/{$start}{$id_salt}" class="detail-bottom-btn">开始阅读</a>
+            <a href="/chapter/{:encode($start.$id_salt)}" class="detail-bottom-btn">开始阅读</a>
             {/if}
         </div>
         <a class="detail-list-more" id="detail-list-more" href="javascript:void(0);" onclick="charpterMore(this);">展开全部章节</a>
