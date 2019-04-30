@@ -32,10 +32,10 @@
     <div id="content">
         <div class="fanye">
             {if $prev != "null"}
-            <a href="/chapter/{:encode($prev.id.$id_salt)}" class="block" title="{$prev.chapter_name}">上一章</a>
+            <a href="/chapter/{$prev.id}" class="block" title="{$prev.chapter_name}">上一章</a>
             {/if}
             {if $next != "null"}
-            <a href="/chapter/{:encode($next.id.$id_salt)}" class="block" title="{$next.chapter_name}">下一章</a>
+            <a href="/chapter/{$next.id}" class="block" title="{$next.chapter_name}">下一章</a>
             {/if}
         </div>
         <div class="comiclist">
@@ -55,10 +55,10 @@
         </div>
         <div class="fanye">
             {if $prev != "null"}
-            <a href="/chapter/{:encode($prev.id.$id_salt)}" class="block" title="{$prev.chapter_name}">上一章</a>
+            <a href="/chapter/{$prev.id}" class="block" title="{$prev.chapter_name}">上一章</a>
             {/if}
             {if $next != "null"}
-            <a href="/chapter/{:encode($next.id.$id_salt)}" class="block" title="{$next.chapter_name}">下一章</a>
+            <a href="/chapter/{$next.id}" class="block" title="{$next.chapter_name}">下一章</a>
             {/if}
         </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="row">
         <div class="crumbs">
             <a href="/" title="{$site_name}">{$site_name}</a> &gt;
-            <a class="comic-name" href="/book/{:encode($chapter.book_id.$id_salt)}" title="{$chapter.book.book_name}">{$chapter.book.book_name}</a>
+            <a class="comic-name" href="/book/{$chapter.book_id}" title="{$chapter.book.book_name}">{$chapter.book.book_name}</a>
         </div>
         <h1 class="title">{$chapter.book.book_name} {$chapter.chapter_name}<span>(<span class="showcurindex">46</span>/109)</span>
         </h1>
@@ -90,7 +90,7 @@
                 <ul>
                     {volist name="chapters" id="vo"}
                     <li>
-                        <a href="/chapter/{:encode($vo.id.$id_salt)}" rel="nofollow">
+                        <a href="/chapter/{$vo.id}" rel="nofollow">
                             {$vo.chapter_name}
                         </a>
                     </li>

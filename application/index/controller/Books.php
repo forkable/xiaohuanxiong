@@ -20,10 +20,8 @@ class Books extends Base
         $this->bookService = new \app\service\BookService();
     }
 
-    public function index(Request $request)
+    public function index($id)
     {
-        $temp = decode(input('id')); //id解密
-        $id = str_replace($this->id_salt,'',$temp); //去除id盐
         $book = cache('book:' . $id);
         $tags = cache('tags:book:' . $id );
         if ($book ==false) {
