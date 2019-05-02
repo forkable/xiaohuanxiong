@@ -51,7 +51,7 @@
         </div>
         <ul class="detail-list-1 detail-list-select" id="detail-list-select">
             {volist name="book.chapters" id="vo"}
-            <li><a href="/chapter/$vo.id" title="{$vo.chapter_name}" class="chapteritem">{$vo.chapter_name}</a></li>
+            <li><a href="/chapter/{$vo.id}" title="{$vo.chapter_name}" class="chapteritem">{$vo.chapter_name}</a></li>
             {/volist}
         </ul>
         <div class="detail-fix-bottom">
