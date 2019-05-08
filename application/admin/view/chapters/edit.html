@@ -1,4 +1,4 @@
-{extend name="pub/base" /}
+{extend name="pub/base2" /}
 {block name="title"}
 <title>章节修改</title>
 {/block}
@@ -7,7 +7,6 @@
 <article class="clearfix pd-20">
     <form action="{:url('update')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{$chapter.id}">
-        <input type="hidden" value="{$returnUrl}" name="returnUrl">
         <input type="hidden" value="{$chapter.book_id}" name="book_id">
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>章节名：</label>
@@ -32,7 +31,6 @@
 </article>
 
 <!--请在下方写此页面业务相关的脚本-->
-{include file="pub/validate_scripts" /}
 <script type="text/javascript">
     $(function(){
         $("form").validate({

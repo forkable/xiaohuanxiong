@@ -99,13 +99,11 @@ class Books extends BaseAdmin
 
     public function edit()
     {
-        $returnUrl = input('returnUrl');
         $areas = Area::all();
         $id = input('id');
         $book = Book::with('author')->find($id);
         $this->assign([
             'book' => $book,
-            'returnUrl' => $returnUrl,
             'areas' => $areas
         ]);
         return view();
@@ -113,7 +111,6 @@ class Books extends BaseAdmin
 
     public function update(Request $request){
         $data = $request->param();
-        $returnUrl = $data['returnUrl'];
         $validate = new \app\admin\validate\Book();
         if ($validate->check($data)){
             //作者处理
@@ -140,7 +137,7 @@ class Books extends BaseAdmin
                     header("Cache-Control: no-cache, must-revalidate" );
 
                 }
-                $this->success('编辑成功',$returnUrl,'',1);
+                $this->success('编辑成功');
             }else{
                 $this->error('编辑失败');
             }

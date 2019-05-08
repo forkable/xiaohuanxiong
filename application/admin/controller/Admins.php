@@ -44,16 +44,14 @@ class Admins extends BaseAdmin
             $admin->username = $data['username'];
             $admin->password = md5(strtolower(trim($data['password'])).config('site.salt'));
             $admin->save();
-            $this->success('新增管理员成功','index','',1);
+            $this->success('新增管理员成功');
         }
     }
 
     public function edit(){
-        $returnUrl = input('returnUrl');
         $admin = Admin::get(input('id'));
         $this->assign([
             'admin' => $admin,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
@@ -67,7 +65,7 @@ class Admins extends BaseAdmin
             $admin->password = md5(strtolower(trim($data['password'])).config('site.salt'));
         }
         $admin->isUpdate(true)->save();
-        $this->success('编辑成功',$data['returnUrl'],'',1);
+        $this->success('编辑成功');
     }
 
     public function delete($id){

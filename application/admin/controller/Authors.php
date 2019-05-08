@@ -54,27 +54,24 @@ class Authors extends BaseAdmin
         $author = new Author();
         $author->author_name = $author_name;
         $author->save();
-        $this->success('作者新增成功',url('authors/index'),'',1);
+        $this->success('作者新增成功');
     }
 
     public function edit($id)
     {
-        $returnUrl = input('returnUrl');
         $author = Author::get($id);
         $this->assign([
             'author' => $author,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $data = $request->param();
-        $returnUrl = $data['returnUrl'];
         $result = Author::update($data);
         if ($result){
-            $this->success('编辑成功',$returnUrl,'',1);
+            $this->success('编辑成功');
         }else{
             $this->error('编辑失败');
         }

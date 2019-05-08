@@ -42,7 +42,7 @@ class Photos extends BaseAdmin
             'book_id'=>$book_id,
             'book_name'=>$book->book_name,
             'chapter_name'=>$chapter->chapter_name,
-            'count' => $data->count()
+            'count' => $data->count(),
         ]);
         return view();
     }
@@ -102,15 +102,17 @@ class Photos extends BaseAdmin
             $photo = new Photo();
             $result = $photo->isUpdate(true)->save($data);
             if ($result){
-                $file = $request->file('image');
-                $dir = App::getRootPath() . 'public/static/upload/book/'.$data['book_id'].'/'.$data['chapter_id'];
-                if (!file_exists($dir)){
-                    mkdir($dir,0777,true);
+                if (count($request->file()) > 0){
+                    $file = $request->file('image');
+                    $dir = App::getRootPath() . 'public/static/upload/book/'.$data['book_id'].'/'.$data['chapter_id'];
+                    if (!file_exists($dir)){
+                        mkdir($dir,0777,true);
+                    }
+                    if ($file){
+                        $file->validate(['size'=>2048000,'ext'=>'jpg,png,gif'])->move($dir,$photo->id.'.jpg');
+                    }
                 }
-                if ($file){
-                    $file->validate(['size'=>2048000,'ext'=>'jpg,png,gif'])->move($dir,$photo->id.'.jpg');
-                }
-                $this->success('编辑成功',$data['returnUrl'],'',1);
+                $this->success('编辑成功');
             }else{
                 $this->error('编辑失败');
             }
@@ -118,7 +120,6 @@ class Photos extends BaseAdmin
         $book_id = input('book_id');
         $chapter_id = input('chapter_id');
         $id = input('id');
-        $returnUrl = input('returnUrl');
         $photo = Photo::get($id);
         if (!$photo){
             $this->error('图片不存在');
@@ -128,7 +129,6 @@ class Photos extends BaseAdmin
             'book_id' => $book_id,
             'chapter_id' => $chapter_id,
             'order' => $photo->order,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }

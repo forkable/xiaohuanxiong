@@ -1,5 +1,4 @@
 <script>
-    /*资讯-删除*/
     function del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
             $.ajax({
@@ -24,6 +23,18 @@
                 },
             });
         });
+    }
+    
+    function editCreate(title,url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url,
+            cancel: function(){
+                window.location.reload();
+            }
+        });
+        layer.full(index);
     }
 
     function member_stop(id) {

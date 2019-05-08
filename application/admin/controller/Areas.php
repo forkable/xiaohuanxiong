@@ -35,22 +35,19 @@ class Areas extends BaseAdmin
         $area = new Area();
         $area->area_name = $aname;
         $area->save();
-        $this->success('添加成功','index','',1);
+        $this->success('添加成功');
     }
 
     public function edit(){
-        $returnUrl = input('returnUrl');
         $id = input('id');
         $area = Area::get($id);
         $this->assign([
             'area' => $area,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
 
     public function update(){
-        $returnUrl = input('returnUrl');
         $aname = trim(input('area_name')) ;
         $area = Area::where('area_name','=',$aname)->find();
         if ($area){
@@ -61,7 +58,7 @@ class Areas extends BaseAdmin
         $area->area_name = $aname;
         $area->isUpdate(true)->save();
 
-        $this->success('编辑成功',$returnUrl,'',1);
+        $this->success('编辑成功');
     }
 
     public function delete($id)

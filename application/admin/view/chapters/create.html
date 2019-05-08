@@ -1,4 +1,4 @@
-{extend name="pub/base" /}
+{extend name="pub/base2" /}
 {block name="title"}
 <title>添加章节</title>
 {/block}
@@ -7,7 +7,6 @@
 <article class="clearfix pd-20">
     <form class="form form-horizontal" action="{:url('save')}" method="post" enctype="multipart/form-data">
         <input type="hidden" value="{$book_id}" name="book_id">
-        <input type="hidden" value="{$returnUrl}" name="returnUrl">
 
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">章节名：</label>
@@ -31,7 +30,6 @@
     </form>
 </article>
 <!--请在下方写此页面业务相关的脚本-->
-{include file="pub/validate_scripts" /}
 <script type="text/javascript">
     $(function () {
         $("form").validate({

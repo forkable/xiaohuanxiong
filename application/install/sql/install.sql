@@ -50,7 +50,7 @@ CREATE TABLE `xwx_author` (
 DROP TABLE IF EXISTS `xwx_banner`;
 CREATE TABLE `xwx_banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pic_name` varchar(50) NOT NULL,
+  `pic_name` varchar(50) DEFAULT '',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `book_id` int(11) NOT NULL,

@@ -33,8 +33,8 @@ class Banners extends BaseAdmin
         $data = $request->param();
         $validate = new \app\admin\validate\Banner();
         if ($validate->check($data)) {
-            $pic = $request->file('pic_name');
-            if ($pic) {
+            if (count($request->file()) > 0){
+                $pic = $request->file('pic_name');
                 $dir = App::getRootPath() . '/public/static/upload/banner/';
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
@@ -43,13 +43,10 @@ class Banners extends BaseAdmin
                 if ($info){
                     $data['pic_name'] = $info->getSaveName();
                 }
-            }
-            $result = BannerModel::create($data);
-            if ($result) {
-
-                $this->success('添加成功','index','',1);
+                BannerModel::create($data);
+                $this->success('添加成功');
             }else{
-                $this->error('添加失败');
+                $this->error('未上传图片');
             }
         }else{
             $this->error($validate->getError());
@@ -58,22 +55,19 @@ class Banners extends BaseAdmin
 
     public function edit(){
         $id = input('id');
-        $returnUrl = input('returnUrl');
         $banner = BannerModel::get($id);
         $this->assign([
             'banner' => $banner,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
 
     public function update(Request $request){
         $data = $request->param();
-        $returnUrl = $data['returnUrl'];
         $validate = new \app\admin\validate\Banner();
         if ($validate->check($data)) {
-            $pic = $request->file('pic_name');
-            if ($pic) {
+            if (count($request->file()) > 0){
+                $pic = $request->file('pic_name');
                 $dir = App::getRootPath() . '/public/static/upload/banner/';
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
@@ -83,10 +77,11 @@ class Banners extends BaseAdmin
                     $data['pic_name'] = $info->getSaveName();
                 }
             }
+
             $result = BannerModel::update($data);
             if ($result) {
 
-                $this->success('编辑成功',$returnUrl,'',1);
+                $this->success('编辑成功');
             }else{
                 $this->error('编辑失败');
             }

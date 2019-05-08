@@ -36,15 +36,13 @@ class Friendshiplinks extends BaseAdmin
         $data = $request->param();
         $link = new FriendshipLink();
         $link->save($data);
-        $this->success('新增友链成功','index','',1);
+        $this->success('新增友链成功');
     }
 
     public function edit(){
-        $returnUrl = input('returnUrl');
         $link = FriendshipLink::get(input('id'));
         $this->assign([
             'link' => $link,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
@@ -53,7 +51,7 @@ class Friendshiplinks extends BaseAdmin
         $data = $request->param();
         $link = new FriendshipLink();
         $link->isUpdate(true)->save($data);
-        $this->success('编辑成功',$data['returnUrl'],'',1);
+        $this->success('编辑成功');
     }
 
     public function delete($id){

@@ -1,3 +1,4 @@
+<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -13,25 +14,17 @@
     <link rel="stylesheet" type="text/css" href="/static/admin/lib/Hui-iconfont/1.0.9/iconfont.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/admin/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="/static/admin/css/style.css" />
-    <title>小涴熊漫画CMS</title>
-    <meta name="description" content="小涴熊漫画CMS是一款适合国人使用的漫画连载系统。">
+    {block name="title"}{/block}
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-{include file="pub/menu" /}
-<div class="Hui-admin-dislpayArrow">
-    <a href="javascript:void(0);" onClick="displaynavbar(this)">
-        <i class="Hui-iconfont Hui-iconfont-left">&#xe6d4;</i>
-        <i class="Hui-iconfont Hui-iconfont-right">&#xe6d7;</i>
-    </a>
-</div>
-<section class="Hui-admin-article-wrapper">
-{include file="pub/head" /}
 {block name="body"}{/block}
-</section>
 <script type="text/javascript" src="/static/admin/lib/layer/3.1.1/layer.js"></script>
 <script type="text/javascript" src="/static/admin/js/H-ui.min.js"></script>
 <script type="text/javascript" src="/static/admin/js/h-ui.admin.pro.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/additional-methods.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/localization/messages_zh.min.js"></script>
 {include file="pub/index_scripts" /}
 </body>
 </html>

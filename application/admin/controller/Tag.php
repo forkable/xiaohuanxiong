@@ -42,41 +42,44 @@ class Tag extends BaseAdmin
         }
         $tag->tag_name = $request->param('tag_name');
         $tag->save();
-        $cover = $request->file('cover');
-        if ($cover) {
-            $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif'])
-                ->move($dir,$tag->id . '.jpg');
+        if (count($request->file()) > 0){
+            $cover = $request->file('cover');
+            if ($cover) {
+                $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif'])
+                    ->move($dir,$tag->id . '.jpg');
+            }
         }
 
-        $this->success('添加成功','index','',1);
+
+        $this->success('添加成功');
     }
 
     public function edit(){
-        $returnUrl = input('returnUrl');
         $id = input('id');
         $tag = Tags::get($id);
         $this->assign([
             'tag' => $tag,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
 
     public function update(Request $request){
         $data = $request->param();
-        $returnUrl = $data['returnUrl'];
         $tag = new Tags();
         $tag->isUpdate()->save($data);
         $dir = App::getRootPath().'/public/static/upload/tags';
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
-        $cover = $request->file('cover');
-        if ($cover) {
-            $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif'])
-                ->move($dir,$tag->id . '.jpg');
+        if (count($request->file()) > 0){
+            $cover = $request->file('cover');
+            if ($cover) {
+                $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif'])
+                    ->move($dir,$tag->id . '.jpg');
+            }
         }
-        $this->success('编辑成功',$returnUrl,'',1);
+
+        $this->success('编辑成功');
     }
 
     public function delete($id)

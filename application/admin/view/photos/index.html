@@ -1,4 +1,4 @@
-{extend name="pub/base" /}
+{extend name="pub/base2" /}
 {block name="title"}
 <title>图片管理</title>
 {/block}
@@ -7,7 +7,7 @@
 <section class="Hui-admin-article">
     <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px"><i class="Hui-iconfont">&#xe67f;</i> 首页
         <span class="c-gray en">&gt;</span>
-        图片管理
+        章节管理
         <span class="c-gray en">&gt;</span>
         图片列表
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
@@ -61,7 +61,7 @@
                             <td>{$vo.create_time|date='Y-m-d'}</td>
                             <td>{$vo.update_time|date='Y-m-d'}</td>
                             <td class="f-14 td-manage">
-                                <a style="text-decoration:none" class="ml-5" href="/admin/photos/edit?id={$vo.id}&book_id={$book_id}&chapter_id={$chapter_id}&returnUrl={$returnUrl}">
+                                <a style="text-decoration:none" class="ml-5" onClick="editCreate('图片编辑','/admin/photos/edit?id={$vo.id}&book_id={$book_id}&chapter_id={$chapter_id}')">
                                     <i class="Hui-iconfont">&#xe6df;</i>
                                 </a>
                                 <a style="text-decoration:none" class="ml-5" onclick="del(this,{$vo.id})" href="javascript:;" title="删除">

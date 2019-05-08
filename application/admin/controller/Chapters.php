@@ -21,7 +21,7 @@ class Chapters extends BaseAdmin
 
     public function index($book_id)
     {
-        $book = Book::get($book_id);
+        $book = Book::get(input('book_id'));
         $data = $this->chapterService->getChapters([
             ['book_id','=',$book_id]
         ]);
@@ -34,7 +34,6 @@ class Chapters extends BaseAdmin
     }
 
     public function create(){
-        $returnUrl = input('returnUrl');
         $book_id = input('book_id');
         $lastChapterOrder = 0;
         $lastChapter = $this->chapterService->getLastChapter($book_id);
@@ -44,7 +43,6 @@ class Chapters extends BaseAdmin
         $this->assign([
             'book_id' => $book_id,
             'order' => $lastChapterOrder + 1,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
@@ -60,7 +58,7 @@ class Chapters extends BaseAdmin
                     "last_time" => time()
                 ];
                 Book::update($param);
-                $this->success('添加成功',$data['returnUrl'],'',1);
+                $this->success('添加成功');
             }else{
                 $this->error('新增失败');
             }
@@ -72,7 +70,6 @@ class Chapters extends BaseAdmin
 
     public function edit($id)
     {
-        $returnUrl = input('returnUrl');
         $id = input('id');
         $chapter = Chapter::get($id);
         if (!$chapter){
@@ -80,7 +77,6 @@ class Chapters extends BaseAdmin
         }
         $this->assign([
             'chapter' => $chapter,
-            'returnUrl' => $returnUrl
         ]);
         return view();
     }
@@ -92,7 +88,7 @@ class Chapters extends BaseAdmin
             $chapter = Chapter::get($data['id']);
             if ($chapter) {
                 $chapter->isUpdate(true)->save($data);
-                $this->success('编辑成功', $data['returnUrl'], '', 1);
+                $this->success('编辑成功');
             } else {
                 $this->error('章节不存在');
             }
