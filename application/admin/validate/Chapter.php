@@ -22,7 +22,7 @@ class Chapter extends Validate
     protected $rule = [
         'chapter_name' => 'require',
         'book_id' => 'require',
-        'order' => 'require'
+        'chapter_order' => 'require'
     ];
 
     /**
@@ -34,6 +34,6 @@ class Chapter extends Validate
     protected $message = [
         'chapter_name' => '名称必须',
         'book_id' => 'book_id必须',
-        'order' => '章节order必须'
+        'chapter_order' => '章节order必须'
     ];
 }

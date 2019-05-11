@@ -29,7 +29,7 @@ class Photos extends BaseAdmin
         $book_id = input('book_id');
         $book = Book::get($book_id);
         $data = Photo::where('chapter_id','=',$chapter_id);
-        $photos = $data->order('order','desc')
+        $photos = $data->order('pic_order','desc')
             ->paginate(5,false,
                 [
                     'query' => request()->param(),
@@ -72,13 +72,13 @@ class Photos extends BaseAdmin
         $lastPhoto = $this->photoService->getLastPhoto($chapter_id);
         $order = 1;
         if ($lastPhoto) {
-            $order = $lastPhoto->order + 1; //拿到最新图片的order，加1
+            $order = $lastPhoto->pic_order + 1; //拿到最新图片的order，加1
         }
         $files = $request->file('image');
         foreach($files as $file){
             $photo = new Photo();
             $photo->chapter_id = $chapter_id;
-            $photo->order = $order;
+            $photo->pic_order = $order;
             $result = $photo->save();
             if ($result){
                 $dir = App::getRootPath() . 'public/static/upload/book/'.$book_id.'/'.$chapter_id;
@@ -128,7 +128,7 @@ class Photos extends BaseAdmin
             'id' => $id,
             'book_id' => $book_id,
             'chapter_id' => $chapter_id,
-            'order' => $photo->order,
+            'order' => $photo->pic_order,
         ]);
         return view();
     }

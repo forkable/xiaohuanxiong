@@ -135,15 +135,15 @@ class Index extends Controller
             self::make_database($data);
 
             if ($cover) { //如果选择覆盖数据库
-//                $check = $db_connect->execute('SELECT * FROM information_schema.schemata WHERE schema_name="' . $database . '"');
-//                if ($check) {
-//                    $this->success('该数据库已存在，可直接覆盖安装。', '');
-//                } else {
-//                    // 创建数据库
-//                    if (!$db_connect->execute("CREATE DATABASE IF NOT EXISTS `{$database}` DEFAULT CHARACTER SET utf8")) {
-//                        return $this->error($db_connect->getError());
-//                    }
-//                }
+               $check = $db_connect->execute('SELECT * FROM information_schema.schemata WHERE schema_name="' . $database . '"');
+               if ($check) {
+                   $this->success('该数据库已存在，可直接覆盖安装。', '');
+               } else {
+                   // 创建数据库
+                   if (!$db_connect->execute("CREATE DATABASE IF NOT EXISTS `{$database}` DEFAULT CHARACTER SET utf8")) {
+                       return $this->error($db_connect->getError());
+                   }
+               }
 
                 // 导入系统初始数据库结构
                 // 导入SQL

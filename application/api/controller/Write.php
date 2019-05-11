@@ -61,9 +61,9 @@ class Write extends Controller
                 $lastChapterOrder = 0;
                 $lastChapter = $this->chapterService->getLastChapter($book->id);
                 if ($lastChapter){
-                    $lastChapterOrder = $lastChapter->order;
+                    $lastChapterOrder = $lastChapter->chapter_order;
                 }
-                $chapter->order = $lastChapterOrder + 1;
+                $chapter->chapter_order = $lastChapterOrder + 1;
                 $chapter->save();
             }
             $preg = '/\bsrc\b\s*=\s*[\'\"]?([^\'\"]*)[\'\"]?/i';
@@ -74,9 +74,9 @@ class Write extends Controller
                 $lastOrder = 0;
                 $lastPhoto = $this->photoService->getLastPhoto($chapter->id);
                 if ($lastPhoto){
-                    $lastOrder = $lastPhoto->order;
+                    $lastOrder = $lastPhoto->pic_order;
                 }
-                $photo->order = $lastOrder + 1;
+                $photo->pic_order = $lastOrder + 1;
                 $photo->img_url = $img_url;
                 $photo->save();
             }

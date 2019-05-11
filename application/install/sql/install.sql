@@ -22,8 +22,9 @@ CREATE TABLE `xwx_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` char(32) NOT NULL,
   `nick_name` varchar(100) DEFAULT '',
-  `mobile` char(11) DEFAULT '',
+  `mobile` char(11) DEFAULT '' COMMENT '会员手机号',
   `password` char(32) NOT NULL,
+  `level` int default '0' COMMENT '为普通会员，1为vip会员',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `delete_time` int(11) DEFAULT '0',
@@ -50,11 +51,11 @@ CREATE TABLE `xwx_author` (
 DROP TABLE IF EXISTS `xwx_banner`;
 CREATE TABLE `xwx_banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pic_name` varchar(50) DEFAULT '',
+  `pic_name` varchar(50) DEFAULT '' COMMENT '轮播图完整路径名',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  `book_id` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
+  `book_id` int(11) NOT NULL COMMENT '所属漫画ID',
+  `title` varchar(50) NOT NULL COMMENT '轮播图标题',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
@@ -64,19 +65,19 @@ CREATE TABLE `xwx_banner` (
 DROP TABLE IF EXISTS `xwx_book`;
 CREATE TABLE `xwx_book` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `book_name` varchar(50) NOT NULL,
-  `nick_name` varchar(100),
+  `book_name` varchar(50) NOT NULL COMMENT '漫画名',
+  `nick_name` varchar(100) COMMENT '别名',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  `last_time` int(11) DEFAULT '0',
-  `tags` varchar(100) DEFAULT '',
-  `summary` text,
-  `end` tinyint(4) DEFAULT '0',
-  `author_id` int(11) NOT NULL,
-  `cover_url` varchar(255) DEFAULT '',
+  `last_time` int(11) DEFAULT '0' COMMENT '最后更新时间',
+  `tags` varchar(100) DEFAULT '' COMMENT '分类',
+  `summary` text COMMENT '简介',
+  `end` tinyint(4) DEFAULT '0', COMMENT '0为连载，1为完结',
+  `author_id` int(11) NOT NULL COMMENT '作者ID',
+  `cover_url` varchar(255) DEFAULT '' COMMENT '封面图路径',
   `start_pay` int(10) NOT NULL DEFAULT '99999' COMMENT '第m话开始需要付费',
-  `money` decimal(10,2) DEFAULT '0',
-  `area_id` int(11) NOT NULL,
+  `money` decimal(10,2) DEFAULT '0' COMMENT '每章所需费用',
+  `area_id` int(11) NOT NULL COMMENT '漫画所属地区',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `tags` (`tags`) USING BTREE,
   KEY `end` (`end`) USING BTREE,
@@ -90,15 +91,15 @@ CREATE TABLE `xwx_book` (
 DROP TABLE IF EXISTS `xwx_chapter`;
 CREATE TABLE `xwx_chapter` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `chapter_name` varchar(255) NOT NULL,
+  `chapter_name` varchar(255) NOT NULL COMMENT '章节名称',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  `book_id` int(10) unsigned NOT NULL,
-  `order` decimal(10,2) NOT NULL,
+  `book_id` int(10) unsigned NOT NULL COMMENT '章节所属漫画ID',
+  `chapter_order` decimal(10,2) NOT NULL '章节序',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `chapter_name` (`chapter_name`) USING BTREE,
   KEY `book_id` (`book_id`) USING BTREE,
-  KEY `order` (`order`) USING BTREE
+  KEY `chapter_order` (`chapter_order`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -110,11 +111,11 @@ CREATE TABLE `xwx_photo` (
   `chapter_id` int(11) NOT NULL,
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
-  `order` decimal(10,2) NOT NULL,
-  `img_url` varchar(255) DEFAULT '',
+  `pic_order` decimal(10,2) NOT NULL COMMENT '图片序',
+  `img_url` varchar(255) DEFAULT '' COMMENT '图片路径',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `chapter_id` (`chapter_id`) USING BTREE,
-  KEY `order` (`order`) USING BTREE
+  KEY `pic_order` (`pic_order`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -123,7 +124,7 @@ CREATE TABLE `xwx_photo` (
 DROP TABLE IF EXISTS `xwx_tags`;
 CREATE TABLE `xwx_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tag_name` varchar(20) NOT NULL,
+  `tag_name` varchar(20) NOT NULL COMMENT '分类名',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
@@ -136,8 +137,8 @@ CREATE TABLE `xwx_tags` (
 DROP TABLE IF EXISTS `xwx_friendship_link`;
 CREATE TABLE `xwx_friendship_link` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `url` varchar(255) NOT NULL,
+  `name` varchar(100) NOT NULL COMMENT '友链名',
+  `url` varchar(255) NOT NULL COMMENT '友链地址',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -149,7 +150,7 @@ CREATE TABLE `xwx_friendship_link` (
 DROP TABLE IF EXISTS `xwx_area`;
 CREATE TABLE `xwx_area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_name` varchar(32) NOT NULL,
+  `area_name` varchar(32) NOT NULL COMMENT '地区名',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -162,7 +163,7 @@ CREATE TABLE `xwx_area` (
 DROP TABLE IF EXISTS `xwx_user_book`;
 CREATE TABLE `xwx_user_book` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `book_id` int(10) unsigned NOT NULL,
+  `book_id` int(10) unsigned NOT NULL '用户收藏的漫画ID',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',

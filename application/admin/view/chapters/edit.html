@@ -18,7 +18,7 @@
         <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">章节序</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="{$chapter.order}" name="order">
+                <input type="text" class="input-text" value="{$chapter.chapter_order}" name="chapter_order">
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                     minlength:1,
                     maxlength:50
                 },
-                order:{
+                chapter_order:{
                     required:true,
                     number: true
                 }

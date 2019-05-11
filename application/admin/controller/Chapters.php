@@ -3,7 +3,6 @@
 namespace app\admin\controller;
 
 use app\model\Book;
-use think\Controller;
 use think\Request;
 use app\model\Chapter;
 
@@ -38,7 +37,7 @@ class Chapters extends BaseAdmin
         $lastChapterOrder = 0;
         $lastChapter = $this->chapterService->getLastChapter($book_id);
         if ($lastChapter){
-            $lastChapterOrder = $lastChapter->order;
+            $lastChapterOrder = $lastChapter->chapter_order;
         }
         $this->assign([
             'book_id' => $book_id,
