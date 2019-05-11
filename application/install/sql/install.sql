@@ -28,10 +28,39 @@ CREATE TABLE `xwx_user` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `delete_time` int(11) DEFAULT '0',
+  `vip_expire_time` int(11) DEFAULT '0' COMMENT '会员到期时间',
   PRIMARY KEY (`id`) USING BTREE,
   unique key `username` (`username`) ,
   key `mobile` (`mobile`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Table structure for xhx_user_finance
+-- ----------------------------
+DROP TABLE IF EXISTS `xhx_user_finance`;
+CREATE TABLE `xhx_user_finance`  (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL DEFAULT 0,
+  `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '充值/消费金额',
+  `usage` tinyint(4) NOT NULL COMMENT '用途，1.充值，2.购买vip，3.购买章节',
+  `summary` text COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE,
+  key `user_id` (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for xhx_user_buy
+-- ----------------------------
+DROP TABLE IF EXISTS `xhx_user_buy`;
+CREATE TABLE `xhx_user_buy`  (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '购买用户ID',
+  `chapter_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '购买漫画ID',
+  `book_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '购买章节ID',
+  `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '消费金额',
+  `summary` text COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for author
@@ -72,7 +101,7 @@ CREATE TABLE `xwx_book` (
   `last_time` int(11) DEFAULT '0' COMMENT '最后更新时间',
   `tags` varchar(100) DEFAULT '' COMMENT '分类',
   `summary` text COMMENT '简介',
-  `end` tinyint(4) DEFAULT '0', COMMENT '0为连载，1为完结',
+  `end` tinyint(4) DEFAULT '0' COMMENT '0为连载，1为完结',
   `author_id` int(11) NOT NULL COMMENT '作者ID',
   `cover_url` varchar(255) DEFAULT '' COMMENT '封面图路径',
   `start_pay` int(10) NOT NULL DEFAULT '99999' COMMENT '第m话开始需要付费',
@@ -95,7 +124,7 @@ CREATE TABLE `xwx_chapter` (
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `book_id` int(10) unsigned NOT NULL COMMENT '章节所属漫画ID',
-  `chapter_order` decimal(10,2) NOT NULL '章节序',
+  `chapter_order` decimal(10,2) NOT NULL COMMENT '章节序',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `chapter_name` (`chapter_name`) USING BTREE,
   KEY `book_id` (`book_id`) USING BTREE,
@@ -163,7 +192,7 @@ CREATE TABLE `xwx_area` (
 DROP TABLE IF EXISTS `xwx_user_book`;
 CREATE TABLE `xwx_user_book` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `book_id` int(10) unsigned NOT NULL '用户收藏的漫画ID',
+  `book_id` int(10) unsigned NOT NULL COMMENT '用户收藏的漫画ID',
   `create_time` int(11) DEFAULT '0',
   `update_time` int(11) DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
