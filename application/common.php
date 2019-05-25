@@ -223,3 +223,9 @@ function verifycode($code,$phone){
     }
     return 1;
 }
+
+function jsonFormatProtect(&$val){
+    if($val!==true && $val!==false && $val!==null){
+        $val = urlencode($val);
+    }
+}

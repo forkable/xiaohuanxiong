@@ -442,6 +442,7 @@ img.normal-top-right-avatar{height: 25px;vertical-align: top;margin-top: 11px;ma
 .detail-list-2-info-title{font-size: 14px;color: #252525;letter-spacing: 0;padding-top: 22px;font-weight: bold;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-right: 30px;}
 .detail-list-2-info-subtitle{font-size: 12px;color: #999999;letter-spacing: 0;line-height: 16px;margin-top: 4px;}
 .detail-list-2-info-right{position: absolute;right: 10px;top: 34px;height: 18px;}
+.detail-list-3-info-right{position: absolute;right: 10px;top: 15px;height: 18px;}
 
 .win-pay{position: absolute;bottom: 90px;left: 5%;width: 90%;background-color: #fff;}
 .win-pay2{position: fixed;top: 50%;left: 10%;margin-top: -140px;width: 80%;background-color: #fff;z-index:1000;}

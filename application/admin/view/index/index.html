@@ -8,7 +8,8 @@
         首页
         <span class="c-gray en">/</span>
         站点配置
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+           href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
     <div class="Hui-article">
         <article class="clearfix pd-20">
@@ -65,14 +66,16 @@
                 <div class="row clearfix">
                     <label class="form-label col-xs-4 col-sm-3">redis密码：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                        <input type="text" class="input-text" value="{$redis_auth}" name="redis_auth" placeholder="不设置密码请留空">
+                        <input type="text" class="input-text" value="{$redis_auth}" name="redis_auth"
+                               placeholder="不设置密码请留空">
                     </div>
                 </div>
 
                 <div class="row clearfix">
                     <label class="form-label col-xs-4 col-sm-3">redis前缀：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                        <input type="text" readonly="readonly" class="input-text" value="{$redis_prefix}" name="redis_prefix">
+                        <input type="text" readonly="readonly" class="input-text" value="{$redis_prefix}"
+                               name="redis_prefix">
                     </div>
                 </div>
 
@@ -81,6 +84,18 @@
                     <div class="formControls col-xs-8 col-sm-9">
                         <input type="text" class="input-text" value="{$front_tpl}" name="front_tpl">
                     </div>
+                </div>
+
+                <div class="row clearfix">
+                    <label class="form-label col-xs-4 col-sm-3">支付方式：</label>
+                    <span class="select-box" style="width:150px;">
+                        <select class="select" name="payment" size="1">
+                            <option value="zhapay">幻兮支付</option>
+                            <option value="xunhupay">虎皮椒</option>
+                            <option value="alipay">支付宝当面付</option>
+                        </select>
+				    </span>
+
                 </div>
 
                 <div class="row clearfix">

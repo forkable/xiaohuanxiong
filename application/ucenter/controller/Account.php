@@ -62,6 +62,7 @@ class Account extends Controller
                 session('xwx_user_id',$user->id);
                 session('xwx_nick_name',$user->nick_name);
                 session('xwx_user_mobile',$user->mobile);
+                session('xwx_user_level',$user->level);
                 return ['err' => 0, 'msg' => '登录成功'];
             }
         }else{

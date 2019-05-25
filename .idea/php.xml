@@ -6,6 +6,10 @@
       <path value="$PROJECT_DIR$/vendor/topthink/think-installer" />
       <path value="$PROJECT_DIR$/vendor/topthink/think-image" />
       <path value="$PROJECT_DIR$/vendor/topthink/think-captcha" />
+      <path value="$PROJECT_DIR$/xiaohuanxiong/vendor/topthink/think-image" />
+      <path value="$PROJECT_DIR$/xiaohuanxiong/vendor/topthink/think-captcha" />
+      <path value="$PROJECT_DIR$/xiaohuanxiong/vendor/topthink/think-installer" />
+      <path value="$PROJECT_DIR$/xiaohuanxiong/vendor/composer" />
     </include_path>
   </component>
 </project>

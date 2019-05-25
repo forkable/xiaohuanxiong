@@ -18,7 +18,6 @@ class BaseUcenter extends Controller
 {
     protected $tpl;
     protected $uid;
-    protected $user;
     protected $redis_prefix;
 
     public function __construct(App $app = null)
@@ -38,13 +37,11 @@ class BaseUcenter extends Controller
             $this->tpl = $tpl_root.$controller.'/'.'pc_'.$action.'.html';
         }
 
-        $this->user = \app\model\User::get($this->uid);
 
         View::share([
             'url' => config('site.url'),
             'site_name' => config('site.site_name'),
-            'img_site' => config('site.img_site'),
-            'user' => $this->user
+            'img_site' => config('site.img_site')
         ]);
     }
 }

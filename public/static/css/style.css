@@ -3596,6 +3596,10 @@ hr {
     background-color: #e90930
 }
 
+.wallet-btn {
+    line-height: 34px;
+}
+
 .text-center {
     text-align: center
 }
@@ -9846,12 +9850,9 @@ body {
     text-align: center;
     white-space: nowrap;
 }
-
 .view-comment-main .info #sendbutton{ margin-top:10px; padding:0; border:0; margin-left:5px; cursor:pointer;height:40px; line-height:40px;}
 .view-comment-main h2{ color:#252525; padding-left:10px;}
-
 #formpl2 .clearfix{ text-align:right;}
-
 .huifu{color: #999; margin-left:10px;}
-
 .v_iWatched {    width: 40px;    height: 18px;    overflow: hidden;    position: absolute;    top: -8px;    margin-left: -20px;    left: 50%;    z-index: 10; background: url(./static/images/v_map.png) 0 0 no-repeat;}
+.detail-list-3-info-right{position: absolute;right: 10px;top: 10px;height: 18px;}

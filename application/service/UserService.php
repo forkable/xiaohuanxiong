@@ -19,8 +19,7 @@ class UserService extends Controller
             $type = 'util\MPage';
         }
         $user = User::get($uid);
-        $books = $user->books()
-            ->paginate(10,false,
+        $books = $user->books()->paginate(10,false,
                 [
                     'query' => request()->param(),
                     'type'     => $type,

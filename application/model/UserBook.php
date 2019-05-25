@@ -8,8 +8,6 @@
 
 namespace app\model;
 
-
-use think\Model;
 use think\model\Pivot;
 class UserBook extends Pivot
 {

@@ -10,16 +10,19 @@ namespace app\ucenter\controller;
 
 use app\model\Comments;
 use app\model\User;
+use app\service\FinanceService;
 use app\service\UserService;
 use think\facade\App;
 use think\facade\Validate;
 class Users extends BaseUcenter
 {
     protected $userService;
+    protected $financeService;
 
     protected function initialize()
     {
         $this->userService = new UserService();
+        $this->financeService = new FinanceService();
     }
 
     public function bookshelf(){
@@ -66,7 +69,13 @@ class Users extends BaseUcenter
     }
 
     public function ucenter(){
+        $balance = cache('balance:' . $this->uid); //当前用户余额
+        if (!$balance) {
+            $balance = $this->financeService->getBalance();
+            cache('balance:' . $this->uid, $balance, '', 'pay');
+        }
         $this->assign([
+            'balance' => $balance,
             'header_title' => '个人中心'
         ]);
         return view($this->tpl);

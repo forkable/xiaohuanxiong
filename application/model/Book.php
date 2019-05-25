@@ -41,6 +41,10 @@ class Book extends Model
         return $this->hasMany('chapter');
     }
 
+    public function users(){
+        return $this->belongsToMany('User');
+    }
+
     public function setBookNameAttr($value){
         return trim($value);
     }

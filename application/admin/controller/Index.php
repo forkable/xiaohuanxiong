@@ -24,6 +24,7 @@ class Index extends BaseAdmin
         $redis_auth = config('cache.password');
         $redis_prefix= config('cache.prefix');
         $front_tpl = config('site.tpl');
+        $payment = config('site.payment');
         $this->assign([
             'site_name' => $site_name,
             'url' => $url,
@@ -34,7 +35,8 @@ class Index extends BaseAdmin
             'redis_port' => $redis_port,
             'redis_auth' => $redis_auth,
             'redis_prefix' => $redis_prefix,
-            'front_tpl' => $front_tpl
+            'front_tpl' => $front_tpl,
+            'payment' => $payment
         ]);
         return view();
     }
@@ -51,6 +53,7 @@ class Index extends BaseAdmin
         $redis_auth = input('redis_auth');
         $redis_prefix = input('redis_prefix');
         $front_tpl = input('front_tpl');
+        $payment = input('payment');
         $site_code = <<<INFO
         <?php
         return [
@@ -59,7 +62,8 @@ class Index extends BaseAdmin
             'site_name' => '{$site_name}',
             'salt' => '{$salt}',
             'api_key' => '{$api_key}', 
-            'tpl' => '{$front_tpl}'         
+            'tpl' => '{$front_tpl}',
+            'payment' => '{$payment}'         
         ];
 INFO;
         file_put_contents(App::getRootPath() . 'config/site.php', $site_code);
@@ -87,6 +91,7 @@ INFO;
     public function clearCache()
     {
         Cache::clear('redis');
+        Cache::clear('pay');
         $rootPath = App::getRootPath();
         delete_dir_file($rootPath . '/runtime/cache/') && delete_dir_file($rootPath . '/runtime/temp/');
         $this->success('清理缓存', 'index', '', 1);

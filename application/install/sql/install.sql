@@ -35,30 +35,53 @@ CREATE TABLE `xwx_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Table structure for xhx_user_finance
+-- Table structure for xwx_user_finance
 -- ----------------------------
-DROP TABLE IF EXISTS `xhx_user_finance`;
-CREATE TABLE `xhx_user_finance`  (
+DROP TABLE IF EXISTS `xwx_user_finance`;
+CREATE TABLE `xwx_user_finance`  (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL DEFAULT 0,
   `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '充值/消费金额',
   `usage` tinyint(4) NOT NULL COMMENT '用途，1.充值，2.购买vip，3.购买章节',
   `summary` text COMMENT '备注',
+  `create_time` int(11) DEFAULT '0',
+  `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   key `user_id` (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARSET=utf8mb4;
+) ENGINE = InnoDB CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
--- Table structure for xhx_user_buy
+-- Table structure for xwx_user_order
 -- ----------------------------
-DROP TABLE IF EXISTS `xhx_user_buy`;
-CREATE TABLE `xhx_user_buy`  (
+DROP TABLE IF EXISTS `xwx_user_order`;
+CREATE TABLE `xwx_user_order`  (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL DEFAULT 0,
+  `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '充值/消费金额',
+  `status` tinyint(4) not null default 0 COMMENT '0为未支付，1为已支付',
+  `pay_type` tinyint(4) default 1 COMMENT '0为未知，1为支付宝，2为QQ钱包，3为微信支付',
+  `summary` text COMMENT '备注',
+  `order_id` varchar(100) default '' COMMENT '云端订单号',
+  `create_time` int(11) DEFAULT '0',
+  `update_time` int(11) DEFAULT '0',
+  `expire_time` int(11) default '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  key `user_id` (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Table structure for xwx_user_buy
+-- ----------------------------
+DROP TABLE IF EXISTS `xwx_user_buy`;
+CREATE TABLE `xwx_user_buy`  (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '购买用户ID',
   `chapter_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '购买漫画ID',
   `book_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '购买章节ID',
   `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '消费金额',
   `summary` text COMMENT '备注',
+  `create_time` int(11) DEFAULT '0',
+  `update_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 

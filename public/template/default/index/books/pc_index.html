@@ -87,17 +87,6 @@
                     })
                 })
 
-                function ShowDialog(title) {
-                    $("#alertTop_1").text(title);
-                    $(".alertTop_1").show();
-                    setTimeout(function () {
-                        alertTopHide_1();
-                    }, 1000);
-                }
-
-                function alertTopHide_1() {
-                    $(".alertTop_1").hide();
-                }
             </script>
             <div style="clear: both;"></div>
         </div>
@@ -167,6 +156,9 @@
                         {volist name="book.chapters" id="vo"}
                         <li>
                             <a href="/chapter/{$vo.id}" target="_blank" rel="nofollow">{$vo.chapter_name}</a>
+                            {if $vo.chapter_order >= $book.start_pay }
+                            <img class="detail-list-3-info-right" src="/static/images/center-main-list-logo-4.png">
+                            {/if}
                         </li>
                         {/volist}
                     </ul>

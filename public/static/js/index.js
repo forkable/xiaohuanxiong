@@ -20,6 +20,7 @@ function ShowDialog(title) {
     $(".alertTop_1").show();
     setTimeout(function () {
         $(".toast").hide();
+        $(".alertTop_1").hide();
     }, 1000);
 }
 

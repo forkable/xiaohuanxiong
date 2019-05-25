@@ -1,5 +1,5 @@
-        <?php
-        return [
-            'username' => 'admin',
-            'password' => '123456',        
-        ];
+<?php
+return [
+    'username' => 'admin',
+    'password' => '123456',
+];

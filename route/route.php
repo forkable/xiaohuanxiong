@@ -33,6 +33,14 @@ Route::rule('/verifyphone', 'ucenter/users/verifyphone');
 Route::rule('/recovery', 'ucenter/users/recovery');
 Route::rule('/resetpwd', 'ucenter/users/resetpwd');
 Route::rule('/commentadd', 'ucenter/users/commentadd');
+Route::rule('/wallet', 'ucenter/finance/wallet');
+Route::rule('/chargehistory', 'ucenter/finance/chargehistory');
+Route::rule('/spendinghistory', 'ucenter/finance/spendinghistory');
+Route::rule('/buyhistory', 'ucenter/finance/buyhistory');
+Route::rule('/charge', 'ucenter/finance/charge');
+Route::rule('/feedback', 'ucenter/finance/feedback');
+Route::rule('/zhapaynotify', 'ucenter/zhapayrec/notify');
+Route::rule('/buychapter', 'ucenter/finance/buychapter');
 
 Route::rule('/login', 'ucenter/account/login');
 Route::rule('/register', 'ucenter/account/register');

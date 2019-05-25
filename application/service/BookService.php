@@ -42,6 +42,7 @@ class BookService extends Base
                     'type'     => 'util\AdminPage',
                     'var_page' => 'page',
                 ]);
+
         return [
             'books' => $books,
             'count' => $data->count()

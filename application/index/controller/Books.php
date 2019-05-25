@@ -75,7 +75,7 @@ class Books extends Base
             'recommand' => $recommand,
             'header_title' => $book->book_name,
             'isfavor' => $isfavor,
-            'comments' => $comments
+            'comments' => $comments,
         ]);
         return view($this->tpl);
 

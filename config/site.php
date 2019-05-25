@@ -1,9 +1,10 @@
         <?php
         return [
-            'url' => 'http://www.haha.com',
-            'img_site' => 'http://haha.com',
+            'url' => 'http://hm.com',
+            'img_site' => 'http://hm.com',
             'site_name' => '哈哈漫画',
-            'salt' => 'hanmantai',
-            'api_key' => 'hahahaha',
-            'tpl' => 'default'            
-            ];
+            'salt' => 'hanmanwo',
+            'api_key' => 'hahahaha', 
+            'tpl' => 'default',
+            'payment' => 'zhapay', //设置支付渠道
+        ];
