@@ -25,6 +25,7 @@ class Index extends BaseAdmin
         $redis_prefix= config('cache.prefix');
         $front_tpl = config('site.tpl');
         $payment = config('site.payment');
+
         $this->assign([
             'site_name' => $site_name,
             'url' => $url,

@@ -6,5 +6,5 @@
             'salt' => 'hanmanwo',
             'api_key' => 'hahahaha', 
             'tpl' => 'default',
-            'payment' => 'zhapay', //设置支付渠道
+            'payment' => 'Vkzf'
         ];

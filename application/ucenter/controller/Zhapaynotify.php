@@ -10,10 +10,9 @@ use think\Controller;
 use think\facade\Cache;
 use think\Request;
 
-class Zhapayrec extends Controller
+class Zhapaynotify extends Controller
 {
-    public function notify(Request $request)
-    {
+    public function index(Request $request){
         $data = $request->param();
         ksort($data); //排序post参数
         reset($data); //内部指针指向数组中的第一个元素
@@ -29,12 +28,16 @@ class Zhapayrec extends Controller
         } else { //合法的数据
             //业务处理
             $order_id = str_replace('xwx_order_', '', $data['out_trade_no']);
+            $type = 1; //默认支付宝
+            if ($data['pay_type'] == 1) {
+                $type = 3; //微信支付
+            }
             $order = UserOrder::get($order_id); //通过返回的订单id查询数据库
             if ($order) {
                 $order->money = $data['total_fee'];
-                $order->pay_type = $data['pay_type']; //支付类型
+                $order->pay_type = $type; //支付类型
                 $order->update_time = $data['paytime']; //云端处理订单时间戳
-                $order->status = $data['status'];
+                $order->status = (int)$data['status'];
                 $order->isupdate(true)->save(); //更新订单
 
                 if ((int)$data['status'] == 1) { //如果已支付，则更新用户财务信息
@@ -42,10 +45,9 @@ class Zhapayrec extends Controller
                     $userFinance->user_id = $order->user_id;
                     $userFinance->money = $order->money;
                     $userFinance->usage = 1; //用户充值
-                    $userFinance->summary = '用户充值';
+                    $userFinance->summary = '幻兮支付';
                     $userFinance->save(); //存储用户充值数据
                 }
-
                 Cache::clear('pay'); //清除支付缓存
             }
             return 'success';

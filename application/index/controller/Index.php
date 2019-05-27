@@ -14,6 +14,7 @@ class Index extends Base
 
     public function index()
     {
+
         $banners = cache('banners_homepage');
         if (!$banners){
             $banners = Banner::limit(5)->order('id','desc')->select();

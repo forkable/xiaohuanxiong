@@ -6,14 +6,14 @@ namespace Util;
 
 class Zhapay
 {
-    public function submit($order_id, $money, $pay_type = 1)
+    public function submit($order_id, $money, $pay_type)
     {
         $mch_id = trim(config('payment.zhapay.appid'));//这里改成支付ID
         $mch_key = trim(config('payment.zhapay.appkey')); //这是您的通讯密钥
         $data = array(
             "mch_uid" => $mch_id,//你的支付ID
             "out_trade_no" => $order_id, //唯一标识 可以是用户ID,用户名,session_id(),订单ID,ip 付款后返回
-            "pay_type_id" => $pay_type,//1微信支付 2支付宝
+            "pay_type_id" => (int)$pay_type,//1微信支付 2支付宝
             "total_fee" => $money,//金额
             "notify_url" => config('site.url') . '/zhapaynotify',//通知地址
             "return_url" => config('site.url') . '/feedback',//跳转地址
@@ -32,8 +32,8 @@ class Zhapay
             }
             $sign .= "$key=$val"; //拼接为url参数形式
             $urls .= "$key=" . urlencode($val); //拼接为url参数形式并URL编码参数值
-
         }
+
         $query = $urls . '&sign=' . md5($sign . $mch_key); //创建订单所需的参数
         $url = "https://www.zhapay.com/pay.html?{$query}"; //支付页面
         header("Location:{$url}"); //跳转到支付页面

@@ -11,18 +11,18 @@ use app\model\UserOrder;
 use app\service\FinanceService;
 use think\facade\Cache;
 use think\Request;
-use util\Zhapay;
 
 class Finance extends BaseUcenter
 {
     protected $financeService;
-    protected $zhaPayUtil;
+    protected $util;
     protected $balance;
 
     protected function initialize()
     {
         $this->financeService = new FinanceService();
-        $this->zhaPayUtil = new Zhapay();
+        $class = '\util\\'.config('site.payment');
+        $this->util = new $class();
         $this->balance = cache('balance:' . $this->uid); //当前用户余额
         if (!$this->balance) {
             $this->balance = $this->financeService->getBalance();
@@ -115,16 +115,15 @@ class Finance extends BaseUcenter
             $order->user_id = $this->uid;
             $order->money = $money;
             $order->status = 0; //未完成订单
-            $order->pay_type = $pay_type;
-            $order->summary = $request->port('summary');
+            $order->pay_type = 0;
             $order->expire_time = time() + 86400; //订单失效时间往后推一天
             $res = $order->save();
             if ($res) {
-                $this->zhaPayUtil->submit('xwx_order_' . $order->id, $money, $pay_type); //调用功能类，进行充值处理
+                $this->util->submit('xwx_order_' . $order->id, $money, $pay_type); //调用功能类，进行充值处理
             }
         } else {
 
-            $payment = config('site.payment');
+            $payment = strtolower(config('site.payment'));
             $payments = config('payment.' . $payment . '.channel');
             $this->assign([
                 'balance' => $this->balance,

@@ -90,9 +90,16 @@
                     <label class="form-label col-xs-4 col-sm-3">支付方式：</label>
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="payment" size="1">
-                            <option value="zhapay">幻兮支付</option>
-                            <option value="xunhupay">虎皮椒</option>
-                            <option value="alipay">支付宝当面付</option>
+                            <option value="Zhapay"
+                                {if $payment == 'Zhapay'}
+                                    selected
+                                {/if}
+                            >幻兮支付</option>
+                            <option value="Vkzf"
+                                {if $payment == 'Vkzf'}
+                                    selected
+                                {/if}
+                            >快支付</option>
                         </select>
 				    </span>
 
