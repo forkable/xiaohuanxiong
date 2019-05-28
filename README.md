@@ -5,5 +5,5 @@
 - 官方QQ群：780362399
 
 感谢捐助：
- ![image](https://s2.ax1x.com/2019/05/28/VmSipd.png =100x100)
- ![image](https://s2.ax1x.com/2019/05/28/VmSF1A.jpg =100x100)
+ ![image](https://s2.ax1x.com/2019/05/28/VmSipd.png){:height="30%" width="30%"}
+ ![image](https://s2.ax1x.com/2019/05/28/VmSF1A.jpg){:height="30%" width="30%"}
