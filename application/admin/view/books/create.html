@@ -56,6 +56,20 @@
         </div>
 
         <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">起始付费章节：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="start_pay" class="input-text">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">单章价格：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" name="money" class="input-text">
+            </div>
+        </div>
+
+        <div class="row clearfix">
             <label class="form-label col-xs-4 col-sm-3">简介：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <textarea name="summary" cols="" rows="" class="textarea" dragonfly="true"
@@ -84,28 +98,6 @@
         </div>
     </form>
 </article>
-
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript">
-    $(function () {
-        $("form").validate({
-            rules:{
-                book_name:{
-                    required:true,
-                    minlength:1,
-                    maxlength:50
-                },
-                author:{
-                    required:true,
-                    minlength:1,
-                    maxlength:50
-                }
-            },
-            onkeyup: false,
-            focusCleanup: false,
-            success: "valid",
-        });
-    });
-</script>
-<!--/请在上方写此页面业务相关的脚本-->
+{/block}
+{block name="script"}
 {/block}

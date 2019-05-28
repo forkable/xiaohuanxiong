@@ -8,7 +8,6 @@
 
 namespace app\service;
 
-use app\index\controller\Base;
 use app\model\Admin;
 class AdminService
 {

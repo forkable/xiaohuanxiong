@@ -152,7 +152,7 @@ class Finance extends BaseUcenter
         $chapter = Chapter::with(['photos' => function ($query) {
             $query->order('pic_order');
         }], 'book')->cache('chapter:' . $id, 600, 'redis')->find($id);
-        $price = config('payment.price'); //获得单章价格
+        $price = $chapter->book->money; //获得单章价格
         if ($this->request->isPost()) {
             $redis = new_redis();
             $lock = $redis->sIsMember($this->redis_prefix.':user_buy_lock', $this->uid); //先判断有没有用户锁
